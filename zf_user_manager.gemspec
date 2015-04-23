@@ -7,17 +7,48 @@ require "zf_user_manager/version"
 Gem::Specification.new do |s|
   s.name        = "zf_user_manager"
   s.version     = ZfUserManager::VERSION
-  s.authors     = ["jacopo-beschi-intersail"]
-  s.email       = ["jacopo.beschi@intersail.it"]
+  s.authors     = ["jacopo-beschi-intersail","asalomoni"]
+  s.email       = ["jacopo.beschi@intersail.it","andrea.salomoni@intersail.it"]
   s.homepage    = "TODO"
   s.summary     = "TODO: Summary of ZfUserManager."
   s.description = "TODO: Description of ZfUserManager."
-  s.license     = "MIT"
+  s.license     = "PROPRIETARY"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 4.2.1"
 
-  s.add_development_dependency "sqlite3"
+  # Databse connector
+  s.add_dependency 'pg'
+
+  # Gui
+  # Use SCSS for stylesheets
+  s.add_dependency 'sass-rails', '~> 5.0'
+  # Use Uglifier as compressor for JavaScript assets
+  s.add_dependency 'uglifier', '>= 1.3.0'
+  # Use CoffeeScript for .coffee assets and views
+  s.add_dependency 'coffee-rails', '~> 4.1.0'
+  # Twitter bootstrap with sass
+  s.add_dependency 'bootstrap-sass'
+  # Cool free icons as fonts
+  s.add_dependency 'font-awesome-rails'
+
+  # Development
+  # Rspec
+  s.add_development_dependency 'rspec-rails'
+  # Automated tests with guard
+  s.add_development_dependency 'guard-rspec'
+  # Rspec
+  s.add_development_dependency 'rspec-rails'
+  # Automated tests with guard
+  s.add_development_dependency 'guard-rspec'
+  # Auto Clean DB
+  s.add_development_dependency 'database_cleaner'
+  # More Rspec matches
+  s.add_development_dependency 'shoulda-matchers'
+  # Automated Object building
+  s.add_development_dependency "factory_girl_rails", "~> 4.0"
+  # Build fake data
+  s.add_development_dependency 'faker'
 end

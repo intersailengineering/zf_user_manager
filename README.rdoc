@@ -1,3 +1,8 @@
 = ZfUserManager
 
-This project rocks and uses MIT-LICENSE.
+== Setup
+* Aggiungere come dipendenza al gemfile: gem 'zf_user_manager', path: "../zf_user_manager"
+* Eseguire bundle install(Attenzione devi essere aggiunto agli utenti del repository per scaricarlo)
+* Settare le root route in routes.rb:  root to: "home#index"
+* Installare e settare le migrations: rake zf_user_manager:install:migrations && rake db:migrate
+* Aggiungere le rotte dell'engine   mount ZfUserManager::Engine => '/'
