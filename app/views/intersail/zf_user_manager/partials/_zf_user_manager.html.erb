@@ -3,14 +3,14 @@
 <div class="zum_main">
 
   <div class="zum_primary_menu">
-    <%= render "layouts/zf_user_manager/primary_menu" %>
+    <%= render "intersail/zf_user_manager/partials/primary_menu" %>
   </div>
 
   <div class="zum_main_content">
     <div class="zum_standard_container">
       <div class="zum_search_container">
         <div class="zum_search">
-            <%= render "layouts/zf_user_manager/search/#{@section.to_s}_search" %>
+            <%= render "intersail/zf_user_manager/partials/search/#{@section.to_s}_search" %>
         </div>
       </div>
       <div class="zum_manager_container">
@@ -18,16 +18,16 @@
           <div class="zum_manager_viewer">
             <div class="zum_viewer_action_row">
               <div class="zum_viewer_actions">
-                <%= render "layouts/zf_user_manager/viewer_action_row" %>
+                <%= render "intersail/zf_user_manager/partials/viewer_action_row" %>
               </div>
             </div>
             <div class="zum_viewer_table">
-              <%= render "layouts/zf_user_manager/viewer/#{@section.to_s}_viewer" %>
+              <%= render "intersail/zf_user_manager/partials/viewer/#{@section.to_s}_viewer" %>
             </div>
           </div>
           <div class="zum_manager_inspector">
             <div class="zum_inspector">
-              <%= render "layouts/zf_user_manager/inspector/#{@section.to_s}_inspector" %>
+              <%= render "intersail/zf_user_manager/partials/inspector/#{@section.to_s}_inspector" %>
             </div>
           </div>
           <div class="clearfix"></div>

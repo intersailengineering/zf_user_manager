@@ -1,7 +1,7 @@
 module Intersail
   module ZfUserManager
     class UserManagerController < ApplicationController
-      layout "application"
+      layout 'application'
 
       def index
       end

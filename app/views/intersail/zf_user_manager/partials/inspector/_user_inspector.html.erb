@@ -44,7 +44,9 @@
     <div class="zum_profiles_header_container">
       <div class="zum_profiles_header" style="margin-right:15px;">
         <div class="zum_profile_title">Profili</div>
-        <%= link_to I18n.t("zf_user_manager.buttons.#{@section.to_s}.new_profile"), '#', :class => 'btn btn-primary btn-xs zum_new_profile', data: {toogle: 'modal', target: '#PROFILE_MODAL'} %>
+        <%= link_to '#', :class => 'btn btn-primary btn-xs zum_new_profile', data: {toogle: 'modal', target: '#PROFILE_MODAL'} do %>
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <%= I18n.t("zf_user_manager.buttons.#{@section.to_s}.new_profile") %>
+        <% end %>
         <div class="clearfix"></div>
       </div>
     </div>
