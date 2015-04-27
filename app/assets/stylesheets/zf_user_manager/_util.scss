@@ -1,0 +1,116 @@
+// MIXINS
+@mixin rounded-borders($color, $width: 1px, $radius: 5px) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -khtml-border-radius: $radius;
+  -o-border-radius: $radius;
+  border-radius: $radius;
+  border: $width solid $color;
+}
+
+@mixin rounded-borders-specific($color, $width: 1px, $tl: 5px, $tr: 5px, $br: 5px, $bl: 5px) {
+  -webkit-border-radius: $tl $tr $br $bl;
+  -moz-border-radius: $tl $tr $br $bl;
+  border-radius: $tl $tr $br $bl;
+  border: $width solid $color;
+}
+
+@mixin vertical-gradient($top-color, $bottom-color){
+  background: $top-color;
+  background: -moz-linear-gradient(top, $top-color 0%, $bottom-color 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $top-color), color-stop(100%, $bottom-color));
+  background: -webkit-linear-gradient(top, $top-color 0%, $bottom-color 100%);
+  background: -o-linear-gradient(top, $top-color 0%, $bottom-color 100%);
+  background: -ms-linear-gradient(top, $top-color 0%, $bottom-color 100%);
+  background: linear-gradient(to bottom, $top-color 0%, $bottom-color 100%);
+}
+
+@mixin horizontal-gradient($left-color, $right-color){
+  background: $left-color;
+  background: -moz-linear-gradient(left, $left-color 0%, $right-color 100%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, $left-color), color-stop(100%, $right-color));
+  background: -webkit-linear-gradient(left, $left-color 0%, $right-color 100%);
+  background: -o-linear-gradient(left, $left-color 0%, $right-color 100%);
+  background: -ms-linear-gradient(left, $left-color 0%, $right-color 100%);
+  background: linear-gradient(to right, $left-color 0%, $right-color 100%);
+}
+
+@mixin radial-gradient($inner-color, $outer-color){
+  background: $inner-color;
+  background: -moz-radial-gradient(center, ellipse cover, $inner-color 0%, $outer-color 100%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, $inner-color), color-stop(100%, $outer-color));
+  background: -webkit-radial-gradient(center, ellipse cover, $inner-color 0%, $outer-color 100%);
+  background: -o-radial-gradient(center, ellipse cover, $inner-color 0%, $outer-color 100%);
+  background: -ms-radial-gradient(center, ellipse cover, $inner-color 0%, $outer-color 100%);
+  background: radial-gradient(ellipse at center, $inner-color 0%, $outer-color 100%);
+}
+
+@mixin webkit-scrollbar($track-color, $button-color, $width) {
+  ::-webkit-scrollbar {
+    width: $width;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: $track-color;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: $button-color;
+  }
+
+  ::-webkit-scrollbar-button {
+    background-color: $button-color;
+  }
+
+  ::-webkit-scrollbar-corner {
+    background-color: black;
+  }
+}
+
+@mixin webkit-scrollbar-with-gradient($track-color-top, $track-color-bottom, $button-color, $width) {
+  ::-webkit-scrollbar {
+    width: $width;
+  }
+
+  ::-webkit-scrollbar-track {
+    @include horizontal-gradient($track-color-top, $track-color-bottom);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: $button-color;
+  }
+
+  ::-webkit-scrollbar-button {
+    background-color: $button-color;
+  }
+
+  ::-webkit-scrollbar-corner {
+    background-color: black;
+  }
+}
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  filter: alpha(opacity=#{$opacity * 100});
+}
+
+@mixin no-text-selection {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@mixin no-input-spinner {
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+@mixin box-sizing($box-model) {
+  -webkit-box-sizing: $box-model;
+  -moz-box-sizing: $box-model;
+  box-sizing: $box-model;
+}

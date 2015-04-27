@@ -1,0 +1,25 @@
+it:
+  zf_user_manager:
+    models:
+      user:
+        one: utente
+        other: utenti
+      unit:
+        one: unità
+        other: unità
+      role:
+        one: ruolo
+        other: ruoli
+      permission:
+        one: permesso
+        two: permessi
+    buttons:
+      user:
+        new: 'Nuovo Utente'
+        new_profile: 'Nuovo Profilo'
+      unit:
+        new: 'Nuova Unità'
+      role:
+        new: 'Nuovo Ruolo'
+      permission:
+        new: 'Nuovo Permesso'

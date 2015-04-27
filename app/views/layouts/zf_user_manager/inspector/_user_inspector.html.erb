@@ -1,0 +1,92 @@
+<div class="zum_inspector_header">Modifica Utente</div>
+
+<div class="zum_inspector_data">
+  <div class="zum_user_data">
+
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label for="username" class="col-sm-3 control-label">Username</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="username" placeholder="Username" value="andreasalomoni">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email" class="col-sm-3 control-label">Email</label>
+        <div class="col-sm-9">
+          <input type="email" class="form-control" id="email" placeholder="Email" value="andrea.salomoni@intersail.it">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="first_name" class="col-sm-3 control-label">Nome</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="first_name" placeholder="Nome" value="Andrea">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="last_name" class="col-sm-3 control-label">Cognome</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="last_name" placeholder="Cognome" value="Salomoni">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" checked> Abilitato
+            </label>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+  <div class="zum_user_profiles">
+    <div class="zum_profiles_header_container">
+      <div class="zum_profiles_header" style="margin-right:15px;">
+        <div class="zum_profile_title">Profili</div>
+        <%= link_to I18n.t("zf_user_manager.buttons.#{@section.to_s}.new_profile"), '#', :class => 'btn btn-primary btn-xs zum_new_profile', data: {toogle: 'modal', target: '#PROFILE_MODAL'} %>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+    <div class="zum_profiles_table_container">
+      <div class="zum_profiles_table">
+
+        <table class="table">
+          <thead>
+          <th></th>
+          <th>Unità</th>
+          <th>Ruolo</th>
+          <th>Abilitato</th>
+          <th></th>
+          </thead>
+          <tbody>
+              <tr>
+                <td class="list_row_icon">
+                  <%= image_tag 'zf_user_manager/profile.png', size: '24x24' %>
+                </td>
+                <td>Ricerca e Sviluppo</td>
+                <td>Amministrativo</td>
+                <td>
+                  <input type="checkbox" value="" checked>
+                </td>
+                <td style="width:70px;">
+                  <button type="button" class="btn btn-primary btn-xs">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                  </button>
+                  <button type="button" class="btn btn-danger btn-xs">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                  </button>
+                </td>
+              </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="zum_inspector_footer">
+  <button type="button" class="btn btn-primary btn-sm">Salva</button>
+  <button type="button" class="btn btn-danger btn-sm">Elimina</button>
+</div>
