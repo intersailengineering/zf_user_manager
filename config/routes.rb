@@ -1,5 +1,5 @@
 ZfUserManager::Engine.routes.draw do
 
-  get '/', to: '/intersail/zf_user_manager/user_manager#index'
+  get '/user_manager', to: '/intersail/zf_user_manager/user#index'
 
 end
