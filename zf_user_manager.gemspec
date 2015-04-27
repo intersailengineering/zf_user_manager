@@ -30,7 +30,8 @@ Gem::Specification.new do |s|
   # Use CoffeeScript for .coffee assets and views
   s.add_dependency 'coffee-rails', '~> 4.1.0'
   # Twitter bootstrap with sass
-  s.add_dependency 'bootstrap-sass'
+  # s.add_dependency 'bootstrap-sass'
+  s.add_dependency 'twitter-bootstrap-rails'
 
   # Development
   # Rspec
