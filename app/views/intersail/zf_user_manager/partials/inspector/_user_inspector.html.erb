@@ -76,32 +76,34 @@
     </div>
     <div class="zum_profiles_table_container">
       <div class="zum_profiles_table">
-        <table class="table">
-          <thead>
-              <th></th>
-              <th>Unità</th>
-              <th>Ruolo</th>
-              <th></th>
-          </thead>
+        <% unless @user.urrs.blank? %>
+            <table class="table">
+              <thead>
+                  <th></th>
+                  <th>Unità</th>
+                  <th>Ruolo</th>
+                  <th></th>
+              </thead>
 
-          <tbody>
-              <% @user.urrs.each do |urr| %>
-                  <tr id="<%= urr.id %>">
-                    <td class="list_row_icon">
-                      <%= image_tag 'zf_user_manager/profile.png', size: '24x24' %>
-                    </td>
-                    <td><%= urr.unit.name %></td>
-                    <td><%= urr.role.name %></td>
-                    <td class="zum_profile_table_actions_col">
-                      <%= link_to "/user_manager/users/#{@user.id.to_s}/destroy_profile/#{urr.id.to_s}", method: :post, class: 'btn btn-danger btn-xs' do %>
-                          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                      <% end %>
-                    </td>
-                  </tr>
+              <tbody>
+                  <% @user.urrs.each do |urr| %>
+                      <tr id="<%= urr.id %>">
+                        <td class="list_row_icon">
+                          <%= image_tag 'zf_user_manager/profile.png', size: '24x24' %>
+                        </td>
+                        <td><%= urr.unit.name %></td>
+                        <td><%= urr.role.name %></td>
+                        <td class="zum_profile_table_actions_col">
+                          <%= link_to "/user_manager/users/#{@user.id.to_s}/destroy_profile/#{urr.id.to_s}", method: :post, class: 'btn btn-danger btn-xs' do %>
+                              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                          <% end %>
+                        </td>
+                      </tr>
 
-              <% end %>
-          </tbody>
-        </table>
+                  <% end %>
+              </tbody>
+            </table>
+        <% end %>
       </div>
     </div>
   </div>
