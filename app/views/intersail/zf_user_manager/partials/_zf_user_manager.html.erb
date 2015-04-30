@@ -1,13 +1,14 @@
-<% @section = :user %>
-
 <div class="zum_main">
 
   <div class="zum_primary_menu">
     <%= render "intersail/zf_user_manager/partials/primary_menu" %>
   </div>
 
-  <div class="zum_main_content">
+  <div class="zum_main_content zum_messages_hidden">
     <div class="zum_standard_container">
+      <div class="zum_messages_container">
+        <%= render_messages %>
+      </div>
       <div class="zum_search_container">
         <div class="zum_search">
             <%= render "intersail/zf_user_manager/partials/search/#{@section.to_s}_search" %>
@@ -27,7 +28,9 @@
           </div>
           <div class="zum_manager_inspector">
             <div class="zum_inspector">
-              <%= render "intersail/zf_user_manager/partials/inspector/#{@section.to_s}_inspector" %>
+              <% if @user %>
+                <%= render "intersail/zf_user_manager/partials/inspector/#{@section.to_s}_inspector" %>
+              <% end %>
             </div>
           </div>
           <div class="clearfix"></div>
@@ -36,6 +39,16 @@
     </div>
   </div>
 
+</div>
+
+
+<!-- MODALS -->
+<div class="modal fade" id="ZUM_MODAL">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+    </div>
+  </div>
 </div>
 
 

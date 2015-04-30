@@ -1,0 +1,63 @@
+<%= javascript_tag do %>
+    function close_messages() {
+        $('.zum_main_content').removeClass('zum_messages_visible_small');
+        $('.zum_main_content').removeClass('zum_messages_visible');
+        $('.zum_main_content').addClass('zum_messages_hidden');
+    }
+
+    function open_messages() {
+        $('.zum_main_content').removeClass('zum_messages_hidden');
+        $('.zum_main_content').removeClass('zum_messages_visible_small');
+        $('.zum_main_content').addClass('zum_messages_visible');
+    }
+
+    function open_messages_small() {
+        $('.zum_main_content').removeClass('zum_messages_hidden');
+        $('.zum_main_content').removeClass('zum_messages_visible');
+        $('.zum_main_content').addClass('zum_messages_visible_small');
+    }
+<% end %>
+
+<% type = render_messages_options[:type] %>
+<% format = render_messages_options[:format] %>
+<% messages = render_messages_options[:messages] %>
+
+<% unless messages.blank? %>
+    <% if type == :success %>
+        <%= javascript_tag do %>
+            open_messages_small();
+        <% end %>
+        <div class="render_messages">
+          <div class="alert alert-success alert-dismissible messages_alert" role="alert" >
+            <button type="button" class="close" data-dismiss="alert" onclick="close_messages();"><span aria-hidden="true">&times;</span></button>
+            <p><%= messages.html_safe %></p>
+          </div>
+        </div>
+    <% elsif type == :error %>
+        <% if format == :string %>
+            <%= javascript_tag do %>
+                open_messages_small();
+            <% end %>
+            <div class="render_messages">
+              <div class="alert alert-danger alert-dismissible messages_alert" role="alert" >
+                <button type="button" class="close" data-dismiss="alert" onclick="close_messages();"><span aria-hidden="true">&times;</span></button>
+                <p><%= messages.html_safe %></p>
+              </div>
+            </div>
+        <% elsif format == :array  %>
+            <%= javascript_tag do %>
+                open_messages();
+            <% end %>
+            <div class="render_messages">
+              <div class="alert alert-danger alert-dismissible messages_alert" role="alert" >
+                <button type="button" class="close" data-dismiss="alert" onclick="close_messages();"><span aria-hidden="true">&times;</span></button>
+                <div class="all_messages" >
+                  <% messages.each do |message| %>
+                      <li><%= message %></li>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+        <% end %>
+    <% end %>
+<% end %>

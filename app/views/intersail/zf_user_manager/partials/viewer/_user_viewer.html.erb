@@ -1,25 +1,30 @@
 <div class="zum_scrollable">
   <table class="table table-striped table-hover">
     <thead>
-    <th></th>
-    <th>Username</th>
-    <th>Email</th>
-    <th>Nome</th>
-    <th>Abilitato</th>
+        <th></th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Nome</th>
+        <th>Abilitato</th>
     </thead>
-    <tbody>
 
-        <tr>
-          <td class="list_row_icon">
-            <%= image_tag 'zf_user_manager/user.png', size: '24x24' %>
-          </td>
-          <td>andreasalomoni</td>
-          <td>andrea.salomoni@intersail.it</td>
-          <td>Andrea Salomoni</td>
-          <td>
-            <input type="checkbox" value="" checked>
-          </td>
-        </tr>
+    <tbody class="user_table_body">
+
+        <% @users.each do |user| %>
+
+            <tr id="<%= user.id %>" onclick="window.location.href = '<%= "/user_manager/users/#{user.id}#{search_params_for_url}" %>'" class="<%= user_selected(user) %>">
+              <td class="list_row_icon">
+                <%= image_tag 'zf_user_manager/user.png', size: '24x24' %>
+              </td>
+              <td><%= user.username %></td>
+              <td><%= user.profile.mail %></td>
+              <td><%= "#{user.profile.first_name} #{user.profile.last_name}" %></td>
+              <td>
+                <%= enable_icon(user.active) %>
+              </td>
+            </tr>
+
+        <% end %>
 
     </tbody>
   </table>

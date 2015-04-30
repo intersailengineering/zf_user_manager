@@ -1,3 +1,13 @@
-<%= link_to '#', :class => 'btn btn-primary btn-xs' do %>
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <%= I18n.t("zf_user_manager.buttons.#{@section.to_s}.new") %>
+<%= javascript_tag do %>
+    function new_user() {
+        if ($('.user_table_body tr[id=new_user]').length == 0) {
+            $('.user_table_body tr').removeClass('zum_viewer_row_selected');
+            $('.user_table_body').prepend('<%= j(render('intersail/zf_user_manager/partials/viewer/new_user_row')) %>');
+            $('.zum_inspector').html('<%= j(render('intersail/zf_user_manager/partials/inspector/new_user_inspector')) %>');
+        }
+    }
 <% end %>
+
+<button onclick="new_user();" class="btn btn-primary btn-xs">
+  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <%= I18n.t("zf_user_manager.buttons.#{@section.to_s}.new") %>
+</button>

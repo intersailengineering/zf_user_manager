@@ -1,24 +1,19 @@
 <div class="zum_search_title">Ricerca Utenti</div>
 
-<form class="form-inline user_search_form">
-  <div class="form-group">
-    <label for="full_text_search">Cerca</label>
-    <input type="text" class="form-control" id="full_text_search" placeholder="Cerca">
-  </div>
-  <div class="form-group">
-    <label for="unit_select">Unità</label>
-    <select class="form-control" id="unit_select">
-      <option>Contabilità</option>
-      <option>Marketing</option>
-      <option>Ricerca e Sviluppo</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="role_select">Unità</label>
-    <select class="form-control" id="role_select">
-      <option>Amministratore</option>
-      <option>Operatore</option>
-    </select>
-  </div>
-</form>
+<%= form_tag "/user_manager/users", method: :get, class: 'form-inline user_search_form' do %>
+    <div class="form-group">
+      <label for="full_text_search">Cerca</label>
+      <%= text_field_tag :full_text_search, get_search_param(:full_text_search), class: 'form-control', placeholder: 'Cerca'  %>
+    </div>
+    <div class="form-group">
+      <label for="unit_select">Unità</label>
+      <%= select_tag(:unit_select, options_for_select(@unit_select, get_search_param(:unit_select)), class: 'form-control') %>
+    </div>
+    <div class="form-group">
+      <label for="role_select">Ruolo</label>
+      <%= select_tag(:role_select, options_for_select(@role_select, get_search_param(:role_select)), class: 'form-control') %>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-sm zum_inline_submit">Cerca</button>
+<% end %>
 
