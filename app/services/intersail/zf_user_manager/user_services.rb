@@ -65,13 +65,13 @@ module Intersail
       def create_function
         user = set_user_attributes
 
-        #begin
+        begin
           user = zum.create_user(user)
           @user = user
           clean_search_params
-        #rescue
-          # GESTIONE ERRORI
-        #end
+        rescue
+          set_error_message('Campi mancanti o non compilati correttamente')
+        end
 
         index_function
       end
@@ -80,11 +80,20 @@ module Intersail
         user = base_user || new_user
 
         user.username = params[:username]
+        set_user_password(user)
         user.active = params[:active] == 'true' ? true : false
         user.profile.first_name = params[:first_name]
         user.profile.last_name = params[:last_name]
         user.profile.mail = params[:mail]
         user
+      end
+
+      def set_user_password(user)
+        unless params[:password].blank? || params[:password_confirmation].blank?
+          if params[:password] == params[:password_confirmation]
+            user.password = params[:password]
+          end
+        end
       end
 
       def new_user

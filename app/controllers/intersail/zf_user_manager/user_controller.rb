@@ -15,9 +15,6 @@ module Intersail
       def show
         show_function
 
-        set_success_message('Yolo')
-        #set_error_message('Nope')
-        #set_error_messages(['Nope', 'Nope', 'Nope', 'Nope', 'Nope', 'Nope'])
         render 'index'
       end
 
