@@ -4,9 +4,9 @@ module Intersail
       include Intersail::ZfUserManager::Concerns::Messageable
       include Intersail::ZfUserManager::UserServices
 
-      before_action :set_user, only: [:show, :create, :update, :destroy, :add_profile, :destroy_profile]
+      before_action :set_user, only: [:show, :create, :update, :destroy, :new_profile, :edit_profile, :destroy_profile]
       before_action :set_section
-      before_action :set_search_params, only: [:index, :show, :create, :update, :destroy, :add_profile, :destroy_profile]
+      before_action :set_search_params, only: [:index, :show, :create, :update, :destroy, :new_profile, :edit_profile, :destroy_profile]
 
       def index
         index_function
@@ -14,7 +14,6 @@ module Intersail
 
       def show
         show_function
-
         render 'index'
       end
 
@@ -33,15 +32,19 @@ module Intersail
         render 'index'
       end
 
-      def add_profile
-        add_profile_function
-        render 'index'
+=begin
+      def new_profile
+        new_profile_function
+      end
+
+      def edit_profile
+        edit_profile_function
       end
 
       def destroy_profile
         destroy_profile_function
-        render 'index'
       end
+=end
 
       private
 

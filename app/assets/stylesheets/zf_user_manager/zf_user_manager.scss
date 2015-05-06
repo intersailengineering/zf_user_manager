@@ -36,7 +36,7 @@ $messages_container_TH: $messages_container_h + $messages_container_padding_bott
 $messages_container_TH_small: $messages_container_h_small + $messages_container_padding_bottom;
 
 //------ Search Container
-$search_container_h: 105px;
+$search_container_h: 95px;
 $search_container_padding_bottom: 10px;
 $search_container_TH: $search_container_h + $search_container_padding_bottom;
 // Search
@@ -72,12 +72,15 @@ $inspector_gradient_right_color: $box1_gradient_right_color;
 $inspector_border_w: $box1_border_bottom_w;
 $inspector_border_color: $box1_border_bottom_color;
 $inspector_border_radius: $box1_border_radius;
-$inspector_header_h: 50px;
 $inspector_footer_h: 45px;
-$inspector_user_data_percentage: 50%;
-$inspector_user_profiles_percentage: 50%;
-$inspector_profiles_header_h: 40px;
-
+// Action Row
+$profiles_action_row_h: 27px;
+$profiles_action_row_horizontal_padding: 20px;
+$profiles_action_row_top_padding: 10px;
+$profiles_action_row_bottom_padding: 15px;
+$profiles_action_row_TH: $profiles_action_row_h + $profiles_action_row_top_padding + $profiles_action_row_bottom_padding;
+$profiles_action_border_bottom_w: 1px;
+$profiles_action_border_bottom_color: #337ab7;
 
 
 //########################################################
@@ -345,21 +348,11 @@ a {
   @include rounded-borders($inspector_border_color, $inspector_border_w, $inspector_border_radius);
 }
 
-.zum_inspector_header {
-  @extend .zum_pannel_title;
-  height: $inspector_header_h;
-  position: relative;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  padding-top: 5px;
-}
-
 .zum_inspector_data {
    height: 100%;
    position: relative;
-   margin-top: - $inspector_header_h;
-   padding-top: $inspector_header_h;
+   top: 0;
+   left: 0;
    margin-bottom: - $inspector_footer_h;
    padding-bottom: $inspector_footer_h;
    z-index: 1;
@@ -381,50 +374,38 @@ a {
   overflow-y: auto;
 }
 
-.zum_inspector_tab {
-  padding: 20px 15px;
+.zum_profiles_tab {
+  padding: 20px 10px;
 }
 
-.zum_user_data {
-  height: $inspector_user_data_percentage;
-  padding: 0px 15px 0px 0px;
-  overflow-y: auto;
+.zum_user_info_tab {
+  padding: 30px 10px 20px 10px;
 }
 
-.zum_user_profiles {
-  height: $inspector_user_profiles_percentage;
-  padding: 20px 15px 15px 0px;
-}
-
-.zum_profiles_header_container {
-  height: $inspector_profiles_header_h;
+.zum_profiles_action_row {
+  height: $profiles_action_row_TH;
+  padding: $profiles_action_row_top_padding $profiles_action_row_horizontal_padding $profiles_action_row_bottom_padding $profiles_action_row_horizontal_padding;
   position: relative;
   top: 0;
   left: 0;
   z-index: 100;
-  padding-top: 10px;
 }
 
-.zum_profiles_header {
-  font-size: 16px;
-  font-weight: bold;
-  padding: 0px 10px 4px 10px;
-  border-bottom: 1px solid black;
-}
-
-.zum_profile_title {
-  float: left;
+.zum_profiles_actions {
+  height: 100%;
+  border-bottom: $profiles_action_border_bottom_w solid $profiles_action_border_bottom_color;
+  padding: 0px 15px;
 }
 
 .zum_new_profile {
-  float: right;
+  float: left;
 }
 
 .zum_profiles_table_container {
   height: 100%;
   position: relative;
-  margin-top: - $inspector_profiles_header_h;
-  padding-top: $inspector_profiles_header_h;
+  margin-top: - $profiles_action_row_TH;
+  padding-top: $profiles_action_row_TH;
   z-index: 1;
 }
 
@@ -442,7 +423,19 @@ a {
 }
 
 .zum_profile_table_actions_col {
-  width: 35px;
+  width: 70px;
+}
+
+.new_profile {
+  font-weight: bold;
+}
+
+.edited_profile {
+  font-style: italic;
+}
+
+.destroyed_profile {
+  text-decoration: line-through;
 }
 
 

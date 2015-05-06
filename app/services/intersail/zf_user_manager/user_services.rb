@@ -6,14 +6,13 @@ module Intersail
       SEARCH_PARAMETERS = [:full_text_search, :unit_select, :role_select]
 
       def zum
-        Intersail::ZfClient::Client::ZClient.new
+        Intersail::ZfClient::Client::ZClient.new("1")
       end
 
       def index_function
         @unit_select = user_units
         @role_select = user_roles
-
-        @users = zum.all_users(@search_params)
+        @users = zum.user_list(@search_params)
       end
 
       def set_search_params_function
@@ -26,7 +25,7 @@ module Intersail
 
       def update_function
         user = set_user_attributes(@user)
-        user = zum.update_user(user)
+        user = zum.user_update(user)
 
         @user = user if user
 
@@ -34,23 +33,21 @@ module Intersail
       end
 
       def destroy_function
-        zum.delete_user(@user.id)
+        zum.user_delete(@user.id)
 
         @user = nil
 
         index_function
       end
 
-      def add_profile_function
+=begin
+      def new_profile_function
         z = zum
-        urr = z.create_urr({user_id: @user.id, unit_id: params[:unit], role_id: params[:role]})
-        user = @user
-        user.urrs.push(urr)
-        user = z.update_user(user)
+        new_unit = z.get_unit(params[:unit])
+        new_role = z.get_role(params[:role])
+        new_urr = Intersail::ZfClient::ZUrr.new({user_id: @user.id, unit: new_unit, role: new_role})
 
-        @user = user if user
-
-        index_function
+        @urr = new_urr
       end
 
       def destroy_profile_function
@@ -61,12 +58,13 @@ module Intersail
 
         index_function
       end
+=end
 
       def create_function
         user = set_user_attributes
 
         begin
-          user = zum.create_user(user)
+          user = zum.user_create(user)
           @user = user
           clean_search_params
         rescue
@@ -82,9 +80,9 @@ module Intersail
         user.username = params[:username]
         set_user_password(user)
         user.active = params[:active] == 'true' ? true : false
-        user.profile.first_name = params[:first_name]
-        user.profile.last_name = params[:last_name]
-        user.profile.mail = params[:mail]
+        user.resource.first_name = params[:first_name]
+        user.resource.last_name = params[:last_name]
+        user.resource.mail = params[:mail]
         user
       end
 
@@ -97,21 +95,21 @@ module Intersail
       end
 
       def new_user
-        Intersail::ZfClient::ZUser.new(profile: Intersail::ZfClient::ZUserProfile.new)
+        Intersail::ZfClient::ZUser.new(resource: Intersail::ZfClient::ZResource.new)
       end
 
       def set_user_function(id)
-        @user = zum.get_user(id)
+        @user = zum.user_read(id)
       end
 
       def user_units
-        #zum.all_units.map {|unit| [unit.name.humanize, unit.id]}
-        [['Unità 1', 1], ['Unità 2', 2], ['Unità 3', 3]]
+        zum.unit_list.map {|unit| [unit.name.humanize, unit.id]}
+        #[['Unità 1', 1], ['Unità 2', 2], ['Unità 3', 3]]
       end
 
       def user_roles
-        #zum.all_roles.map {|role| [role.name.humanize, role.id]}
-        [['Ruolo 1', 1], ['Ruolo 2', 2], ['Ruolo 3', 3]]
+        zum.role_list.map {|role| [role.name.humanize, role.id]}
+        #[['Ruolo 1', 1], ['Ruolo 2', 2], ['Ruolo 3', 3]]
       end
 
     end

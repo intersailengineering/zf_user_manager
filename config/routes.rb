@@ -7,7 +7,7 @@ ZfUserManager::Engine.routes.draw do
   post '/user_manager/users', to: '/intersail/zf_user_manager/user#create'
   put '/user_manager/users/:id', to: '/intersail/zf_user_manager/user#update'
   delete '/user_manager/users/:id', to: '/intersail/zf_user_manager/user#destroy'
-  post '/user_manager/users/:id/add_profile', to: '/intersail/zf_user_manager/user#add_profile'
-  post '/user_manager/users/:id/destroy_profile/:profile_id', to: '/intersail/zf_user_manager/user#destroy_profile'
-
+  #get '/user_manager/users/:id/new_profile', to: '/intersail/zf_user_manager/user#new_profile'
+  #get '/user_manager/users/:id/edit_profile/:profile_id', to: '/intersail/zf_user_manager/user#edit_profile'
+  #get '/user_manager/users/:id/destroy_profile/:profile_id', to: '/intersail/zf_user_manager/user#destroy_profile'
 end

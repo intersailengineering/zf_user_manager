@@ -17,8 +17,8 @@
                 <%= image_tag 'zf_user_manager/user.png', size: '24x24' %>
               </td>
               <td><%= user.username %></td>
-              <td><%= user.profile.mail %></td>
-              <td><%= "#{user.profile.first_name} #{user.profile.last_name}" %></td>
+              <td><%= user.resource.mail %></td>
+              <td><%= "#{user.resource.first_name} #{user.resource.last_name}" %></td>
               <td>
                 <%= enable_icon(user.active) %>
               </td>

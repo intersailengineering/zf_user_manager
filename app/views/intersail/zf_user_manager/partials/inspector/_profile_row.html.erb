@@ -1,0 +1,17 @@
+<% status = '' unless local_assigns[:status] %>
+
+<tr id="<%= urr.id %>" class="<%= status %>">
+  <td class="list_row_icon" >
+    <%= image_tag 'zf_user_manager/profile.png', size: '24x24' %>
+  </td>
+  <td><%= urr.unit.name %></td>
+  <td><%= urr.role.name %></td>
+  <td class="zum_profile_table_actions_col">
+    <a class="btn btn-primary btn-xs" >
+      <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+    </a>
+    <a class="btn btn-danger btn-xs">
+      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+    </a>
+  </td>
+</tr>

@@ -34,6 +34,10 @@ module Intersail
         end
       end
 
+      def profile_data(urr)
+        {urr_id: urr.id, unit: {id: urr.unit.id, name: urr.unit.name}, role: {id: urr.role.id, name: urr.role.name}}.to_json
+      end
+
 
 
       #### MESSAGES
