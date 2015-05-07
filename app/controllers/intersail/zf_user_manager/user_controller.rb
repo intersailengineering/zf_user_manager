@@ -23,6 +23,8 @@ module Intersail
       end
 
       def update
+        puts '>>>>>>>>>>>>>>> ' + params.inspect
+
         user_update_function
         render 'index'
       end

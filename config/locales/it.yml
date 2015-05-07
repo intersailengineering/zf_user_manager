@@ -4,15 +4,25 @@ it:
       user:
         one: utente
         other: utenti
+        one_upercase: UTENTE
+        other_upercase: UTENTI
       unit:
         one: unità
         other: unità
+        one_upercase: UNITA'
+        other_upercase: UNITA'
       role:
         one: ruolo
         other: ruoli
+        one_upercase: RUOLO
+        other_upercase: RUOLI
       acl:
         one: permesso
         other: permessi
+        one_upercase: PERMESSO
+        other_upercase: PERMESSI
       urr:
         one: profilo
         other: profili
+        one_upercase: PROFILO
+        other_upercase: PROFILI

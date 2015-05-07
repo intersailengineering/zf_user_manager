@@ -2,7 +2,7 @@ module Intersail
   module ZfUserManager
     module ZclientServices
 
-      def self.zum
+      def zum
         @zum ||= Intersail::ZfClient::Client::ZClient.new("1")
       end
 
