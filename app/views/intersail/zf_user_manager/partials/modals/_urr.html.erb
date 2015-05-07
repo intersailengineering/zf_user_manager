@@ -3,7 +3,7 @@
   <h4 class="modal-title">Crea profilo</h4>
 </div>
 <div class="modal-body">
-  <%= form_tag "/user_manager/users/#{@user.id}/new_profile", method: :get, remote: true, class: 'form-horizontal profile_form' do %>
+  <%= form_tag "/user_manager/users/#{@user.id}/new_urr", method: :get, remote: true, class: 'form-horizontal urr_form' do %>
       <div class="form-group">
         <label for="modal_unit_select" class="col-sm-2 control-label">Unità</label>
         <div class="col-sm-6">
@@ -24,6 +24,6 @@
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
-  <button type="button" onclick="$('.profile_form').submit();" data-dismiss="modal" class="btn btn-primary" >Crea</button>
+  <button type="button" onclick="$('.urr_form').submit();" data-dismiss="modal" class="btn btn-primary" >Crea</button>
 </div>
 

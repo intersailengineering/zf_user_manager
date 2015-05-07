@@ -26,6 +26,11 @@ module Intersail
         user.id.to_i == @user.id.to_i ? 'zum_viewer_row_selected' : ''
       end
 
+      def row_selected(record, record_selected)
+        return '' unless defined?(record_selected) && !record_selected.blank?
+        record.id.to_i == record_selected.id.to_i ? 'zum_viewer_row_selected' : ''
+      end
+
       def enable_icon(enabled)
         if enabled
           content_tag :span, '', class: 'glyphicon glyphicon-ok zum_enabled_icon'
@@ -34,7 +39,7 @@ module Intersail
         end
       end
 
-      def profile_data(urr)
+      def urr_data(urr)
         {urr_id: urr.id, unit: {id: urr.unit.id, name: urr.unit.name}, role: {id: urr.role.id, name: urr.role.name}}.to_json
       end
 

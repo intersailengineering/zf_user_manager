@@ -10,16 +10,9 @@ it:
       role:
         one: ruolo
         other: ruoli
-      permission:
+      acl:
         one: permesso
-        two: permessi
-    buttons:
-      user:
-        new: 'Nuovo Utente'
-        new_profile: 'Nuovo Profilo'
-      unit:
-        new: 'Nuova Unità'
-      role:
-        new: 'Nuovo Ruolo'
-      permission:
-        new: 'Nuovo Permesso'
+        other: permessi
+      urr:
+        one: profilo
+        other: profili

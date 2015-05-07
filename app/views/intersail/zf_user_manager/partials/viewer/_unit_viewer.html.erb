@@ -1,0 +1,27 @@
+<div class="zum_scrollable">
+  <table class="table table-striped table-hover">
+    <thead>
+    <th></th>
+    <th>Nome</th>
+    <th>Descrizione</th>
+    <th>Padre</th>
+    </thead>
+
+    <tbody class="user_table_body">
+
+    <% @units.each do |unit| %>
+
+        <tr id="<%= unit.id %>" onclick="window.location.href = '<%= "/unit_manager/units/#{unit.id}#{search_params_for_url}" %>'" class="<%= row_selected(unit, @unit) %>">
+          <td class="list_row_icon">
+            <%= image_tag "zf_user_manager/#{@section.to_s}.png", size: '24x24' %>
+          </td>
+          <td><%= unit.name %></td>
+          <td><%= unit.description %></td>
+          <td><%= unit.parent.name %></td>
+        </tr>
+
+    <% end %>
+
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,35 @@
+<div class="zum_scrollable">
+  <table class="table table-striped table-hover">
+    <thead>
+    <th></th>
+    <th>Processo</th>
+    <th>Attività</th>
+    <th>Unità</th>
+    <th>Ruolo</th>
+    <th>Risorsa</th>
+    <th>Abilitato</th>
+    </thead>
+
+    <tbody class="user_table_body">
+
+    <% @acls.each do |acl| %>
+
+        <tr id="<%= acl.id %>" onclick="window.location.href = '<%= "/unit_manager/acls/#{acl.id}#{search_params_for_url}" %>'" class="<%= row_selected(acl, @acl) %>">
+          <td class="list_row_icon">
+            <%= image_tag "zf_user_manager/#{@section.to_s}.png", size: '24x24' %>
+          </td>
+          <td><%= unit.process.name %></td>
+          <td><%= unit.activity.name %></td>
+          <td><%= unit.unit.name %></td>
+          <td><%= unit.role.name %></td>
+          <td><%= unit.resource.name %></td>
+          <td>
+            <%= enable_icon(acl.enabled) %>
+          </td>
+        </tr>
+
+    <% end %>
+
+    </tbody>
+  </table>
+</div>

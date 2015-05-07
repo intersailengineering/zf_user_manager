@@ -1,0 +1,10 @@
+<div class="zum_search_title">Ricerca Ruoli</div>
+
+<%= form_tag "/user_manager/roles", method: :get, class: 'form-inline unit_role_search_form' do %>
+    <div class="form-group">
+      <label for="full_text_search">Cerca</label>
+      <%= text_field_tag :full_text_search, get_search_param(:full_text_search), class: 'form-control', placeholder: 'Cerca'  %>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-sm zum_inline_submit">Cerca</button>
+<% end %>

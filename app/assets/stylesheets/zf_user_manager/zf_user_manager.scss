@@ -74,13 +74,13 @@ $inspector_border_color: $box1_border_bottom_color;
 $inspector_border_radius: $box1_border_radius;
 $inspector_footer_h: 45px;
 // Action Row
-$profiles_action_row_h: 27px;
-$profiles_action_row_horizontal_padding: 20px;
-$profiles_action_row_top_padding: 10px;
-$profiles_action_row_bottom_padding: 15px;
-$profiles_action_row_TH: $profiles_action_row_h + $profiles_action_row_top_padding + $profiles_action_row_bottom_padding;
-$profiles_action_border_bottom_w: 1px;
-$profiles_action_border_bottom_color: #337ab7;
+$urrs_action_row_h: 27px;
+$urrs_action_row_horizontal_padding: 20px;
+$urrs_action_row_top_padding: 10px;
+$urrs_action_row_bottom_padding: 15px;
+$urrs_action_row_TH: $urrs_action_row_h + $urrs_action_row_top_padding + $urrs_action_row_bottom_padding;
+$urrs_action_border_bottom_w: 1px;
+$urrs_action_border_bottom_color: #337ab7;
 
 
 //########################################################
@@ -285,6 +285,14 @@ a {
   }
 }
 
+.unit_role_search_form {
+  @extend .search_form;
+
+  input {
+    max-width: 300px !important;
+  }
+}
+
 .zum_inline_submit {
   margin-left: 25px;
 }
@@ -374,7 +382,7 @@ a {
   overflow-y: auto;
 }
 
-.zum_profiles_tab {
+.zum_urrs_tab {
   padding: 20px 10px;
 }
 
@@ -382,59 +390,59 @@ a {
   padding: 30px 10px 20px 10px;
 }
 
-.zum_profiles_action_row {
-  height: $profiles_action_row_TH;
-  padding: $profiles_action_row_top_padding $profiles_action_row_horizontal_padding $profiles_action_row_bottom_padding $profiles_action_row_horizontal_padding;
+.zum_urrs_action_row {
+  height: $urrs_action_row_TH;
+  padding: $urrs_action_row_top_padding $urrs_action_row_horizontal_padding $urrs_action_row_bottom_padding $urrs_action_row_horizontal_padding;
   position: relative;
   top: 0;
   left: 0;
   z-index: 100;
 }
 
-.zum_profiles_actions {
+.zum_urrs_actions {
   height: 100%;
-  border-bottom: $profiles_action_border_bottom_w solid $profiles_action_border_bottom_color;
+  border-bottom: $urrs_action_border_bottom_w solid $urrs_action_border_bottom_color;
   padding: 0px 15px;
 }
 
-.zum_new_profile {
+.zum_new_urr {
   float: left;
 }
 
-.zum_profiles_table_container {
+.zum_urrs_table_container {
   height: 100%;
   position: relative;
-  margin-top: - $profiles_action_row_TH;
-  padding-top: $profiles_action_row_TH;
+  margin-top: - $urrs_action_row_TH;
+  padding-top: $urrs_action_row_TH;
   z-index: 1;
 }
 
-.zum_profiles_table {
+.zum_urrs_table {
   height: 100%;
   overflow-y: auto;
 }
 
-.zum_profiles_table table {
+.zum_urrs_table table {
   margin: 0;
 }
 
-.zum_profiles_table table td {
+.zum_urrs_table table td {
   background-color: white;
 }
 
-.zum_profile_table_actions_col {
+.zum_urr_table_actions_col {
   width: 70px;
 }
 
-.new_profile {
+.new_urr {
   font-weight: bold;
 }
 
-.edited_profile {
+.edited_urr {
   font-style: italic;
 }
 
-.destroyed_profile {
+.destroyed_urr {
   text-decoration: line-through;
 }
 

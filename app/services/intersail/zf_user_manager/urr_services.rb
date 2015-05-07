@@ -7,7 +7,7 @@ module Intersail
 
       end
 
-      def urr_update_function
+      def urr_update_all_function
 
       end
 

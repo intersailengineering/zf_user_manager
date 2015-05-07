@@ -1,6 +1,6 @@
 <%= javascript_tag do %>
-    function new_profile() {
-        $('#ZUM_MODAL .modal-content').html('<%= j(render('intersail/zf_user_manager/partials/modals/profile')) %>');
+    function new_urr() {
+        $('#ZUM_MODAL .modal-content').html('<%= j(render('intersail/zf_user_manager/partials/modals/urr')) %>');
         $('#ZUM_MODAL').modal('show');
     }
 <% end %>
@@ -12,7 +12,7 @@
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active"><a href="#user_info" aria-controls="user_info" role="tab" data-toggle="tab">Info Utente</a></li>
-        <li role="presentation"><a href="#user_profiles" aria-controls="user_profiles" role="tab" data-toggle="tab">Profili</a></li>
+        <li role="presentation"><a href="#urrs" aria-controls="urrs" role="tab" data-toggle="tab"><%= I18n.t("zf_user_manager.models.urr.other").titleize %></a></li>
       </ul>
 
       <!-- Tab panes -->
@@ -58,19 +58,19 @@
               </div>
           <% end %>
         </div>
-        <div role="tabpanel" class="tab-pane zum_profiles_tab" id="user_profiles">
+        <div role="tabpanel" class="tab-pane zum_urrs_tab" id="urrs">
 
           <div class="zum_viewer_action_row">
             <div class="zum_viewer_actions">
-              <%= link_to "#", onclick: 'new_profile();', class: 'btn btn-primary btn-xs zum_new_profile' do %>
-                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <%= I18n.t("zf_user_manager.buttons.#{@section.to_s}.new_profile") %>
+              <%= link_to "#", onclick: 'new_urr();', class: 'btn btn-primary btn-xs zum_new_urr' do %>
+                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuovo <%= I18n.t("zf_user_manager.models.urr.one").titleize %>
               <% end %>
               <%= clear %>
             </div>
           </div>
 
-          <div class="zum_profiles_table_container">
-            <div class="zum_profiles_table">
+          <div class="zum_urrs_table_container">
+            <div class="zum_urrs_table">
               <% unless @user.resource.urrs.blank? %>
                   <table class="table">
                     <thead>
@@ -82,7 +82,7 @@
 
                     <tbody>
                     <% @user.resource.urrs.each do |urr| %>
-                        <%= render "intersail/zf_user_manager/partials/inspector/profile_row", urr: urr %>
+                        <%= render "intersail/zf_user_manager/partials/inspector/urr_row", urr: urr %>
                     <% end %>
                     </tbody>
                   </table>
