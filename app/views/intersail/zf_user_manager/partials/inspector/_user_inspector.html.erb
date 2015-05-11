@@ -1,24 +1,69 @@
 <%= javascript_tag do %>
     function new_urr() {
-    $('#ZUM_MODAL .modal-content').html('<%= j(render('intersail/zf_user_manager/partials/modals/urr')) %>');
+    $('#ZUM_MODAL .modal-content').html('<%= j(render('intersail/zf_user_manager/partials/modals/new_urr')) %>');
     $('#ZUM_MODAL').modal('show');
     }
+
+    function edit_urr(row_id, unit_id, role_id) {
+    $('#ZUM_MODAL .modal-content').html('<%= j(render('intersail/zf_user_manager/partials/modals/edit_urr')) %>');
+    $('.urr_edit_form #row_id').val(row_id);
+    $('.urr_edit_form #unit').val(unit_id);
+    $('.urr_edit_form #role').val(role_id);
+    $('#ZUM_MODAL').modal('show');
+    }
+
+    function destroy_urr(row_id) {
+    save_warning();
+
+    var row = $('.zum_urrs_table #' + row_id);
+    var edit_button = $('.zum_urrs_table #' + row_id + ' .urr_edit_button');
+    var destroy_button = $('.zum_urrs_table #' + row_id + ' .urr_destroy_button');
+    var destroy = $('.zum_urrs_table #' + row_id + ' .row_destroy');
+
+    if (row.hasClass('new_urr_style')) {
+    row.remove();
+    } else if (row.hasClass('destroyed_urr_style')) {
+    row.removeClass('destroyed_urr_style');
+    edit_button.attr('disabled', false);
+    destroy.val(0);
+    } else {
+    row.addClass('destroyed_urr_style');
+    edit_button.attr('disabled', true);
+    destroy.val(1);
+    }
+    }
+
+    function show_table() {
+        $('.zum_urrs_table table').show();
+    }
+
+    function hide_table() {
+        $('.zum_urrs_table table').hide();
+    }
+<% end %>
+
+<% if @user.id == 0 %>
+    <% form_url = "/user_manager/users#{search_params_for_url}"  %>
+    <% form_method = :post  %>
+<% else %>
+    <% form_url = "/user_manager/users/#{@user.id}#{search_params_for_url}"  %>
+    <% form_method = :put  %>
 <% end %>
 
 <div class="zum_inspector_data">
   <div class="zum_inspector_data_container">
-    <div role="tabpanel">
+    <%= form_tag form_url, method: form_method, class: 'form-horizontal user_data_form' do %>
+        <div role="tabpanel">
 
-      <!-- Nav tabs -->
-      <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#user_info" aria-controls="user_info" role="tab" data-toggle="tab">Info Utente</a></li>
-        <li role="presentation"><a href="#urrs" aria-controls="urrs" role="tab" data-toggle="tab"><%= I18n.t("zf_user_manager.models.urr.other").titleize %></a></li>
-      </ul>
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#user_info" aria-controls="user_info" role="tab" data-toggle="tab">Info Utente</a></li>
+            <li role="presentation"><a href="#urrs" aria-controls="urrs" role="tab" data-toggle="tab"><%= I18n.t("zf_user_manager.models.urr.other").titleize %></a></li>
+          </ul>
 
-      <!-- Tab panes -->
-      <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active zum_user_info_tab" id="user_info">
-          <%= form_tag "/user_manager/users/#{@user.id}#{search_params_for_url}", method: :put, class: 'form-horizontal user_data_form' do %>
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active zum_user_info_tab" id="user_info">
               <div class="form-group">
                 <label for="username" class="col-sm-3 control-label">Username</label>
                 <div class="col-sm-9">
@@ -56,23 +101,21 @@
                   </div>
                 </div>
               </div>
-          <% end %>
-        </div>
-        <div role="tabpanel" class="tab-pane zum_urrs_tab" id="urrs">
-
-          <div class="zum_viewer_action_row">
-            <div class="zum_viewer_actions">
-              <%= link_to "#", onclick: 'new_urr();', class: 'btn btn-primary btn-xs zum_new_urr' do %>
-                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuovo <%= I18n.t("zf_user_manager.models.urr.one").titleize %>
-              <% end %>
-              <%= clear %>
             </div>
-          </div>
 
-          <div class="zum_urrs_table_container">
-            <div class="zum_urrs_table">
-              <% unless @user.resource.urrs.blank? %>
-                  <table class="table">
+            <div role="tabpanel" class="tab-pane zum_urrs_tab" id="urrs">
+              <div class="zum_viewer_action_row">
+                <div class="zum_viewer_actions">
+                  <%= link_to "#", onclick: 'new_urr();', class: 'btn btn-primary btn-xs zum_new_urr' do %>
+                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuovo <%= I18n.t("zf_user_manager.models.urr.one").titleize %>
+                  <% end %>
+                  <%= clear %>
+                </div>
+              </div>
+
+              <div class="zum_urrs_table_container">
+                <div class="zum_urrs_table">
+                  <table class="table" >
                     <thead>
                     <th></th>
                     <th>Unità</th>
@@ -86,17 +129,21 @@
                     <% end %>
                     </tbody>
                   </table>
-              <% end %>
+
+                  <%= javascript_tag do %>
+                      <% if @user.resource.urrs.blank? %>
+                         hide_table();
+                      <% end %>
+                  <% end %>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-
-    </div>
+  <% end %>
   </div>
 </div>
 
 <div class="zum_inspector_footer">
-  <button type="button" class="btn btn-primary btn-sm" onclick="$('.user_data_form').submit();">Salva</button>
-  <%= link_to 'Elimina', "/user_manager/users/#{@user.id.to_s}#{search_params_for_url}", method: :delete, class: 'btn btn-danger btn-sm' %>
+  <button type="button" class="btn btn-primary btn-sm" onclick="disable_save_warning();$('.user_data_form').submit();">Salva</button>
 </div>

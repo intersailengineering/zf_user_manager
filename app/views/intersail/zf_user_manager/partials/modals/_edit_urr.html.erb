@@ -1,0 +1,59 @@
+<%= javascript_tag do %>
+    function submit_edited_urr() {
+    save_warning();
+
+    var row_id = $('#row_id').val();
+    var unit_name = $('.zum_urrs_table #' + row_id + ' .row_unit_name');
+    var role_name = $('.zum_urrs_table #' + row_id + ' .row_role_name');
+    var unit_id = $('.zum_urrs_table #' + row_id + ' .row_unit_id');
+    var role_id = $('.zum_urrs_table #' + row_id + ' .row_role_id');
+    var edit_button = $('.zum_urrs_table #' + row_id + ' .urr_edit_button');
+    var unit_name_value = $(".urr_edit_form #unit option:selected").text();
+    var role_name_value = $(".urr_edit_form #role option:selected").text();
+    var unit_id_value = $(".urr_edit_form #unit").val();
+    var role_id_value = $(".urr_edit_form #role").val();
+
+    if (!$('.zum_urrs_table #' + row_id).hasClass('new_urr_style')) {
+        if (unit_id.val() != unit_id_value || role_id.val() != role_id_value) {
+            $('.zum_urrs_table #' + row_id).addClass('edited_urr_style');
+        }
+    }
+
+    unit_name.html(unit_name_value);
+    role_name.html(role_name_value);
+    unit_id.val(unit_id_value);
+    role_id.val(role_id_value);
+    edit_button.attr('onclick', 'edit_urr(\'' + row_id + '\', ' + unit_id_value + ', ' + role_id_value + ');');
+    }
+<% end %>
+
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title">Modifica profilo</h4>
+</div>
+<div class="modal-body">
+  <%= form_tag "#", class: 'form-horizontal urr_edit_form' do %>
+      <div class="form-group">
+        <label for="modal_unit_select" class="col-sm-2 control-label">Unità</label>
+        <div class="col-sm-6">
+
+          <%= select_tag(:unit, options_for_select(@unit_select), class: 'form-control') %>
+
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="modal_unit_role" class="col-sm-2 control-label">Ruolo</label>
+        <div class="col-sm-6">
+
+          <%= select_tag(:role, options_for_select(@role_select), class: 'form-control') %>
+
+        </div>
+      </div>
+
+      <%= hidden_field_tag(:row_id, '' ) %>
+  <% end %>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+  <button type="button" onclick="submit_edited_urr();" data-dismiss="modal" class="btn btn-primary" >Modifica</button>
+</div>

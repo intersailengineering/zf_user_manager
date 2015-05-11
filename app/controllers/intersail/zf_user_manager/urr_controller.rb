@@ -8,18 +8,6 @@ module Intersail
         urr_new_function
       end
 
-      def update_all
-        urr_update_all_function
-      end
-
-      def destroy
-        urr_destroy_function
-      end
-
-      private
-
-
-
     end
   end
 end

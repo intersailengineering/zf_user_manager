@@ -1,13 +1,3 @@
-<%= javascript_tag do %>
-    function new_record() {
-        if ($('.zum_viewer_table tr[id=new_record]').length == 0) {
-            $('.zum_viewer_table tr').removeClass('zum_viewer_row_selected');
-            $('.zum_viewer_table').prepend('<%= j(render("intersail/zf_user_manager/partials/viewer/new_row/new_#{@section.to_s}_row")) %>');
-            $('.zum_inspector').html('<%#= j(render("intersail/zf_user_manager/partials/inspector/new_#{@section.to_s}_inspector")) %>');
-        }
-    }
+<%= link_to "/user_manager/users/new", class: "btn btn-primary btn-xs", remote: true do %>
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuovo <%= I18n.t("zf_user_manager.models.#{@section.to_s}.one").titleize %>
 <% end %>
-
-<button onclick="new_record();" class="btn btn-primary btn-xs">
-  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuovo <%= I18n.t("zf_user_manager.models.#{@section.to_s}.one").titleize %>
-</button>

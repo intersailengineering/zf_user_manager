@@ -6,7 +6,7 @@
 
 //------ Main
 $min_w: 1024px;
-$min_h: 600px;
+$min_h: 500px;
 
 //------ Box #1 Theme
 $box1_gradient_left_color: #F5F5F5;
@@ -454,8 +454,19 @@ a {
   width: 70px;
 }
 
-.new_urr {
+.new_urr_style {
   font-weight: bold;
+}
+
+.edited_urr_style {
+  font-weight: normal;
+  font-style: italic;
+}
+
+.destroyed_urr_style {
+  .destroyable {
+    text-decoration: line-through;
+  }
 }
 
 .edited_urr {

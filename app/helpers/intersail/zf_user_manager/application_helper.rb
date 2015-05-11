@@ -39,10 +39,6 @@ module Intersail
         end
       end
 
-      def urr_data(urr)
-        {urr_id: urr.id, unit: {id: urr.unit.id, name: urr.unit.name}, role: {id: urr.role.id, name: urr.role.name}}.to_json
-      end
-
 
 
       #### MESSAGES
@@ -71,8 +67,12 @@ module Intersail
 
       #### MISC
 
+      def new_id(id)
+        id.blank? || id == 0 ? time_hash : id.to_s
+      end
+
       def time_hash
-        Time.now.hash.abs
+        Time.now.hash.abs.to_s
       end
 
     end

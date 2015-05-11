@@ -4,12 +4,16 @@ module Intersail
       include Intersail::ZfUserManager::Concerns::Messageable
       include Intersail::ZfUserManager::UserServices
 
-      before_action :set_user, only: [:show, :create, :update, :destroy]
+      before_action :set_user, only: [:show, :update, :destroy]
       before_action :set_section
       before_action :set_user_search_params, only: [:index, :show, :create, :update, :destroy]
 
       def index
         user_index_function
+      end
+
+      def new
+        user_new_function
       end
 
       def show
@@ -23,8 +27,6 @@ module Intersail
       end
 
       def update
-        puts '>>>>>>>>>>>>>>> ' + params.inspect
-
         user_update_function
         render 'index'
       end

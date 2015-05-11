@@ -1,17 +1,27 @@
 <% status = '' unless local_assigns[:status] %>
+<% new_id = "urr_#{new_id(urr.id)}" %>
 
-<tr id="<%= urr.id %>" class="<%= status %>">
+<tr id="<%= new_id %>" class="<%= status %>">
+
   <td class="list_row_icon" >
     <%= image_tag 'zf_user_manager/urr.png', size: '24x24' %>
   </td>
-  <td><%= urr.unit.name %></td>
-  <td><%= urr.role.name %></td>
+  <td class="row_unit_name destroyable"><%= urr.unit.name %></td>
+  <td class="row_role_name destroyable"><%= urr.role.name %></td>
   <td class="zum_urr_table_actions_col">
-    <a class="btn btn-primary btn-xs" >
+    <a class="btn btn-primary btn-xs urr_edit_button" onclick="edit_urr('<%= new_id %>', <%= urr.unit.id %>, <%= urr.role.id %>);" >
       <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
     </a>
-    <a class="btn btn-danger btn-xs">
+    <a class="btn btn-danger btn-xs urr_destroy_button" onclick="destroy_urr('<%= new_id %>');">
       <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
     </a>
   </td>
+
+  <%= fields_for "urrs[]", urr do |f| %>
+      <%= f.hidden_field :urr_id, class: 'row_urr_id', value: urr.id %>
+      <%= f.hidden_field :unit_id, class: 'row_unit_id', value: urr.unit.id %>
+      <%= f.hidden_field :role_id, class: 'row_role_id', value: urr.role.id %>
+      <%= f.hidden_field :resource_id, class: 'row_resource_id', value: urr.resource_id %>
+      <%= f.hidden_field :_destroy, class: 'row_destroy', value: 0 %>
+<% end %>
 </tr>

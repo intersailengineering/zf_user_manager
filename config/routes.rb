@@ -4,6 +4,7 @@ ZfUserManager::Engine.routes.draw do
 
   # Users
   get '/user_manager/users', to: '/intersail/zf_user_manager/user#index'
+  get '/user_manager/users/new', to: '/intersail/zf_user_manager/user#new'
   get '/user_manager/users/:id', to: '/intersail/zf_user_manager/user#show'
   post '/user_manager/users', to: '/intersail/zf_user_manager/user#create'
   put '/user_manager/users/:id', to: '/intersail/zf_user_manager/user#update'

@@ -7,11 +7,11 @@
     </div>
     <div class="form-group">
       <label for="unit_select">Unità</label>
-      <%= select_tag(:unit_select, options_for_select(@unit_select, get_search_param(:unit_select)), class: 'form-control') %>
+      <%= select_tag(:unit_select, options_for_select(@unit_select, get_search_param(:unit_select)), class: 'form-control', include_blank: true) %>
     </div>
     <div class="form-group">
       <label for="role_select">Ruolo</label>
-      <%= select_tag(:role_select, options_for_select(@role_select, get_search_param(:role_select)), class: 'form-control') %>
+      <%= select_tag(:role_select, options_for_select(@role_select, get_search_param(:role_select)), class: 'form-control', include_blank: true) %>
     </div>
 
     <button type="submit" class="btn btn-primary btn-sm zum_inline_submit">Cerca</button>

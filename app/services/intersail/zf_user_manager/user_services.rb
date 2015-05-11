@@ -9,11 +9,33 @@ module Intersail
       def user_index_function
         @unit_select = unit_select
         @role_select = role_select
-        @users = zum.user_list(@search_params)
+        #@users = zum.user_list(user_search_params(@search_params))
+        @users = zum.user_list()
+      end
+
+      def user_search_params(params)
+        parameters = {}
+        unless params[:full_text_search].blank?
+          parameters['username.like'] = params[:full_text_search]
+          parameters['description.like'] = params[:full_text_search]
+          parameters['resource.first_name.like'] = params[:full_text_search]
+          parameters['resource.last_name.like'] = params[:full_text_search]
+          parameters['resource.mail.like'] = params[:full_text_search]
+        end
+
+        unless params[:unit_select].blank?
+
+        end
       end
 
       def set_user_search_params_function
         search_params(params, SEARCH_PARAMETERS)
+      end
+
+      def user_new_function
+        @unit_select = unit_select
+        @role_select = role_select
+        @user = new_user
       end
 
       def user_show_function
@@ -23,7 +45,6 @@ module Intersail
       def user_update_function
         user = set_user_attributes(@user)
         user = zum.user_update(user.id, user)
-
         @user = user if user
 
         user_index_function
@@ -59,6 +80,14 @@ module Intersail
         user.resource.first_name = params[:first_name]
         user.resource.last_name = params[:last_name]
         user.resource.mail = params[:mail]
+
+        user.resource.urrs = []
+        unless params[:urrs].blank?
+          params[:urrs].each do |urr|
+            user.resource.urrs.push(Intersail::ZfClient::ZUrr.new(id: urr[:urr_id], unit_id: urr[:unit_id], role_id: urr[:role_id], resource_id: user.resource.id, _destroy: urr[:_destroy].to_i))
+          end
+        end
+
         user
       end
 

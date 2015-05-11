@@ -14,7 +14,7 @@
 
     <% @acls.each do |acl| %>
 
-        <tr id="<%= acl.id %>" onclick="window.location.href = '<%= "/unit_manager/acls/#{acl.id}#{search_params_for_url}" %>'" class="<%= row_selected(acl, @acl) %>">
+        <tr id="acl_<%= acl.id %>" onclick="window.location.href = '<%= "/unit_manager/acls/#{acl.id}#{search_params_for_url}" %>'" class="<%= row_selected(acl, @acl) %>">
           <td class="list_row_icon">
             <%= image_tag "zf_user_manager/#{@section.to_s}.png", size: '24x24' %>
           </td>

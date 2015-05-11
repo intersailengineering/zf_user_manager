@@ -12,7 +12,7 @@
 
         <% @users.each do |user| %>
 
-            <tr id="<%= user.id %>" onclick="window.location.href = '<%= "/user_manager/users/#{user.id}#{search_params_for_url}" %>'" class="<%= row_selected(user, @user) %>">
+            <tr id="user_<%= user.id %>" onclick="window.location.href = '<%= "/user_manager/users/#{user.id}#{search_params_for_url}" %>'" class="<%= row_selected(user, @user) %>">
               <td class="list_row_icon">
                 <%= image_tag "zf_user_manager/#{@section.to_s}.png", size: '24x24' %>
               </td>
