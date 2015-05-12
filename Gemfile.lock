@@ -1,6 +1,6 @@
 GIT
   remote: git@github.com:intersailengineering/intersail_auth.git
-  revision: ee76bd0a4936fd7d23a2e887116903e78e3734b0
+  revision: caf2ececa0fc2be1932e45b6c843a2295e97fff1
   branch: staging
   specs:
     intersail_auth (0.0.1)
@@ -8,16 +8,6 @@ GIT
       httparty
       pg
       rails (~> 4.2.0)
-
-GIT
-  remote: https://github.com/intersailengineering/zf-client.git
-  revision: 7045e8cb46338e049ea6b515c1773201ab5263d7
-  branch: f-net-integration
-  specs:
-    zf_client (0.0.1)
-      faker
-      httparty
-      rails (~> 4.2.1)
 
 PATH
   remote: .
@@ -251,5 +241,4 @@ DEPENDENCIES
   rspec-rails
   shoulda-matchers
   sqlite3
-  zf_client!
   zf_user_manager!

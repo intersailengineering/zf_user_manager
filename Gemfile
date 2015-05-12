@@ -11,3 +11,8 @@ gemspec
 # your gem to rubygems.org.
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
+
+# ZapFlow Authentication
+gem 'intersail_auth', :git => 'git@github.com:intersailengineering/intersail_auth.git', :branch => 'staging'
+# ZapFlow User Manager
+gem 'zf_user_manager', path: '../zf_user_manager'
