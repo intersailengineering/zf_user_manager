@@ -10,3 +10,21 @@
   gem 'zf_client', :git => 'https://github.com/intersailengineering/zf-client.git', :branch => 'staging'
   gem 'intersail_auth', :git => 'git@github.com:intersailengineering/intersail_auth.git', :branch => 'staging'
   Per la loro installazione vedere la relativa documentazione associata
+
+== Sovvrascrivere Classi e controller
+Creare una cartella app/decorators ogni file che matcha *_decorator*.rb sarà caricato, in questo modo è possibile
+sovvrascrivere metodi di classi e controller, per esempio:
+
+    module IntersailAuth
+      ApplicationController.class_eval do
+        helper_method :menu_name, :submenu_name
+
+        def menu_name
+          "layouts/menu/empty"
+        end
+
+        def submenu_name
+          "layouts/nav/under_top/empty"
+        end
+      end
+    end
