@@ -1,3 +1,24 @@
+GIT
+  remote: git@github.com:intersailengineering/intersail_auth.git
+  revision: ee76bd0a4936fd7d23a2e887116903e78e3734b0
+  branch: staging
+  specs:
+    intersail_auth (0.0.1)
+      devise
+      httparty
+      pg
+      rails (~> 4.2.0)
+
+GIT
+  remote: https://github.com/intersailengineering/zf-client.git
+  revision: 7045e8cb46338e049ea6b515c1773201ab5263d7
+  branch: f-net-integration
+  specs:
+    zf_client (0.0.1)
+      faker
+      httparty
+      rails (~> 4.2.1)
+
 PATH
   remote: .
   specs:
@@ -48,6 +69,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.0)
+    bcrypt (3.1.10)
     builder (3.2.2)
     celluloid (0.16.0)
       timers (~> 4.0.0)
@@ -60,6 +82,13 @@ GEM
       execjs
     coffee-script-source (1.9.1.1)
     database_cleaner (1.4.1)
+    devise (3.4.1)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 3.2.6, < 5)
+      responders
+      thread_safe (~> 0.1)
+      warden (~> 1.2.3)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.5.2)
@@ -89,6 +118,9 @@ GEM
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
     hitimes (1.2.2)
+    httparty (0.13.3)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     json (1.8.2)
     listen (2.10.0)
@@ -104,12 +136,14 @@ GEM
     mime-types (2.4.3)
     mini_portile (0.6.2)
     minitest (5.6.0)
+    multi_xml (0.5.5)
     nenv (0.2.0)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     notiffany (0.0.6)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    orm_adapter (0.5.0)
     pg (0.18.1)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -146,6 +180,8 @@ GEM
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
+    responders (2.1.0)
+      railties (>= 4.2.0, < 5)
     rspec (3.2.0)
       rspec-core (~> 3.2.0)
       rspec-expectations (~> 3.2.0)
@@ -200,6 +236,8 @@ GEM
     uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    warden (1.2.3)
+      rack (>= 1.0)
 
 PLATFORMS
   ruby
@@ -209,7 +247,9 @@ DEPENDENCIES
   factory_girl_rails (~> 4.0)
   faker
   guard-rspec
+  intersail_auth!
   rspec-rails
   shoulda-matchers
   sqlite3
+  zf_client!
   zf_user_manager!
