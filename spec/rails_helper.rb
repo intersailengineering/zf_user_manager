@@ -1,14 +1,19 @@
-# Configure Rails Environment
-ENV["RAILS_ENV"] = "test"
-
 require 'rails/all'
 require 'rspec/rails'
 require 'spec_helper'
 require 'database_cleaner'
 
+# Configure Rails Environment
+ENV["RAILS_ENV"] = "test"
+
+
 # Require support files
 require File.expand_path("../../test/dummy/config/environment.rb",  __FILE__)
 Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |f| require f }
+
+# Setup migration paths
+ActiveRecord::Migrator.migrations_paths = [File.expand_path("../test/dummy/db/migrate", __FILE__)]
+ActiveRecord::Migrator.migrations_paths << File.expand_path('../db/migrate', __FILE__)
 
 RSpec.configure do |config|
   # RSpec Rails can automatically mix in different behaviours to your tests
@@ -25,14 +30,11 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   # config.infer_spec_type_from_file_location!
-
-  # Activate factory girl
-  config.include FactoryGirl::Syntax::Methods
+  config.include Helpers
 
   # Database handling
   # migrate test schema if needed
   ActiveRecord::Migrator.migrate(File.join(Rails.root, 'db/migrate'))
-
   # Clean database at start of the suite and then
   # just uses transactions
   config.before(:suite) do
@@ -45,4 +47,9 @@ RSpec.configure do |config|
       single_test.run
     end
   end
+
+  # clear all remaning test data
+  # config.after(:all) do
+  #   Helpers::File.clear_test_data
+  # end
 end

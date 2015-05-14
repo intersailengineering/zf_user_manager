@@ -28,3 +28,14 @@ sovvrascrivere metodi di classi e controller, per esempio:
         end
       end
     end
+
+== File di configurazione ed initializers
+
+Per sovvrascrivere la configurazione creare un file intersail_auth.rb nella cartella config/initializers
+Il file deve essere così strutturato:
+
+Intersail::Configuration.configure do |config|
+    config.key = "key"
+end
+
+Dove le possibili chiavi sono nella classa Intersail::Configuration definiti come attr_accessor
