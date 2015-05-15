@@ -18,17 +18,14 @@ module Intersail
 
       def show
         user_show_function
-        render 'index'
       end
 
       def create
         user_create_function
-        render 'index'
       end
 
       def update
         user_update_function
-        render 'index'
       end
 
       def destroy

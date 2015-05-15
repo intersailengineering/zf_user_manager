@@ -22,3 +22,22 @@ function save_warning() {
 function disable_save_warning() {
     window.onbeforeunload = null;
 }
+
+function ajax_call(url, method) {
+    $.ajax({
+        method: method,
+        url: url,
+        dataType: "script"
+    });
+}
+
+function ajax_safe(url, method) {
+    if (window.onbeforeunload != null) {
+        if (confirm("Sei sicuro di voler lasciare la pagina senza salvare?")) {
+            ajax_call(url, method);
+            disable_save_warning();
+        }
+    } else {
+        ajax_call(url, method);
+    }
+}

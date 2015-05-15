@@ -1,0 +1,109 @@
+<%= javascript_tag do %>
+    function new_urr() {
+    $('#ZUM_MODAL .modal-content').html('<%= j(render('intersail/zf_user_manager/partials/modals/new_urr')) %>');
+    $('#ZUM_MODAL').modal('show');
+    }
+
+    function edit_urr(row_id, unit_id, role_id, resource_id) {
+    $('#ZUM_MODAL .modal-content').html('<%= j(render('intersail/zf_user_manager/partials/modals/edit_urr')) %>');
+    $('.urr_edit_form #row_id').val(row_id);
+    <% if @section == :user %>
+        $('.urr_edit_form #unit').val(unit_id);
+        $('.urr_edit_form #role').val(role_id);
+    <% elsif @section == :unit %>
+        $('.urr_edit_form #resource').val(resource_id);
+        $('.urr_edit_form #role').val(role_id);
+    <% elsif @section == :role %>
+        $('.urr_edit_form #resource').val(resource_id);
+        $('.urr_edit_form #role').val(role_id);
+    <% end %>
+    $('#ZUM_MODAL').modal('show');
+    }
+
+    function destroy_urr(row_id) {
+    save_warning();
+
+    var row = $('.zum_urrs_table #' + row_id);
+    var edit_button = $('.zum_urrs_table #' + row_id + ' .urr_edit_button');
+    var destroy_button = $('.zum_urrs_table #' + row_id + ' .urr_destroy_button');
+    var destroy = $('.zum_urrs_table #' + row_id + ' .row_destroy');
+
+    if (row.hasClass('new_urr_style')) {
+    row.remove();
+    } else if (row.hasClass('destroyed_urr_style')) {
+    row.removeClass('destroyed_urr_style');
+    edit_button.attr('disabled', false);
+    destroy.val(0);
+    } else {
+    row.addClass('destroyed_urr_style');
+    edit_button.attr('disabled', true);
+    destroy.val(1);
+    }
+    }
+
+    function show_table() {
+    $('.zum_urrs_table table').show();
+    }
+
+    function hide_table() {
+    $('.zum_urrs_table table').hide();
+    }
+
+    $('.zum_info_tab input, .zum_info_tab select, .zum_info_tab textarea').change(function (e) {
+    save_warning();
+    });
+<% end %>
+
+
+<% record = instance_eval("@#{@section.to_s}") %>
+<% if record.id == 0 %>
+    <% form_url = "/user_manager/users#{search_params_for_url}"  %>
+    <% form_method = :post  %>
+<% else %>
+    <% form_url = "/user_manager/users/#{record.id}#{search_params_for_url}"  %>
+    <% form_method = :put  %>
+<% end %>
+
+
+<div class="zum_inspector_data">
+  <div class="zum_inspector_data_container">
+    <%= form_tag form_url, method: form_method, remote: true, class: 'form-horizontal record_data_form' do %>
+        <div role="tabpanel">
+
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#record_info" aria-controls="record_info" role="tab" data-toggle="tab">Info <%= I18n.t("zf_user_manager.models.#{@section.to_s}.one").titleize %></a></li>
+            <li role="presentation"><a href="#urrs" aria-controls="urrs" role="tab" data-toggle="tab"><%= I18n.t("zf_user_manager.models.urr.other").titleize %></a></li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active zum_info_tab" id="record_info">
+              <%= render "intersail/zf_user_manager/partials/inspector/info_form/#{@section.to_s}_info_form" %>
+            </div>
+
+            <div role="tabpanel" class="tab-pane zum_urrs_tab" id="urrs">
+              <div class="zum_viewer_action_row">
+                <div class="zum_viewer_actions">
+                  <%= link_to "#", onclick: 'new_urr();', class: 'btn btn-primary btn-xs zum_new_urr' do %>
+                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuovo <%= I18n.t("zf_user_manager.models.urr.one").titleize %>
+                  <% end %>
+                  <%= clear %>
+                </div>
+              </div>
+
+              <div class="zum_urrs_table_container">
+                <div class="zum_urrs_table">
+                  <%= render "intersail/zf_user_manager/partials/inspector/urr_form/#{@section.to_s}_urr_form" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="zum_inspector_footer">
+  <button type="button" class="btn btn-primary btn-sm" onclick="disable_save_warning();$('.record_data_form').submit();"><%= form_method == :post ? 'Crea' : 'Salva' %></button>
+</div>

@@ -9,23 +9,24 @@ module Intersail
       def user_index_function
         @unit_select = unit_select
         @role_select = role_select
-        #@users = zum.user_list(user_search_params(@search_params))
-        @users = zum.user_list()
+        @users = zum.user_list(user_search_params(@search_params))
       end
 
       def user_search_params(params)
         parameters = {}
         unless params[:full_text_search].blank?
-          parameters['username.like'] = params[:full_text_search]
-          parameters['description.like'] = params[:full_text_search]
-          parameters['resource.first_name.like'] = params[:full_text_search]
-          parameters['resource.last_name.like'] = params[:full_text_search]
-          parameters['resource.mail.like'] = params[:full_text_search]
+          parameters['full_text_search'] = params[:full_text_search]
         end
 
         unless params[:unit_select].blank?
-
+          parameters['unit_id'] = params[:unit_select]
         end
+
+        unless params[:role_select].blank?
+          parameters['role_id'] = params[:role_select]
+        end
+
+        parameters
       end
 
       def set_user_search_params_function
@@ -66,6 +67,7 @@ module Intersail
           @user = user
           clean_search_params
         rescue
+          @user = user
           set_error_message('Campi mancanti o non compilati correttamente')
         end
 

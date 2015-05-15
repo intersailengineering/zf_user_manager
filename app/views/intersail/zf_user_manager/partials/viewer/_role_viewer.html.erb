@@ -11,13 +11,13 @@
 
     <% @roles.each do |role| %>
 
-        <tr id="role_<%= role.id %>" onclick="window.location.href = '<%= "/unit_manager/roles/#{role.id}#{search_params_for_url}" %>'" class="<%= row_selected(role, @role) %>">
+        <tr id="role_<%= role.id %>" onclick="window.location.href = '<%= "/user_manager/roles/#{role.id}#{search_params_for_url}" %>'" class="<%= row_selected(role, @role) %>">
           <td class="list_row_icon">
             <%= image_tag "zf_user_manager/#{@section.to_s}.png", size: '24x24' %>
           </td>
           <td><%= role.name %></td>
           <td><%= role.description %></td>
-          <td><%= role.parent.name %></td>
+          <td><%= role.parent ? role.parent.name : '-' %></td>
         </tr>
 
     <% end %>

@@ -6,7 +6,7 @@
 
 //------ Main
 $min_w: 1024px;
-$min_h: 500px;
+$min_h: 600px;
 
 //------ Box #1 Theme
 $box1_gradient_left_color: #F5F5F5;
@@ -18,29 +18,18 @@ $box1_border_radius: 8px;
 //------ Primary Menu
 $primary_menu_h: 40px;
 $primary_menu_border_w: 2px;
-$primary_menu_TH: $primary_menu_h + ($primary_menu_border_w * 2);
 $primary_menu_border_color: orangered;
 $primary_menu_gradient_left_color: orange;
 $primary_menu_gradient_right_color: orangered;
-$primary_menu_button_selected_color: orangered;
-$primary_menu_button_hover_color: transparentize(orangered, 0.7);
 
 //------ Main Content
 $main_content_padding: 10px;
 $main_content_border_bottom_w: $primary_menu_border_w;
 $main_content_border_bottom_color: $primary_menu_border_color;
 
-//------ Messages Container
-$messages_container_h: 104px;
-$messages_container_h_small: 52px;
-$messages_container_padding_bottom: 10px;
-$messages_container_TH: $messages_container_h + $messages_container_padding_bottom;
-$messages_container_TH_small: $messages_container_h_small + $messages_container_padding_bottom;
-
 //------ Search Container
-$search_container_h: 95px;
+$search_container_h: 115px;
 $search_container_padding_bottom: 10px;
-$search_container_TH: $search_container_h + $search_container_padding_bottom;
 // Search
 $search_vertical_padding: 5px;
 $search_horizontal_padding: 10px;
@@ -53,15 +42,12 @@ $search_border_radius: $box1_border_radius;
 //------ Manager Viewer
 $manager_viewer_percentage: 60%;
 $manager_viewer_padding_right: 15px;
-// Action Row
-$viewer_action_row_h: 27px;
+$viewer_action_row_h : 52px;
 $viewer_action_row_horizontal_padding: 20px;
 $viewer_action_row_top_padding: 10px;
 $viewer_action_row_bottom_padding: 15px;
-$viewer_action_row_TH: $viewer_action_row_h + $viewer_action_row_top_padding + $viewer_action_row_bottom_padding;
 $viewer_action_border_bottom_w: 1px;
 $viewer_action_border_bottom_color: #337ab7;
-// Table
 $viewer_table_row_selected_color: orange;
 $viewer_table_row_new_color: limegreen;
 
@@ -74,21 +60,17 @@ $inspector_gradient_right_color: $box1_gradient_right_color;
 $inspector_border_w: $box1_border_bottom_w;
 $inspector_border_color: $box1_border_bottom_color;
 $inspector_border_radius: $box1_border_radius;
+$inspector_header_h: 50px;
 $inspector_footer_h: 45px;
-// Action Row
-$urrs_action_row_h: 27px;
-$urrs_action_row_horizontal_padding: 20px;
-$urrs_action_row_top_padding: 10px;
-$urrs_action_row_bottom_padding: 15px;
-$urrs_action_row_TH: $urrs_action_row_h + $urrs_action_row_top_padding + $urrs_action_row_bottom_padding;
-$urrs_action_border_bottom_w: 1px;
-$urrs_action_border_bottom_color: #337ab7;
+$inspector_user_data_percentage: 50%;
+$inspector_user_profiles_percentage: 50%;
+$inspector_profiles_header_h: 40px;
+
 
 
 //########################################################
 //######### STYLES #######################################
 //########################################################
-
 
 //--------GENERAL-----------------------------------
 
@@ -127,8 +109,9 @@ a {
 }
 
 .zum_primary_menu {
+  box-sizing: border-box;
   width: 100%;
-  height: $primary_menu_TH;
+  height: $primary_menu_h;
   position: relative;
   top: 0;
   left: 0;
@@ -136,128 +119,91 @@ a {
   border-top: $primary_menu_border_w solid $primary_menu_border_color;
   border-bottom: $primary_menu_border_w solid $primary_menu_border_color;
   @include horizontal-gradient($primary_menu_gradient_left_color, $primary_menu_gradient_right_color);
-
-  .zum_pm_button {
-    height: 100%;
-    padding: 10px 20px 0px 20px;
-    float: left;
-    color: black;
-    font-weight: bold;
-    text-align: center;
-  }
-
-  .zum_pm_button_selected {
-    border-bottom: 5px solid $primary_menu_button_selected_color !important;
-  }
-
-  a:hover {
-    border-bottom: 5px solid $primary_menu_button_hover_color;
-    text-decoration: none;
-  }
 }
 
 .zum_main_content {
+  box-sizing: border-box;
   width: 100%;
   height: 100%;
   position: relative;
-  margin-top: - $primary_menu_TH;
-  padding: ($primary_menu_TH + $main_content_padding) $main_content_padding $main_content_padding $main_content_padding;
+  margin-top: - $primary_menu_h;
+  padding: ($primary_menu_h + $main_content_padding) $main_content_padding $main_content_padding $main_content_padding;
   z-index: 1;
   border-bottom: $main_content_border_bottom_w solid $main_content_border_bottom_color;
 }
 
-.zum_messages_visible {
-  .zum_messages_container {
-    width: 100%;
-    height: $messages_container_TH;
-    padding-bottom: $messages_container_padding_bottom;
-    position: relative;
-    top: 0;
-    left: 0;
-    z-index: 100;
-  }
 
-  .zum_search_container {
-    width: 100%;
-    height: $search_container_TH + $messages_container_TH;
-    position: relative;
-    margin-top: - $messages_container_TH;
-    padding-top: $messages_container_TH;
-    padding-bottom: $search_container_padding_bottom;
-    z-index: 99;
-  }
 
-  .zum_manager_container {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    margin-top: - ($search_container_TH + $messages_container_TH);
-    padding-top: $search_container_TH + $messages_container_TH;
-    z-index: 1;
-  }
+
+
+$messages_container_h: 60px;
+
+.zum_messages_container {
+  box-sizing: border-box;
+  width: 100%;
+  height: $messages_container_h;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: green;
 }
 
-.zum_messages_visible_small {
-  .zum_messages_container {
-    width: 100%;
-    height: $messages_container_TH_small;
-    padding-bottom: $messages_container_padding_bottom;
-    position: relative;
-    top: 0;
-    left: 0;
-    z-index: 100;
-  }
-
-  .zum_search_container {
-    width: 100%;
-    height: $search_container_TH + $messages_container_TH_small;
-    position: relative;
-    margin-top: - $messages_container_TH_small;
-    padding-top: $messages_container_TH_small;
-    padding-bottom: $search_container_padding_bottom;
-    z-index: 99;
-  }
-
-  .zum_manager_container {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    margin-top: - ($search_container_TH + $messages_container_TH_small);
-    padding-top: $search_container_TH + $messages_container_TH_small;
-    z-index: 1;
-  }
+.zum_search_container_2 {
+  box-sizing: border-box;
+  width: 100%;
+  height: $search_container_h;
+  position: relative;
+  margin-top: - $messages_container_h;
+  padding-top: $messages_container_h;
+  padding-bottom: $search_container_padding_bottom;
+  z-index: 99;
 }
 
-.zum_messages_hidden {
-  .zum_messages_container {
-    display: none;
-  }
+.zum_manager_container_2 {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  margin-top: - ($search_container_h + 70px);
+  padding-top: $search_container_h + 70px;
+  z-index: 1;
+}
 
-  .zum_search_container {
-    width: 100%;
-    height: $search_container_TH;
-    position: relative;
-    top: 0;
-    left: 0;
-    padding-bottom: $search_container_padding_bottom;
-    z-index: 100;
-  }
 
-  .zum_manager_container {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    margin-top: - $search_container_TH;
-    padding-top: $search_container_TH;
-    z-index: 1;
-  }
+
+
+
+
+
+.zum_search_container {
+  box-sizing: border-box;
+  width: 100%;
+  height: $search_container_h;
+  position: relative;
+  top: 0;
+  left: 0;
+  padding-bottom: $search_container_padding_bottom;
+  z-index: 100;
+}
+
+.zum_manager_container {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  margin-top: - $search_container_h;
+  padding-top: $search_container_h;
+  z-index: 1;
 }
 
 .zum_manager_viewer {
+  box-sizing: border-box;
   float: left;
   width: $manager_viewer_percentage;
   height: 100%;
   padding-right: $manager_viewer_padding_right;
+
 }
 
 .zum_manager_inspector {
@@ -275,7 +221,8 @@ a {
 //--------SEARCH-----------------------------------
 
 .zum_search {
-  height: $search_container_h;
+  box-sizing: border-box;
+  height: $search_container_h - $search_container_padding_bottom;
   padding: $search_vertical_padding $search_horizontal_padding;
   @include vertical-gradient($search_gradient_left_color, $search_gradient_right_color);
   @include rounded-borders($search_border_color, $search_border_w, $search_border_radius);
@@ -291,25 +238,13 @@ a {
     margin-left: 10px;
     margin-right: 5px;
   }
-
-  input, select {
-    margin-right: 10px;
-  }
 }
 
 .user_search_form {
   @extend .search_form;
 
   input, select {
-    max-width: 225px !important;
-  }
-}
-
-.unit_role_search_form {
-  @extend .search_form;
-
-  input {
-    max-width: 300px !important;
+    max-width: 235px !important;
   }
 }
 
@@ -321,7 +256,8 @@ a {
 //--------VIEWER-----------------------------------
 
 .zum_viewer_action_row {
-  height: $viewer_action_row_TH;
+  box-sizing: border-box;
+  height: $viewer_action_row_h;
   padding: $viewer_action_row_top_padding $viewer_action_row_horizontal_padding $viewer_action_row_bottom_padding $viewer_action_row_horizontal_padding;
   position: relative;
   top: 0;
@@ -330,17 +266,19 @@ a {
 }
 
 .zum_viewer_actions {
+  box-sizing: border-box;
   height: 100%;
   border-bottom: $viewer_action_border_bottom_w solid $viewer_action_border_bottom_color;
   padding: 0px 15px;
 }
 
 .zum_viewer_table {
+  box-sizing: border-box;
   height: 100%;
   width: 100%;
   position: relative;
-  margin-top: - $viewer_action_row_TH;
-  padding-top: $viewer_action_row_TH;
+  margin-top: - $viewer_action_row_h;
+  padding-top: $viewer_action_row_h;
   z-index: 1;
 }
 
@@ -370,23 +308,37 @@ a {
 //--------INSPECTOR-----------------------------------
 
 .zum_inspector {
+  box-sizing: border-box;
   height: 100%;
   padding: $inspector_vertical_padding $inspector_horizontal_padding;
   @include vertical-gradient($inspector_gradient_left_color, $inspector_gradient_right_color);
   @include rounded-borders($inspector_border_color, $inspector_border_w, $inspector_border_radius);
 }
 
+.zum_inspector_header {
+  box-sizing: border-box;
+  @extend .zum_pannel_title;
+  height: $inspector_header_h;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding-top: 5px;
+}
+
 .zum_inspector_data {
+   box-sizing: border-box;
    height: 100%;
    position: relative;
-   top: 0;
-   left: 0;
+   margin-top: - $inspector_header_h;
+   padding-top: $inspector_header_h;
    margin-bottom: - $inspector_footer_h;
    padding-bottom: $inspector_footer_h;
    z-index: 1;
  }
 
 .zum_inspector_footer {
+  box-sizing: border-box;
   height: $inspector_footer_h;
   position: relative;
   bottom: 0;
@@ -397,128 +349,78 @@ a {
 }
 
 .zum_inspector_data_container {
+  box-sizing: border-box;
   height: 100%;
   padding: 0px 15px 0px 0px;
   overflow-y: auto;
 }
 
-.zum_urrs_tab {
-  padding: 20px 10px;
+.zum_user_data {
+  box-sizing: border-box;
+  height: $inspector_user_data_percentage;
+  padding: 0px 15px 0px 0px;
+  overflow-y: auto;
 }
 
-.zum_info_tab {
-  padding: 30px 10px 20px 10px;
+.zum_user_profiles {
+  box-sizing: border-box;
+  height: $inspector_user_profiles_percentage;
+  padding: 20px 15px 15px 0px;
 }
 
-.zum_urrs_action_row {
-  height: $urrs_action_row_TH;
-  padding: $urrs_action_row_top_padding $urrs_action_row_horizontal_padding $urrs_action_row_bottom_padding $urrs_action_row_horizontal_padding;
+.zum_profiles_header_container {
+  box-sizing: border-box;
+  height: $inspector_profiles_header_h;
   position: relative;
   top: 0;
   left: 0;
   z-index: 100;
+  padding-top: 10px;
 }
 
-.zum_urrs_actions {
-  height: 100%;
-  border-bottom: $urrs_action_border_bottom_w solid $urrs_action_border_bottom_color;
-  padding: 0px 15px;
+.zum_profiles_header {
+  box-sizing: border-box;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 0px 10px 4px 10px;
+  border-bottom: 1px solid black;
 }
 
-.zum_new_urr {
+.zum_profile_title {
   float: left;
 }
 
-.zum_urrs_table_container {
+.zum_new_profile {
+  float: right;
+}
+
+.zum_profiles_table_container {
+  box-sizing: border-box;
   height: 100%;
   position: relative;
-  margin-top: - $urrs_action_row_TH;
-  padding-top: $urrs_action_row_TH;
+  margin-top: - $inspector_profiles_header_h;
+  padding-top: $inspector_profiles_header_h;
   z-index: 1;
 }
 
-.zum_urrs_table {
+.zum_profiles_table {
+  box-sizing: border-box;
   height: 100%;
   overflow-y: auto;
 }
 
-.zum_urrs_table table {
+.zum_profiles_table table {
   margin: 0;
 }
 
-.zum_urrs_table table td {
+.zum_profiles_table table td {
   background-color: white;
 }
 
-.zum_urr_table_actions_col {
-  width: 70px;
+.zum_profile_table_actions_col {
+  width: 35px;
 }
 
-.new_urr_style {
-  font-weight: bold;
-}
-
-.edited_urr_style {
-  font-weight: normal;
-  font-style: italic;
-}
-
-.destroyed_urr_style {
-  .destroyable {
-    text-decoration: line-through;
-  }
-}
-
-.edited_urr {
-  font-style: italic;
-}
-
-.destroyed_urr {
-  text-decoration: line-through;
-}
-
-
-//--------MESSAGES-----------------------------------
-
-.zum_messages_visible_small {
-  .zum_messages_container {
-    .render_messages {
-      height: $messages_container_h_small;
-    }
-
-    .messages_alert {
-      margin: 0px;
-      height: $messages_container_h_small;
-    }
-
-    .all_messages {
-      max-height: $messages_container_h_small - 30px;
-      margin-right: 20px;
-      overflow-x: hidden;
-      overflow-y: auto;
-    }
-  }
-}
-
-.zum_messages_visible {
-  .zum_messages_container {
-    .render_messages {
-      height: $messages_container_h;
-    }
-
-    .messages_alert {
-      margin: 0px;
-      height: $messages_container_h;
-    }
-
-    .all_messages {
-      max-height: $messages_container_h - 30px;
-      margin-right: 20px;
-      overflow-x: hidden;
-      overflow-y: auto;
-    }
-  }
-}
 
 
 

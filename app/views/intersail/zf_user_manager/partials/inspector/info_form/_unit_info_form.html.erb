@@ -1,0 +1,60 @@
+<div class="form-group">
+  <label for="username" class="col-sm-3 control-label">Username</label>
+  <div class="col-sm-9">
+    <%= text_field_tag :username, @user.username, class: 'form-control', placeholder: 'Username'  %>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="username" class="col-sm-3 control-label">Email</label>
+  <div class="col-sm-9">
+    <%= text_field_tag :mail, @user.resource.mail, class: 'form-control', placeholder: 'Email'  %>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="username" class="col-sm-3 control-label">Nome</label>
+  <div class="col-sm-9">
+    <%= text_field_tag :first_name, @user.resource.first_name, class: 'form-control', placeholder: 'Nome'  %>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="username" class="col-sm-3 control-label">Cognome</label>
+  <div class="col-sm-9">
+    <%= text_field_tag :last_name, @user.resource.last_name, class: 'form-control', placeholder: 'Cognome'  %>
+  </div>
+</div>
+
+<div class="form-group">
+  <div class="col-sm-offset-3 col-sm-9">
+    <div class="checkbox">
+      <label>
+        <%= check_box_tag :active, 'true', @user.active %> Abilitato
+      </label>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="form-group">
+  <label for="name" class="col-sm-3 control-label">Nome</label>
+  <div class="col-sm-9">
+    <%= text_field_tag :name, @unit.name, class: 'form-control', placeholder: 'Nome'  %>
+  </div>
+</div>
+<div class="form-group">
+  <label for="description" class="col-sm-3 control-label">Descrizione</label>
+  <div class="col-sm-9">
+    <%= text_area_tag :description, @unit.description, class: 'form-control', placeholder: 'Descrizione'  %>
+  </div>
+</div>
+<div class="form-group">
+  <label for="description" class="col-sm-3 control-label">Padre</label>
+  <div class="col-sm-9">
+    <select class="form-control" id="role_select">
+      <option>Intersail</option>
+    </select>
+  </div>
+</div>
