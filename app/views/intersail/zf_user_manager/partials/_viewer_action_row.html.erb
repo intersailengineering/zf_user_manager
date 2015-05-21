@@ -1,3 +1,3 @@
-<%= link_to "/user_manager/users/new", class: "btn btn-primary btn-xs", remote: true do %>
+<%= link_to "/user_manager/#{@section.to_s}s/new", class: "btn btn-primary btn-xs", remote: true do %>
     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuovo <%= I18n.t("zf_user_manager.models.#{@section.to_s}.one").titleize %>
 <% end %>

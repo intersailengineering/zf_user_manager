@@ -67,8 +67,8 @@ module Intersail
 
       #### MISC
 
-      def new_id(id)
-        id.blank? || id == 0 ? time_hash : id.to_s
+      def new_id(record)
+        record.blank? ? time_hash : record.id.to_s
       end
 
       def time_hash

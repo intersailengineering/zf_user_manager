@@ -2,6 +2,7 @@ module Intersail
   module ZfUserManager
     class UserController < ApplicationController
       include Intersail::ZfUserManager::Concerns::Messageable
+      include Intersail::ZfUserManager::Concerns::TabPersistable
       include Intersail::ZfUserManager::UserServices
 
       before_action :set_user, only: [:show, :update, :destroy]
@@ -42,6 +43,8 @@ module Intersail
 
       def update
         user_update_function
+
+        puts '>>>>>>>>>>>>>>>>>>>> ' + @target_tab
 
         respond_to do |format|
           format.js { render 'intersail/zf_user_manager/shared/update' }

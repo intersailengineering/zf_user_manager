@@ -2,6 +2,7 @@ module Intersail
   module ZfUserManager
     class UnitController < ApplicationController
       include Intersail::ZfUserManager::Concerns::Messageable
+      include Intersail::ZfUserManager::Concerns::TabPersistable
       include Intersail::ZfUserManager::UnitServices
 
       before_action :set_unit, only: [:show, :create, :update, :destroy]

@@ -18,8 +18,8 @@ module Intersail
         zum.resource_list.map {|resource| ["#{resource.first_name.humanize} #{resource.last_name.humanize}", resource.id]}
       end
 
-      def process_instance_select
-        zum.process_instance_list.map {|role| [role.name.humanize, role.id]}
+      def process_def_select
+        zum.process_def_list.map {|process_def| [process_def.name.humanize, process_def.id]}
       end
 
     end

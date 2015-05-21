@@ -113,6 +113,7 @@ a {
   min-height: $min_h;
   min-width: $min_w;
   position: relative;
+  @include no-text-selection;
 }
 
 .zum_standard_container {
@@ -269,6 +270,14 @@ a {
 .zum_pannel_title {
   font-size: 18px;
   font-weight: bold;
+}
+
+#ZUM_MODAL {
+  position: absolute;
+
+  .modal-dialog {
+    margin: 50px auto !important;
+  }
 }
 
 

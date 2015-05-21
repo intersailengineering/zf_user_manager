@@ -1,19 +1,51 @@
 <%= javascript_tag do %>
     function submit_new_urr() {
 
+    $('.zum_urrs_table table tbody').prepend('<%= j(render('intersail/zf_user_manager/partials/inspector/urr_row', urr: nil, status: 'new_urr_style')) %>');
+
+    var urr_row = $('.zum_urrs_table table tbody .urr_row:first');
+    var edit_button = urr_row.find('.urr_edit_button');
+
+    <% if defined? @resource_select %>
+        var resource_name = urr_row.find('.row_resource_name');
+        var resource_id = urr_row.find('.row_resource_id');
+        var resource_name_value = $(".urr_new_form #resource option:selected").text();
+        var resource_id_value = $(".urr_new_form #resource").val();
+    <% end %>
+
     <% if defined? @unit_select %>
-        $('.urr_new_form #unit_name').val($(".urr_new_form #unit option:selected").text());
+        var unit_name = urr_row.find('.row_unit_name');
+        var unit_id = urr_row.find('.row_unit_id');
+        var unit_name_value = $(".urr_new_form #unit option:selected").text();
+        var unit_id_value = $(".urr_new_form #unit").val();
     <% end %>
 
     <% if defined? @role_select %>
-        $('.urr_new_form #role_name').val($(".urr_new_form #role option:selected").text());
+        var role_name = urr_row.find('.row_role_name');
+        var role_id = urr_row.find('.row_role_id');
+        var role_name_value = $(".urr_new_form #role option:selected").text();
+        var role_id_value = $(".urr_new_form #role").val();
     <% end %>
 
-    <% if defined? @resource_select %>
-        $('.urr_new_form #resource_name').val($(".urr_new_form #resource option:selected").text());
+    <% if @section == :user %>
+        unit_name.html(unit_name_value);
+        role_name.html(role_name_value);
+        unit_id.val(unit_id_value);
+        role_id.val(role_id_value);
+        edit_button.attr('onclick', 'edit_urr(\'' + row_id + '\', ' + unit_id_value + ', ' + role_id_value + ', null);');
+    <% elsif @section == :unit %>
+        resource_name.html(resource_name_value);
+        role_name.html(role_name_value);
+        resource_id.val(resource_id_value);
+        role_id.val(role_id_value);
+        edit_button.attr('onclick', 'edit_urr(\'' + row_id + '\', null, ' + role_id_value + ', ' + resource_id_value + ');');
+    <% elsif @section == :role %>
+        unit_name.html(unit_name_value);
+        resource_name.html(resource_name_value);
+        resource_id.val(resource_id_value);
+        role_id.val(role_id_value);
+        edit_button.attr('onclick', 'edit_urr(\'' + row_id + '\', null, ' + role_id_value + ', ' + resource_id_value + ');');
     <% end %>
-
-    $('.urr_new_form').submit();
     }
 <% end %>
 
@@ -22,7 +54,7 @@
   <h4 class="modal-title">Crea profilo</h4>
 </div>
 <div class="modal-body">
-  <%= form_tag "/user_manager/urrs/new", method: :get, remote: true, class: 'form-horizontal urr_new_form' do %>
+  <%= form_tag "#", class: 'form-horizontal urr_new_form' do %>
 
       <% if defined? @resource_select %>
           <div class="form-group">
@@ -55,20 +87,6 @@
 
             </div>
           </div>
-      <% end %>
-
-      <% if @section == :user %>
-          <%= hidden_field_tag(:resource, @user.resource.id ) %>
-          <%= hidden_field_tag(:unit_name, '' ) %>
-          <%= hidden_field_tag(:role_name, '' ) %>
-      <% elsif @section == :unit %>
-          <%= hidden_field_tag(:resource, '' ) %>
-          <%= hidden_field_tag(:unit_name, @unit.id ) %>
-          <%= hidden_field_tag(:role_name, '' ) %>
-      <% elsif @section == :role %>
-          <%= hidden_field_tag(:resource, '' ) %>
-          <%= hidden_field_tag(:unit_name, '' ) %>
-          <%= hidden_field_tag(:role_name, @role.id ) %>
       <% end %>
 
   <% end %>

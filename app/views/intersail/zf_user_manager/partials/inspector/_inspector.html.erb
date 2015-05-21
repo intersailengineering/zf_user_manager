@@ -57,10 +57,10 @@
 
 <% record = instance_eval("@#{@section.to_s}") %>
 <% if record.id == 0 %>
-    <% form_url = "/user_manager/users#{search_params_for_url}"  %>
+    <% form_url = "/user_manager/#{@section.to_s}s#{search_params_for_url}"  %>
     <% form_method = :post  %>
 <% else %>
-    <% form_url = "/user_manager/users/#{record.id}#{search_params_for_url}"  %>
+    <% form_url = "/user_manager/#{@section.to_s}s/#{record.id}#{search_params_for_url}"  %>
     <% form_method = :put  %>
 <% end %>
 
@@ -68,38 +68,64 @@
 <div class="zum_inspector_data">
   <div class="zum_inspector_data_container">
     <%= form_tag form_url, method: form_method, remote: true, class: 'form-horizontal record_data_form' do %>
-        <div role="tabpanel">
 
-          <!-- Nav tabs -->
-          <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#record_info" aria-controls="record_info" role="tab" data-toggle="tab">Info <%= I18n.t("zf_user_manager.models.#{@section.to_s}.one").titleize %></a></li>
-            <li role="presentation"><a href="#urrs" aria-controls="urrs" role="tab" data-toggle="tab"><%= I18n.t("zf_user_manager.models.urr.other").titleize %></a></li>
-          </ul>
+        <% if @section == :acl %>
+            <%= render "intersail/zf_user_manager/partials/inspector/info_form/#{@section.to_s}_info_form" %>
+        <% else %>
+            <div role="tabpanel">
 
-          <!-- Tab panes -->
-          <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active zum_info_tab" id="record_info">
-              <%= render "intersail/zf_user_manager/partials/inspector/info_form/#{@section.to_s}_info_form" %>
-            </div>
+              <!-- Nav tabs -->
+              <ul class="nav nav-tabs inspector_tabs" role="tablist" >
+                <li role="presentation" class="active"><a href="#record_info" aria-controls="record_info" role="tab" data-toggle="tab">Info <%= I18n.t("zf_user_manager.models.#{@section.to_s}.one").titleize %></a></li>
+                <li role="presentation"><a href="#urrs" aria-controls="urrs" role="tab" data-toggle="tab"><%= I18n.t("zf_user_manager.models.urr.other").titleize %></a></li>
 
-            <div role="tabpanel" class="tab-pane zum_urrs_tab" id="urrs">
-              <div class="zum_viewer_action_row">
-                <div class="zum_viewer_actions">
-                  <%= link_to "#", onclick: 'new_urr();', class: 'btn btn-primary btn-xs zum_new_urr' do %>
-                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuovo <%= I18n.t("zf_user_manager.models.urr.one").titleize %>
-                  <% end %>
-                  <%= clear %>
+                <%= hidden_field_tag :current_tab %>
+                <% if defined? @target_tab %>
+                    <%= javascript_tag do %>
+                        console.log('1');
+                        $('.inspector_tabs a[href=<%= @target_tab %>]').tab('show')
+                    <% end %>
+                <% else %>
+                    <%= javascript_tag do %>
+                        console.log('2');
+                        $('#current_tab').val($('.inspector_tabs li[class=active] a').attr("href"));
+                    <% end %>
+                <% end %>
+              </ul>
+
+              <!-- Tab panes -->
+              <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active zum_info_tab" id="record_info">
+                  <%= render "intersail/zf_user_manager/partials/inspector/info_form/#{@section.to_s}_info_form" %>
+                </div>
+
+                <div role="tabpanel" class="tab-pane zum_urrs_tab" id="urrs">
+                  <div class="zum_viewer_action_row">
+                    <div class="zum_viewer_actions">
+                      <%= link_to "#", onclick: 'new_urr();', class: 'btn btn-primary btn-xs zum_new_urr' do %>
+                          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuovo <%= I18n.t("zf_user_manager.models.urr.one").titleize %>
+                      <% end %>
+                      <%= clear %>
+                    </div>
+                  </div>
+
+                  <div class="zum_urrs_table_container">
+                    <div class="zum_urrs_table">
+                      <%= render "intersail/zf_user_manager/partials/inspector/urr_form/#{@section.to_s}_urr_form" %>
+                    </div>
+                  </div>
                 </div>
               </div>
-
-              <div class="zum_urrs_table_container">
-                <div class="zum_urrs_table">
-                  <%= render "intersail/zf_user_manager/partials/inspector/urr_form/#{@section.to_s}_urr_form" %>
-                </div>
-              </div>
             </div>
-          </div>
-        </div>
+
+            <%= javascript_tag do %>
+                $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                    var target = $(e.target).attr("href");
+                    $('#current_tab').val(target);
+                })
+            <% end %>
+        <% end %>
+
     <% end %>
   </div>
 </div>

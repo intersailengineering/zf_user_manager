@@ -2,6 +2,7 @@ module Intersail
   module ZfUserManager
     class RoleController < ApplicationController
       include Intersail::ZfUserManager::Concerns::Messageable
+      include Intersail::ZfUserManager::Concerns::TabPersistable
       include Intersail::ZfUserManager::RoleServices
 
       before_action :set_role, only: [:show, :create, :update, :destroy]

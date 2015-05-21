@@ -20,11 +20,11 @@
           <td class="list_row_icon">
             <%= image_tag "zf_user_manager/#{@section.to_s}.png", size: '24x24' %>
           </td>
-          <td><%= unit.process.name %></td>
-          <td><%= unit.activity.name %></td>
-          <td><%= unit.unit.name %></td>
-          <td><%= unit.role.name %></td>
-          <td><%= unit.resource.name %></td>
+          <td><%= acl.process.name %></td>
+          <td><%= acl.activity.name %></td>
+          <td><%= acl.unit.name %></td>
+          <td><%= acl.role.name %></td>
+          <td><%= acl.resource.name %></td>
           <td>
             <%= enable_icon(acl.enabled) %>
           </td>

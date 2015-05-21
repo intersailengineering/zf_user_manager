@@ -4,19 +4,42 @@ module Intersail
       include Intersail::ZfUserManager::ZclientServices
       include Intersail::ZfUserManager::SearchServices
 
-      SEARCH_PARAMETERS = [:process_instance_select, :unit_select, :role_select]
+      SEARCH_PARAMETERS = [:process_def_select, :unit_select, :role_select]
       ACL_ACTIONS = %w(a k c x r w t d !)
 
       def acl_index_function
         @unit_select = unit_select
         @role_select = role_select
-        @process_instance_select = process_instance_select
+        @process_def_select = process_def_select
 
-        @acls = zum.acl_list(@search_params)
+        @acls = zum.acl_list(acl_search_params(@search_params))
+      end
+
+      def acl_search_params(params)
+        parameters = {}
+        unless params[:full_text_search].blank?
+          parameters['full_text_search'] = params[:full_text_search]
+        end
+
+        unless params[:unit_select].blank?
+          parameters['unit_id'] = params[:unit_select]
+        end
+
+        unless params[:role_select].blank?
+          parameters['role_id'] = params[:role_select]
+        end
+
+        parameters
       end
 
       def set_acl_search_params_function
         search_params(params, SEARCH_PARAMETERS)
+      end
+
+      def acl_new_function
+        @unit_select = unit_select
+        @role_select = role_select
+        @acl = new_acl
       end
 
       def acl_show_function
