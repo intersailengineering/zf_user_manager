@@ -10,27 +10,46 @@ module Intersail
 
       def index
         user_index_function
+
+        respond_to do |format|
+          format.html { render 'intersail/zf_user_manager/shared/index' }
+        end
       end
 
       def new
         user_new_function
+
+        respond_to do |format|
+          format.js { render 'intersail/zf_user_manager/shared/new' }
+        end
       end
 
       def show
         user_show_function
+
+        respond_to do |format|
+          format.js { render 'intersail/zf_user_manager/shared/show' }
+        end
       end
 
       def create
         user_create_function
+
+        respond_to do |format|
+          format.js { render 'intersail/zf_user_manager/shared/create' }
+        end
       end
 
       def update
         user_update_function
+
+        respond_to do |format|
+          format.js { render 'intersail/zf_user_manager/shared/update' }
+        end
       end
 
       def destroy
-        user_destroy_function
-        render 'index'
+
       end
 
       private

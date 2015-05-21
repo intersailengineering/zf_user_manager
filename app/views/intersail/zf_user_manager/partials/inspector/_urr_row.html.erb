@@ -6,14 +6,36 @@
   <td class="list_row_icon" >
     <%= image_tag 'zf_user_manager/urr.png', size: '24x24' %>
   </td>
-  <td class="row_unit_name destroyable"><%= urr.unit.name %></td>
-  <td class="row_role_name destroyable"><%= urr.role.name %></td>
+
+  <% if @section == :user %>
+      <td class="row_unit_name destroyable"><%= urr.unit.name %></td>
+      <td class="row_role_name destroyable"><%= urr.role.name %></td>
+  <% elsif @section == :unit %>
+      <td class="row_resource_name destroyable"><%= "#{urr.resource.first_name} #{urr.resource.last_name}" %></td>
+      <td class="row_role_name destroyable"><%= urr.role.name %></td>
+  <% elsif @section == :role %>
+      <td class="row_resource_name destroyable"><%= "#{urr.resource.first_name} #{urr.resource.last_name}" %></td>
+      <td class="row_unit_name destroyable"><%= urr.unit.name %></td>
+  <% end %>
+
   <td class="zum_urr_table_actions_col">
-    <a class="btn btn-primary btn-xs urr_edit_button" onclick="edit_urr('<%= new_id %>', <%= urr.unit.id %>, <%= urr.role.id %>);" >
-      <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-    </a>
+
+    <% if @section == :user %>
+        <a class="btn btn-primary btn-xs urr_edit_button" onclick="edit_urr('<%= new_id %>', <%= urr.unit.id %>, <%= urr.role.id %>, null);" >
+          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+        </a>
+    <% elsif @section == :unit %>
+        <a class="btn btn-primary btn-xs urr_edit_button" onclick="edit_urr('<%= new_id %>', null, <%= urr.role.id %>, <%= urr.resource.id %>);" >
+          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+        </a>
+    <% elsif @section == :role %>
+        <a class="btn btn-primary btn-xs urr_edit_button" onclick="edit_urr('<%= new_id %>', <%= urr.unit.id %>, null, <%= urr.resource.id %>);" >
+          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+        </a>
+    <% end %>
+
     <a class="btn btn-danger btn-xs urr_destroy_button" onclick="destroy_urr('<%= new_id %>');">
-      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
     </a>
   </td>
 
@@ -23,5 +45,5 @@
       <%= f.hidden_field :role_id, class: 'row_role_id', value: urr.role.id %>
       <%= f.hidden_field :resource_id, class: 'row_resource_id', value: urr.resource_id %>
       <%= f.hidden_field :_destroy, class: 'row_destroy', value: 0 %>
-<% end %>
+  <% end %>
 </tr>

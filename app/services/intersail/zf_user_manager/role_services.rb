@@ -7,11 +7,28 @@ module Intersail
       SEARCH_PARAMETERS = [:full_text_search]
 
       def role_index_function
-        @roles = zum.role_list(@search_params)
+        @resource_select = resource_select
+        @unit_select = unit_select
+        @roles = zum.role_list(role_search_params(@search_params))
+      end
+
+      def role_search_params(params)
+        parameters = {}
+        unless params[:full_text_search].blank?
+          parameters['full_text_search'] = params[:full_text_search]
+        end
+
+        parameters
       end
 
       def set_role_search_params_function
         search_params(params, SEARCH_PARAMETERS)
+      end
+
+      def role_new_function
+        @resource_select = resource_select
+        @unit_select = unit_select
+        @role = new_role
       end
 
       def role_show_function

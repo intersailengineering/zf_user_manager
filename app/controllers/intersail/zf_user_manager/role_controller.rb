@@ -10,26 +10,46 @@ module Intersail
 
       def index
         role_index_function
+
+        respond_to do |format|
+          format.html { render 'intersail/zf_user_manager/shared/index' }
+        end
+      end
+
+      def new
+        role_new_function
+
+        respond_to do |format|
+          format.js { render 'intersail/zf_user_manager/shared/new' }
+        end
       end
 
       def show
         role_show_function
-        render 'index'
+
+        respond_to do |format|
+          format.js { render 'intersail/zf_user_manager/shared/show' }
+        end
       end
 
       def create
         role_create_function
-        render 'index'
+
+        respond_to do |format|
+          format.js { render 'intersail/zf_user_manager/shared/create' }
+        end
       end
 
       def update
         role_update_function
-        render 'index'
+
+        respond_to do |format|
+          format.js { render 'intersail/zf_user_manager/shared/update' }
+        end
       end
 
       def destroy
-        role_destroy_function
-        render 'index'
+
       end
 
       private

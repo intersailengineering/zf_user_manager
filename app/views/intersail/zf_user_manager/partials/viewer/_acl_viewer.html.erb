@@ -1,3 +1,5 @@
+<%= render "intersail/zf_user_manager/scripts/select_record" %>
+
 <div class="zum_scrollable">
   <table class="table table-striped table-hover">
     <thead>
@@ -14,7 +16,7 @@
 
     <% @acls.each do |acl| %>
 
-        <tr id="acl_<%= acl.id %>" onclick="window.location.href = '<%= "/user_manager/acls/#{acl.id}#{search_params_for_url}" %>'" class="<%= row_selected(acl, @acl) %>">
+        <tr id="acl_<%= acl.id %>" onclick="select_record(<%= acl.id %>);" class="<%= row_selected(acl, @acl) %>">
           <td class="list_row_icon">
             <%= image_tag "zf_user_manager/#{@section.to_s}.png", size: '24x24' %>
           </td>

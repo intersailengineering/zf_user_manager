@@ -1,0 +1,6 @@
+<%= javascript_tag do %>
+    function select_record(record_id) {
+    var url = "/user_manager/<%= @section.to_s %>s/" + record_id + "<%= search_params_for_url %>";
+    ajax_safe(url, "GET");
+    }
+<% end %>

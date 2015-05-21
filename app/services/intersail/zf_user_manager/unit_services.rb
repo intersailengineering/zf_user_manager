@@ -7,11 +7,28 @@ module Intersail
       SEARCH_PARAMETERS = [:full_text_search]
 
       def unit_index_function
-        @units = zum.unit_list(@search_params)
+        @resource_select = resource_select
+        @role_select = role_select
+        @units = zum.unit_list(unit_search_params(@search_params))
+      end
+
+      def unit_search_params(params)
+        parameters = {}
+        unless params[:full_text_search].blank?
+          parameters['full_text_search'] = params[:full_text_search]
+        end
+
+        parameters
       end
 
       def set_unit_search_params_function
         search_params(params, SEARCH_PARAMETERS)
+      end
+
+      def unit_new_function
+        @resource_select = resource_select
+        @role_select = role_select
+        @unit = new_unit
       end
 
       def unit_show_function

@@ -1,5 +1,5 @@
 if ($('.zum_viewer_table tr[id=new_record]').length == 0) {
     $('.zum_viewer_table tr').removeClass('zum_viewer_row_selected');
     $('.zum_viewer_table table tbody').prepend('<%= j(render("intersail/zf_user_manager/partials/viewer/new_row/new_#{@section.to_s}_row")) %>');
-    $('.zum_inspector').html('<%= j(render("intersail/zf_user_manager/partials/inspector/#{@section.to_s}_inspector")) %>');
+    $('.zum_inspector').html('<%= j(render("intersail/zf_user_manager/partials/inspector/inspector")) %>');
 }

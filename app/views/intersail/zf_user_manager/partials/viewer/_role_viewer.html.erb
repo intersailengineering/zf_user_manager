@@ -1,3 +1,5 @@
+<%= render "intersail/zf_user_manager/scripts/select_record" %>
+
 <div class="zum_scrollable">
   <table class="table table-striped table-hover">
     <thead>
@@ -11,7 +13,7 @@
 
     <% @roles.each do |role| %>
 
-        <tr id="role_<%= role.id %>" onclick="window.location.href = '<%= "/user_manager/roles/#{role.id}#{search_params_for_url}" %>'" class="<%= row_selected(role, @role) %>">
+        <tr id="role_<%= role.id %>" onclick="select_record(<%= role.id %>);" class="<%= row_selected(role, @role) %>">
           <td class="list_row_icon">
             <%= image_tag "zf_user_manager/#{@section.to_s}.png", size: '24x24' %>
           </td>

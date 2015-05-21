@@ -1,8 +1,19 @@
 <%= javascript_tag do %>
     function submit_new_urr() {
+
+    <% if defined? @unit_select %>
         $('.urr_new_form #unit_name').val($(".urr_new_form #unit option:selected").text());
+    <% end %>
+
+    <% if defined? @role_select %>
         $('.urr_new_form #role_name').val($(".urr_new_form #role option:selected").text());
-        $('.urr_new_form').submit();
+    <% end %>
+
+    <% if defined? @resource_select %>
+        $('.urr_new_form #resource_name').val($(".urr_new_form #resource option:selected").text());
+    <% end %>
+
+    $('.urr_new_form').submit();
     }
 <% end %>
 
@@ -12,26 +23,54 @@
 </div>
 <div class="modal-body">
   <%= form_tag "/user_manager/urrs/new", method: :get, remote: true, class: 'form-horizontal urr_new_form' do %>
-      <div class="form-group">
-        <label for="modal_unit_select" class="col-sm-2 control-label">Unità</label>
-        <div class="col-sm-6">
 
-          <%= select_tag(:unit, options_for_select(@unit_select), class: 'form-control') %>
+      <% if defined? @resource_select %>
+          <div class="form-group">
+            <label for="modal_resource_select" class="col-sm-2 control-label">Unità</label>
+            <div class="col-sm-6">
 
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="modal_unit_role" class="col-sm-2 control-label">Ruolo</label>
-        <div class="col-sm-6">
+              <%= select_tag(:resource, options_for_select(@resource_select), class: 'form-control') %>
 
-          <%= select_tag(:role, options_for_select(@role_select), class: 'form-control') %>
+            </div>
+          </div>
+      <% end %>
 
-        </div>
-      </div>
+      <% if defined? @unit_select %>
+          <div class="form-group">
+            <label for="modal_unit_select" class="col-sm-2 control-label">Unità</label>
+            <div class="col-sm-6">
 
-      <%= hidden_field_tag(:resource, @user.resource.id ) %>
-      <%= hidden_field_tag(:unit_name, '' ) %>
-      <%= hidden_field_tag(:role_name, '' ) %>
+              <%= select_tag(:unit, options_for_select(@unit_select), class: 'form-control') %>
+
+            </div>
+          </div>
+      <% end %>
+
+      <% if defined? @role_select %>
+          <div class="form-group">
+            <label for="modal_unit_role" class="col-sm-2 control-label">Ruolo</label>
+            <div class="col-sm-6">
+
+              <%= select_tag(:role, options_for_select(@role_select), class: 'form-control') %>
+
+            </div>
+          </div>
+      <% end %>
+
+      <% if @section == :user %>
+          <%= hidden_field_tag(:resource, @user.resource.id ) %>
+          <%= hidden_field_tag(:unit_name, '' ) %>
+          <%= hidden_field_tag(:role_name, '' ) %>
+      <% elsif @section == :unit %>
+          <%= hidden_field_tag(:resource, '' ) %>
+          <%= hidden_field_tag(:unit_name, @unit.id ) %>
+          <%= hidden_field_tag(:role_name, '' ) %>
+      <% elsif @section == :role %>
+          <%= hidden_field_tag(:resource, '' ) %>
+          <%= hidden_field_tag(:unit_name, '' ) %>
+          <%= hidden_field_tag(:role_name, @role.id ) %>
+      <% end %>
+
   <% end %>
 </div>
 <div class="modal-footer">

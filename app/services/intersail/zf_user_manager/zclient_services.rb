@@ -14,6 +14,10 @@ module Intersail
         zum.role_list.map {|role| [role.name.humanize, role.id]}
       end
 
+      def resource_select
+        zum.resource_list.map {|resource| ["#{resource.first_name.humanize} #{resource.last_name.humanize}", resource.id]}
+      end
+
       def process_instance_select
         zum.process_instance_list.map {|role| [role.name.humanize, role.id]}
       end
