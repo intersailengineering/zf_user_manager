@@ -8,10 +8,12 @@ module Intersail
         @search_params[param] if @search_params.has_key?(param)
       end
 
-      def search_params_for_url
-        unless @search_params.blank?
+      def search_params_for_url(other_params = {})
+        parameters = @search_params.merge(other_params)
+
+        unless parameters.blank?
           string = '?'
-          @search_params.each do |k, v|
+          parameters.each do |k, v|
             string += "#{k.to_s}=#{v.to_s}&"
           end
 

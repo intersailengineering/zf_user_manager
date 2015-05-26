@@ -29,27 +29,40 @@ module Intersail
         @resource_select = resource_select
         @unit_select = unit_select
         @role = new_role
+
+        role_urrs
       end
 
       def role_show_function
         role_index_function
+
+        role_urrs
       end
 
       def role_update_function
         role = set_role_attributes(@role)
         role = zum.role_update(role.id, role)
+        role_urrs_update
 
         @role = role if role
 
         role_index_function
+        role_urrs
       end
 
-      def role_destroy_function
-        zum.role_delete(@role.id)
+      def role_urrs_update
+        return nil if params[:urrs].blank?
 
-        @role = nil
-
-        role_index_function
+        params[:urrs].each do |urr|
+          if urr[:urr_id] == '0'
+            u = Intersail::ZfClient::ZUrr.new(id: nil, unit_id: urr[:unit_id], role_id: @role.id, resource_id: urr[:resource_id])
+            zum.urr_create(u)
+          elsif urr[:_edited] == '1'
+            u = Intersail::ZfClient::ZUrr.new(id: urr[:urr_id], unit_id: urr[:unit_id], role_id: @role.id, resource_id: urr[:resource_id], _destroy: urr[:_destroy].to_i)
+            zum.urr_update(u.id, u)
+          end
+        end
+        params.delete(:urrs)
       end
 
       def role_create_function
@@ -64,6 +77,30 @@ module Intersail
         end
 
         role_index_function
+        role_urrs
+      end
+
+      def role_urrs
+        @role_urrs = zum.urr_list({role_id: @role.id})
+
+        resources_ids = []
+        units_ids = []
+        @role_urrs.each do |urr|
+          resources_ids.push(urr.resource_id) unless resources_ids.include?(urr.resource_id)
+          units_ids.push(urr.unit_id) unless units_ids.include?(urr.unit_id)
+        end
+
+        resources = resources_ids.blank? ? zum.resource_list : zum.resource_list(id: resources_ids.join(','))
+        @role_urr_resources = {}
+        resources.each do |r|
+          @role_urr_resources[r.id] = "#{r.first_name} #{r.last_name}"
+        end
+
+        units = units_ids.blank? ? zum.unit_list : zum.unit_list(id: units_ids.join(','))
+        @role_urr_units = {}
+        units.each do |u|
+          @role_urr_units[u.id] = u.name
+        end
       end
 
       def set_role_attributes(base_role = nil)
@@ -71,7 +108,7 @@ module Intersail
 
         role.name = params[:name]
         role.description = params[:description]
-        role.parent = params[:parent]
+        role.parent_id = params[:parent_id].blank? ? 0 : params[:parent_id]
         role
       end
 

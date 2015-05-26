@@ -2,92 +2,41 @@
 <div class="form-group">
   <label class="col-sm-3 control-label">Processo</label>
   <div class="col-sm-9">
-    <select class="form-control" disabled>
-      <option>Spedizione PEC</option>
-      <option>Spedizione Fax</option>
-      <option>Spedizione Telegramma</option>
-      <option>Spedizione Raccomandata</option>
-    </select>
-    <%= select_tag(:process_def, options_for_select(@process_def_select, @acl.process.id), class: 'form-control', include_blank: true) %>
+    <%= select_tag(:process_def_id, options_for_select(@process_def_select, @acl.process_def_id ), class: 'form-control') %>
   </div>
 </div>
 
 <div class="form-group">
   <label class="col-sm-3 control-label">Attività</label>
   <div class="col-sm-9">
-    <select class="form-control">
-      <option>Compilazione</option>
-      <option>Invio</option>
-      <option>Monitoraggio</option>
-    </select>
+    <%= select_tag(:activity_def_id, options_for_select(@activity_def_select, @acl.activity_def_id), class: 'form-control', include_blank: true) %>
   </div>
 </div>
 
 <div class="form-group">
   <label class="col-sm-3 control-label">Unità</label>
   <div class="col-sm-5">
-    <select class="form-control">
-      <option></option>
-      <option selected>Utente</option>
-      <option>Proprietario</option>
-      <option>Utente e Proprietario</option>
-      <option>Contabilità</option>
-      <option selected>Marketing</option>
-      <option>Ricerca e Sviluppo</option>
-    </select>
+    <%= select_tag(:unit_id, options_for_select(@unit_select, @acl.unit_id), class: 'form-control', include_blank: true) %>
   </div>
   <div class="col-sm-4">
-    <select class="form-control">
-      <option>Padre L3</option>
-      <option>Padre L2</option>
-      <option>Padre L1</option>
-      <option selected>Nessuna</option>
-      <option>Figli L1</option>
-      <option>Figli L2</option>
-      <option>Figli L3</option>
-    </select>
+    <%= select_tag(:inherit_unit, options_for_select(@inherit_select, @acl.inherit_unit), class: 'form-control', include_blank: true) %>
   </div>
 </div>
 
 <div class="form-group">
   <label class="col-sm-3 control-label">Ruolo</label>
   <div class="col-sm-5">
-    <select class="form-control">
-      <option></option>
-      <option>Utente</option>
-      <option>Proprietario</option>
-      <option>Utente e Proprietario</option>
-      <option>Amministratore</option>
-      <option selected>Operatore</option>
-    </select>
+    <%= select_tag(:role_id, options_for_select(@role_select, @acl.role_id), class: 'form-control', include_blank: true) %>
   </div>
   <div class="col-sm-4">
-    <select class="form-control">
-      <option>Padre L3</option>
-      <option>Padre L2</option>
-      <option>Padre L1</option>
-      <option selected>Nessuna</option>
-      <option>Figli L1</option>
-      <option>Figli L2</option>
-      <option>Figli L3</option>
-    </select>
+    <%= select_tag(:inherit_role, options_for_select(@inherit_select, @acl.inherit_role), class: 'form-control', include_blank: true) %>
   </div>
 </div>
 
 <div class="form-group">
   <label class="col-sm-3 control-label">Risorsa</label>
   <div class="col-sm-9">
-    <select class="form-control">
-      <option></option>
-      <option>Utente</option>
-      <option>Proprietario</option>
-      <option>Utente e Proprietario</option>
-      <option>Andrea Salomoni</option>
-      <option>Michele Crescini</option>
-      <option>Jacopo Beschi</option>
-      <option>Federica Santicoli</option>
-      <option>Cristiano Boncompagni</option>
-    </select>
+    <%= select_tag(:resource_id, options_for_select(@resource_select, @acl.resource_id), class: 'form-control', include_blank: true) %>
   </div>
 </div>
 
@@ -96,12 +45,12 @@
   <div class="col-sm-9">
     <div class="col-sm-6" style="padding:0px 10px 0px 0px;">
       <label class="radio-inline">
-        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked> Permetti
+        <%= radio_button_tag(:not_acl_action_!, '1', !@acl_actions[:!], name: 'acl_action_!') %> Permetti
       </label>
     </div>
     <div class="col-sm-6" style="padding:0px 10px 0px 0px;">
       <label class="radio-inline">
-        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Nega
+        <%= radio_button_tag(:acl_action_!, '1', @acl_actions[:!], name: 'acl_action_!') %> Nega
       </label>
     </div>
   </div>
@@ -112,27 +61,12 @@
   <div class="col-sm-9">
     <div class="col-sm-6" style="padding:0px 10px 0px 0px;">
       <label class="checkbox-inline">
-        <input type="checkbox" value="option1" checked> Lettura
+        <%= check_box_tag(:acl_action_r, '1', @acl_actions[:r]) %> Lettura
       </label>
     </div>
     <div class="col-sm-6" style="padding:0px 10px 0px 0px;">
       <label class="checkbox-inline">
-        <input type="checkbox" value="option1" checked> Scrittura
-      </label>
-    </div>
-  </div>
-</div>
-<div class="form-group">
-  <label class="col-sm-3 control-label"></label>
-  <div class="col-sm-9">
-    <div class="col-sm-6" style="padding:0px 10px 0px 0px;">
-      <label class="checkbox-inline">
-        <input type="checkbox" value="option1"> Esecuzione
-      </label>
-    </div>
-    <div class="col-sm-6" style="padding:0px 10px 0px 0px;">
-      <label class="checkbox-inline">
-        <input type="checkbox" value="option1"> Creazione
+        <%= check_box_tag(:acl_action_w, '1', @acl_actions[:w]) %> Scrittura
       </label>
     </div>
   </div>
@@ -142,12 +76,12 @@
   <div class="col-sm-9">
     <div class="col-sm-6" style="padding:0px 10px 0px 0px;">
       <label class="checkbox-inline">
-        <input type="checkbox" value="option1"> Assegnazione
+        <%= check_box_tag(:acl_action_x, '1', @acl_actions[:x]) %> Esecuzione
       </label>
     </div>
     <div class="col-sm-6" style="padding:0px 10px 0px 0px;">
       <label class="checkbox-inline">
-        <input type="checkbox" value="option1"> Assegnazione Tar.
+        <%= check_box_tag(:acl_action_c, '1', @acl_actions[:c]) %> Creazione
       </label>
     </div>
   </div>
@@ -157,12 +91,27 @@
   <div class="col-sm-9">
     <div class="col-sm-6" style="padding:0px 10px 0px 0px;">
       <label class="checkbox-inline">
-        <input type="checkbox" value="option1"> Commento
+        <%= check_box_tag(:acl_action_a, '1', @acl_actions[:a]) %> Assegnazione
       </label>
     </div>
     <div class="col-sm-6" style="padding:0px 10px 0px 0px;">
       <label class="checkbox-inline">
-        <input type="checkbox" value="option1"> Annullamento
+        <%= check_box_tag(:acl_action_t, '1', @acl_actions[:t]) %> Assegnazione Tar.
+      </label>
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-sm-3 control-label"></label>
+  <div class="col-sm-9">
+    <div class="col-sm-6" style="padding:0px 10px 0px 0px;">
+      <label class="checkbox-inline">
+        <%= check_box_tag(:acl_action_k, '1', @acl_actions[:k]) %> Commento
+      </label>
+    </div>
+    <div class="col-sm-6" style="padding:0px 10px 0px 0px;">
+      <label class="checkbox-inline">
+        <%= check_box_tag(:acl_action_d, '1', @acl_actions[:d]) %> Annullamento
       </label>
     </div>
   </div>
@@ -171,7 +120,7 @@
 <div class="form-group">
   <label class="col-sm-3 control-label">Priorità</label>
   <div class="col-sm-9">
-    <input type="number" class="form-control" placeholder="Priorità" value="0">
+    <%= text_field_tag :priority, @acl.priority, class: 'form-control', placeholder: 'Priorità'  %>
   </div>
 </div>
 
@@ -179,7 +128,7 @@
   <div class="col-sm-offset-3 col-sm-9">
     <div class="checkbox">
       <label>
-        <input type="checkbox" checked> Obbligatorio
+        <%= check_box_tag(:mandatory, '1', @acl.mandatory) %> Obbligatorio
       </label>
     </div>
   </div>
@@ -189,7 +138,7 @@
   <div class="col-sm-offset-3 col-sm-9">
     <div class="checkbox">
       <label>
-        <input type="checkbox" checked> Abilitato
+        <%= check_box_tag(:enabled, '1', @acl.enabled) %> Abilitato
       </label>
     </div>
   </div>

@@ -1,0 +1,20 @@
+<table class="table" >
+  <thead>
+  <th></th>
+  <th>Risorsa</th>
+  <th>Unità</th>
+  <th></th>
+  </thead>
+
+  <tbody>
+  <% @role_urrs.each do |urr| %>
+      <%= render "intersail/zf_user_manager/partials/inspector/urr_row", urr: urr %>
+  <% end %>
+  </tbody>
+</table>
+
+<%= javascript_tag do %>
+    <% if @role_urrs.blank? %>
+        hide_table();
+    <% end %>
+<% end %>

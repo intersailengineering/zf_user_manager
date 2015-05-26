@@ -27,6 +27,7 @@
     var edit_button = $('.zum_urrs_table #' + row_id + ' .urr_edit_button');
     var destroy_button = $('.zum_urrs_table #' + row_id + ' .urr_destroy_button');
     var destroy = $('.zum_urrs_table #' + row_id + ' .row_destroy');
+    var edited = $('.zum_urrs_table #' + row_id + ' .row_update');
 
     if (row.hasClass('new_urr_style')) {
     row.remove();
@@ -38,6 +39,7 @@
     row.addClass('destroyed_urr_style');
     edit_button.attr('disabled', true);
     destroy.val(1);
+    edited.val(1);
     }
     }
 
@@ -70,7 +72,9 @@
     <%= form_tag form_url, method: form_method, remote: true, class: 'form-horizontal record_data_form' do %>
 
         <% if @section == :acl %>
-            <%= render "intersail/zf_user_manager/partials/inspector/info_form/#{@section.to_s}_info_form" %>
+            <div class="zum_acl_inspector_container">
+              <%= render "intersail/zf_user_manager/partials/inspector/info_form/#{@section.to_s}_info_form" %>
+            </div>
         <% else %>
             <div role="tabpanel">
 
@@ -78,19 +82,6 @@
               <ul class="nav nav-tabs inspector_tabs" role="tablist" >
                 <li role="presentation" class="active"><a href="#record_info" aria-controls="record_info" role="tab" data-toggle="tab">Info <%= I18n.t("zf_user_manager.models.#{@section.to_s}.one").titleize %></a></li>
                 <li role="presentation"><a href="#urrs" aria-controls="urrs" role="tab" data-toggle="tab"><%= I18n.t("zf_user_manager.models.urr.other").titleize %></a></li>
-
-                <%= hidden_field_tag :current_tab %>
-                <% if defined? @target_tab %>
-                    <%= javascript_tag do %>
-                        console.log('1');
-                        $('.inspector_tabs a[href=<%= @target_tab %>]').tab('show')
-                    <% end %>
-                <% else %>
-                    <%= javascript_tag do %>
-                        console.log('2');
-                        $('#current_tab').val($('.inspector_tabs li[class=active] a').attr("href"));
-                    <% end %>
-                <% end %>
               </ul>
 
               <!-- Tab panes -->
@@ -119,9 +110,13 @@
             </div>
 
             <%= javascript_tag do %>
+                if (_zum_inspector_selected_tab != null) {
+                $('.inspector_tabs a[href=' + _zum_inspector_selected_tab + ']').tab('show');
+                }
+
                 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-                    var target = $(e.target).attr("href");
-                    $('#current_tab').val(target);
+                var target = $(e.target).attr("href");
+                _zum_inspector_selected_tab = target;
                 })
             <% end %>
         <% end %>

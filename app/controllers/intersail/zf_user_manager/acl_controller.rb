@@ -2,12 +2,11 @@ module Intersail
   module ZfUserManager
     class AclController < ApplicationController
       include Intersail::ZfUserManager::Concerns::Messageable
-      include Intersail::ZfUserManager::Concerns::TabPersistable
       include Intersail::ZfUserManager::AclServices
 
-      before_action :set_acl, only: [:show, :create, :update, :destroy]
+      before_action :set_acl, only: [:show, :update, :destroy]
       before_action :set_section
-      before_action :set_acl_search_params, only: [:index, :show, :create, :update, :destroy]
+      before_action :set_acl_search_params, only: [:new, :index, :show, :create, :update, :destroy]
 
       def index
         acl_index_function

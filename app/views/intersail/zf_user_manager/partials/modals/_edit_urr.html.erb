@@ -42,6 +42,7 @@
         if (!$('.zum_urrs_table #' + row_id).hasClass('new_urr_style')) {
         if (resource_id.val() != resource_id_value || role_id.val() != role_id_value) {
         $('.zum_urrs_table #' + row_id).addClass('edited_urr_style');
+        $('.zum_urrs_table #' + row_id + ' .row_update').val(1);
         }
         }
 
@@ -54,6 +55,7 @@
         if (!$('.zum_urrs_table #' + row_id).hasClass('new_urr_style')) {
         if (unit_id.val() != unit_id_value || resource_id.val() != resource_id_value) {
         $('.zum_urrs_table #' + row_id).addClass('edited_urr_style');
+        $('.zum_urrs_table #' + row_id + ' .row_update').val(1);
         }
         }
 

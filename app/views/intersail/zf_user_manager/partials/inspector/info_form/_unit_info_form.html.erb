@@ -11,3 +11,5 @@
     <%= text_area_tag :description, @unit.description, class: 'form-control', placeholder: 'Descrizione'  %>
   </div>
 </div>
+
+<%= hidden_field_tag(:parent_id, @unit.parent_id ) %>

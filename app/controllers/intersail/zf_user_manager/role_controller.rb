@@ -2,12 +2,11 @@ module Intersail
   module ZfUserManager
     class RoleController < ApplicationController
       include Intersail::ZfUserManager::Concerns::Messageable
-      include Intersail::ZfUserManager::Concerns::TabPersistable
       include Intersail::ZfUserManager::RoleServices
 
-      before_action :set_role, only: [:show, :create, :update, :destroy]
+      before_action :set_role, only: [:show, :update, :destroy]
       before_action :set_section
-      before_action :set_role_search_params, only: [:index, :show, :create, :update, :destroy]
+      before_action :set_role_search_params, only: [:new, :index, :show, :create, :update, :destroy]
 
       def index
         role_index_function

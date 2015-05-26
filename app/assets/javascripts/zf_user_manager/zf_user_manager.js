@@ -23,21 +23,27 @@ function disable_save_warning() {
     window.onbeforeunload = null;
 }
 
-function ajax_call(url, method) {
+function ajax_call(url, method, data) {
     $.ajax({
         method: method,
         url: url,
-        dataType: "script"
+        dataType: "script",
+        data: data
     });
 }
 
-function ajax_safe(url, method) {
+function ajax_safe(url, method, data) {
     if (window.onbeforeunload != null) {
         if (confirm("Sei sicuro di voler lasciare la pagina senza salvare?")) {
-            ajax_call(url, method);
+            ajax_call(url, method, data);
             disable_save_warning();
         }
     } else {
-        ajax_call(url, method);
+        ajax_call(url, method, data);
     }
 }
+
+// ----------
+// INSPECTOR
+// ----------
+var _zum_inspector_selected_tab = null;

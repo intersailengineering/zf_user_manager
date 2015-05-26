@@ -2,12 +2,11 @@ module Intersail
   module ZfUserManager
     class UnitController < ApplicationController
       include Intersail::ZfUserManager::Concerns::Messageable
-      include Intersail::ZfUserManager::Concerns::TabPersistable
       include Intersail::ZfUserManager::UnitServices
 
-      before_action :set_unit, only: [:show, :create, :update, :destroy]
+      before_action :set_unit, only: [:show, :update, :destroy]
       before_action :set_section
-      before_action :set_unit_search_params, only: [:index, :show, :create, :update, :destroy]
+      before_action :set_unit_search_params, only: [:new, :index, :show, :create, :update, :destroy]
 
       def index
         unit_index_function

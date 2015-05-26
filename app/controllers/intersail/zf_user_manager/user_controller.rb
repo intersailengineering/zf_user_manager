@@ -2,12 +2,11 @@ module Intersail
   module ZfUserManager
     class UserController < ApplicationController
       include Intersail::ZfUserManager::Concerns::Messageable
-      include Intersail::ZfUserManager::Concerns::TabPersistable
       include Intersail::ZfUserManager::UserServices
 
       before_action :set_user, only: [:show, :update, :destroy]
       before_action :set_section
-      before_action :set_user_search_params, only: [:index, :show, :create, :update, :destroy]
+      before_action :set_user_search_params, only: [:new, :index, :show, :create, :update, :destroy]
 
       def index
         user_index_function
@@ -43,8 +42,6 @@ module Intersail
 
       def update
         user_update_function
-
-        puts '>>>>>>>>>>>>>>>>>>>> ' + @target_tab
 
         respond_to do |format|
           format.js { render 'intersail/zf_user_manager/shared/update' }

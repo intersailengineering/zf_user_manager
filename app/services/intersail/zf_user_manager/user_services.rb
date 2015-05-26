@@ -51,14 +51,6 @@ module Intersail
         user_index_function
       end
 
-      def user_destroy_function
-        zum.user_delete(@user.id)
-
-        @user = nil
-
-        user_index_function
-      end
-
       def user_create_function
         user = set_user_attributes
 
