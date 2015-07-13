@@ -12,4 +12,11 @@
   </div>
 </div>
 
+<div class="form-group">
+  <label for="description" class="col-sm-3 control-label">Padre</label>
+  <div class="col-sm-9">
+    <%= select :unit, :parent_id, fetch_unit_options , {}, class: 'form-control', disabled: @unit.id != 0  %>
+  </div>
+</div>
+
 <%= hidden_field_tag(:parent_id, @unit.parent_id ) %>

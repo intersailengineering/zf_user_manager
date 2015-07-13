@@ -1,15 +1,21 @@
 module Intersail
   module ZfUserManager
     module UnitServices
+      extend ActiveSupport::Concern
       include Intersail::ZfUserManager::ZclientServices
       include Intersail::ZfUserManager::SearchServices
 
       SEARCH_PARAMETERS = [:full_text_search]
 
+      included do
+        helper_method :fetch_unit_options
+      end
+
       def unit_index_function
         @resource_select = resource_select
         @role_select = role_select
         @units = zum.unit_list(unit_search_params(@search_params))
+        update_unit_parents
       end
 
       def unit_search_params(params)
@@ -120,6 +126,21 @@ module Intersail
         @unit = zum.unit_read(id)
       end
 
+      private
+      # create the array that contain all the unit options for the select
+      def fetch_unit_options
+        zum.unit_list.inject([["Nessuno",0]]) {|units,unit| units << [unit.name,unit.id]}
+      end
+      # set the parent object of the unit if has any parent_id setted
+      # works using the local units found from the client
+      def update_unit_parents
+        @units.map {|unit| update_unit_parent(unit) }
+      end
+
+      def update_unit_parent(unit)
+        return unless unit.parent_id != 0
+        unit.parent = @units.find {|unit| unit.parent_id = unit.parent_id}
+      end
     end
   end
 end
