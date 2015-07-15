@@ -32,14 +32,17 @@ intersail.nav.NodeTreeBuilder = class NodeTreeBuilder
 
     #set relations data
     for node, index in nodes
+      node.parent = @searchNode(nodes, eval("nodes_json[index] && nodes_json[index].#{@options.parentIdField}"))
       if @options.siblingIdGiven
         node.sibling = @searchNode(nodes, nodes_json[index]?.siblingId)
       if @options.childrenIdGiven
         node.children = @searchNode(nodes, eval("nodes_json[index] && nodes_json[index].#{@options.childrenIdField}") )
-      else
-        node.children = @searchChildren(nodes_json, nodes, node.id)
-      node.parent = @searchNode(nodes, eval("nodes_json[index] && nodes_json[index].#{@options.parentIdField}"))
       node.root = rootNode
+
+    unless @options.childrenIdGiven
+      for node, index in nodes
+        node.children = @searchChildren(nodes_json, nodes, node.id)
+
     @setSiblings(nodes, nodes_json, node) unless @options.siblingIdGiven
 
     # hook
@@ -66,7 +69,7 @@ intersail.nav.NodeTreeBuilder = class NodeTreeBuilder
         # if has the same parent, is not him and still has no sibling
         if possible_sibling.parent == node.parent && possible_sibling.id != node.id && possible_sibling.sibling == null
           node.sibling = possible_sibling
-          continue
+          break
 
 
   searchChildren: (nodes_json, nodes, id) ->

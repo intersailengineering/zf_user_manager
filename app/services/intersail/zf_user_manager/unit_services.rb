@@ -15,6 +15,7 @@ module Intersail
         @resource_select = resource_select
         @role_select = role_select
         @units = zum.unit_list(unit_search_params(@search_params))
+
         update_unit_parents
       end
 
@@ -114,7 +115,8 @@ module Intersail
 
         unit.name = params[:name]
         unit.description = params[:description]
-        unit.parent_id = params[:parent_id].blank? ? 0 : params[:parent_id]
+        unit.parent_id = params.fetch(:unit, {}).fetch(:parent_id,0).to_i
+        # unit.parent_id = params[:parent_id].blank? ? 0 : params[:parent_id]
         unit
       end
 
@@ -139,7 +141,7 @@ module Intersail
 
       def update_unit_parent(unit)
         return unless unit.parent_id != 0
-        unit.parent = @units.find {|unit| unit.parent_id = unit.parent_id}
+        unit.parent = @units.find {|u| u.id == unit.parent_id}
       end
     end
   end

@@ -18,5 +18,3 @@
     <%= select :unit, :parent_id, fetch_unit_options , {}, class: 'form-control', disabled: @unit.id != 0  %>
   </div>
 </div>
-
-<%= hidden_field_tag(:parent_id, @unit.parent_id ) %>
