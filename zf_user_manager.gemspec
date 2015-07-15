@@ -32,7 +32,7 @@ Gem::Specification.new do |s|
   # Use Jquery
   s.add_dependency 'jquery-rails'
   # Use JqueryUi as the JavaScript library
-  s.add_dependency gem 'jquery-ui-rails'
+  s.add_dependency 'jquery-ui-rails'
   # UnderscoreJs lib
   s.add_dependency 'underscore-rails'
   # Twitter bootstrap with sass
