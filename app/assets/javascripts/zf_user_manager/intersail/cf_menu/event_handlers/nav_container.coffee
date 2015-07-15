@@ -7,10 +7,11 @@ intersail.eventHandlers.NavContainer = class NavContainer
     @adjustWidth(handler)
 
   activateResizable: () ->
-    @domDetailContainer.resizable(
-      # resize on left
-      handles: 'w',
-    )
+    #@jtodoIMP make this work 
+#    @domDetailContainer.resizable(
+#      # resize on left
+#      handles: 'w',
+#    )
 
   adjustWidth: (handler)->
     #fix this to resize the wrapper to fix the container sum of size

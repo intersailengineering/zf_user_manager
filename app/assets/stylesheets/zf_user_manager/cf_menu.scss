@@ -66,6 +66,10 @@ body, html {
   width: 15px;
 }
 
+div.ui-widget-content{
+  background: none;
+}
+
 #box-container {
   @include h100;
   .horizzontal-scroll {
