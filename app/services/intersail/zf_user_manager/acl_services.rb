@@ -66,23 +66,16 @@ module Intersail
 
       def acl_update_function
         acl = set_acl_attributes(@acl)
-
         acl = zum.acl_update(acl.id, acl)
-
         @acl = acl if acl
-
         acl_index_function
         set_acl_actions_data
       end
 
       def acl_create_function
         acl = set_acl_attributes
-
         begin
           acl = zum.acl_create(acl)
-
-          puts '>>>>>>>>>>>>>> ' + acl.inspect
-
           @acl = acl
           clean_search_params
         rescue
