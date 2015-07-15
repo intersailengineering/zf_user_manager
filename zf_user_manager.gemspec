@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = ZfUserManager::VERSION
   s.authors     = %w(jacopo-beschi-intersail asalomoni)
   s.email       = %w(jacopo.beschi@intersail.it andrea.salomoni@intersail.it)
-  s.homepage    = 'TODO'
-  s.summary     = 'TODO: Summary of ZfUserManager.'
-  s.description = 'TODO: Description of ZfUserManager.'
+  s.homepage    = ''
+  s.summary     = 'Summary of ZfUserManager.'
+  s.description = 'Description of ZfUserManager.'
   s.license     = 'PROPRIETARY'
 
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.rdoc']
