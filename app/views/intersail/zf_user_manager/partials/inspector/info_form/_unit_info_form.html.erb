@@ -13,6 +13,13 @@
 </div>
 
 <div class="form-group">
+  <label for="description" class="col-sm-3 control-label">Centro di costo</label>
+  <div class="col-sm-9">
+    <%= text_field_tag "metadata[centro_di_costo]", @unit.metadata && @unit.metadata.with_indifferent_access.fetch(:centro_di_costo,""), class: 'form-control', placeholder: 'Nome centro di costo'  %>
+  </div>
+</div>
+
+<div class="form-group">
   <label for="description" class="col-sm-3 control-label">Padre</label>
   <div class="col-sm-9">
     <%= select :unit, :parent_id, fetch_unit_options , {}, class: 'form-control', disabled: @unit.id != 0  %>

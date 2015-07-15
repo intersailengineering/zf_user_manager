@@ -20,7 +20,7 @@ module Intersail
       end
 
       def unit_search_params(params)
-        parameters = {}
+        parameters = {metadata: true}
         unless params[:full_text_search].blank?
           parameters['full_text_search'] = params[:full_text_search]
         end
@@ -112,10 +112,14 @@ module Intersail
 
       def set_unit_attributes(base_unit = nil)
         unit = base_unit || new_unit
-
         unit.name = params[:name]
         unit.description = params[:description]
         unit.parent_id = params.fetch(:unit, {}).fetch(:parent_id,0).to_i
+        if (centro_di_costo = params.fetch("metadata", {}).fetch("centro_di_costo",false) )
+          metadata = {}.merge({"centro_di_costo" => centro_di_costo})
+          unit.metadata = metadata
+          # unit.parent_id = params[:parent_id].blank? ? 0 : params[:parent_id]
+        end
         # unit.parent_id = params[:parent_id].blank? ? 0 : params[:parent_id]
         unit
       end
@@ -125,7 +129,7 @@ module Intersail
       end
 
       def set_unit_function(id)
-        @unit = zum.unit_read(id)
+        @unit = zum.unit_read(id, {metadata: true})
       end
 
       private
