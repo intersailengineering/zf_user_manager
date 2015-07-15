@@ -49,9 +49,8 @@ module Intersail
       def unit_update_function
         unit = set_unit_attributes(@unit)
         unit = zum.unit_update(unit.id, unit)
-        unit_urrs_update
 
-        @unit = unit if unit
+        @unit = zum.unit_read(unit.id, {metadata: true}) if unit
 
         unit_index_function
         unit_urrs
@@ -118,9 +117,7 @@ module Intersail
         if (centro_di_costo = params.fetch("metadata", {}).fetch("centro_di_costo",false) )
           metadata = {}.merge({"centro_di_costo" => centro_di_costo})
           unit.metadata = metadata
-          # unit.parent_id = params[:parent_id].blank? ? 0 : params[:parent_id]
         end
-        # unit.parent_id = params[:parent_id].blank? ? 0 : params[:parent_id]
         unit
       end
 
