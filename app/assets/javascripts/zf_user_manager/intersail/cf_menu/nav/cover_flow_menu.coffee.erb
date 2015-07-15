@@ -1,0 +1,152 @@
+intersail.nav.ListElement = class ListElement extends intersail.nav.NodeElement
+    @include intersail.nav.NodeClickModule
+
+    defaults = {
+        startSelected: false,
+        boxClass: "node-box",
+        ulClass: "box-element",
+        liClass: "list-element",
+        nodeListHeaderClass: "node-list-header",
+        headersEnabled: true,
+        labelClass: "label-item",
+        # for handling window resizing
+        baseContainerId: "node-scroll",
+        listBoxClass: "node-list-box"
+    }
+
+    constructor: (@id, @label = "", @labelHeader = "", @sibling = null, @children = null, @parent = null, @identifier = null, @attributes = {}, @options = {}) ->
+        @initializeOptions()
+        @nodesCollection = new intersail.nav.NodesCollection()
+
+    initializeOptions: ->
+        intersail.__.defaults(@options, defaults)
+        @selected = @options.startSelected
+
+    initializeGui: ()->
+        @html()
+        @activateResize()
+
+    activateResize: ->
+        @domBox = $(".#{@options.listBoxClass}")
+        @domBox.resizable(
+            # resize on right
+            handles: 'e',
+            maxWidth: 650
+        )
+
+    getDomObj: ->
+        $("li[data-id=#{@identifier}]")
+
+    updateGui: ->
+        @updateSelectedStatus()
+        @updateChildrenBoxes()
+        @updateListHeader()
+        @scrollToHorizontalPosition()
+
+    getBoxSubContainer: ->
+        @getDomObj().parent().parent()
+
+    updateListHeader: ->
+        return unless @options.headersEnabled == true
+        @getBoxContainer().find("span.#{@options.nodeListHeaderClass}").html(@labelHeader)
+
+    selectAndShow: (current = @, start = @)->
+        current.selectAndShow(current.parent, current) if current.parent
+        current.updateGui()
+
+    select: ->
+        @setSelected(true)
+        @getDomObj().addClass "selected"
+
+    deselect: ->
+        @setSelected(false)
+        @getDomObj().removeClass "selected"
+
+    getSelected: ->
+        @selected ? false
+
+    setSelected: (value) ->
+        @selected = value ? true: false
+
+    hide: ->
+        @getDomObj().hide()
+
+    show: ->
+        @getDomObj().show()
+
+    updateSelectedStatus: ()->
+        # deselect
+        for selected in @nodesCollection.selectedNodes()
+            selected.deselect()
+        @nodesCollection.clearSelectedNodes()
+
+        # reselect
+        @nodesCollection.addSelectedNode(@)
+        for parent in @getParents()
+            @nodesCollection.addSelectedNode(parent)
+            parent.select()
+
+        @select()
+
+    updateChildrenBoxes: (handler)->
+        # remove all subelements
+        while (toRemove = @getBoxContainer()?.next())?.length > 0
+            toRemove.remove()
+        # initialize new subelement
+        @children.initializeGui() if @children
+
+    getBoxContainer: (domObj = null)->
+        domObj = domObj || @getDomObj()
+        return unless domObj.hasClass(@options.liClass)
+        return domObj.parent().parent().parent()
+
+    # Node click handling
+    attachEvents: ->
+        @_attachClick()
+
+    onClickEvent: (node) ->
+        node.updateGui() if node
+
+    # Rendering
+    html: ->
+        html = "<div class=\"#{@options.boxClass}\">"
+        html += "<span class=\"#{@options.nodeListHeaderClass}\"></span>"
+        html += "<div class=\"#{@options.listBoxClass} ui-widget-content\"><ul class=\"#{@options.ulClass}\">"
+        html += @elementHtml()
+        html += element.elementHtml() for element in @getRightSiblings()
+        html += "</ul></div></div>"
+
+        toAppend = @getBoxContainer() || $("div##{@options.baseContainerId}")
+        toAppend.append(html)
+
+    elementHtml: ->
+        html = "<li class=\"#{@options.liClass}\" data-id=\"#{@identifier}\">"
+        html += @leftIconHtml()
+        html += "<span clas=\"#{@options.labelClass}\">#{@label}</span>"
+        html += @rightIconHtml()
+        html += "</li>"
+
+    leftIconHtml: ->
+        # @jtodoLOW extract this part as composition of various element time
+        #Possible element status: folder, folder-open, file
+        if @isDir()
+            return '<%= image_tag image_url("template/original/32x32/status/folder-open.png"), size: "20" %>'
+        return '<%= image_tag image_url("template/original/32x32/mimetypes/text-x-generic-template.png"), size: "20" %>'
+
+    rightIconHtml: ->
+        if(@hasChildrens())
+            return '<%= image_tag image_url("template/original/32x32/actions/media-playback-start.png"), size: "20", class: "arrow-navigate-right" %>'
+        ""
+
+    # Auto scrolling
+    scrollToHorizontalPosition: ->
+        nodeScrollElement = $("div##{@options.baseContainerId}")[0]
+        toScrollOnContainer = @getBoxContainer().position().left + @getBoxContainer().width() * 2
+        intersail.lib.delay 100, ->
+            nodeScrollElement.scrollLeft = toScrollOnContainer
+
+    scrollToVerticalPosition: ->
+        delay = 400
+        @getBoxSubContainer().animate({
+            scrollTop: @getDomObj().offset().top - @getBoxContainer().offset().top - 60
+        }, delay)

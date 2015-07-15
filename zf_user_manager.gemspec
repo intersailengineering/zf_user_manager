@@ -29,6 +29,12 @@ Gem::Specification.new do |s|
   s.add_dependency 'uglifier', '>= 1.3.0'
   # Use CoffeeScript for .coffee assets and views
   s.add_dependency 'coffee-rails', '~> 4.1.0'
+  # Use Jquery
+  s.add_dependency 'jquery-rails'
+  # Use JqueryUi as the JavaScript library
+  s.add_dependency gem 'jquery-ui-rails'
+  # UnderscoreJs lib
+  s.add_dependency 'underscore-rails'
   # Twitter bootstrap with sass
   # s.add_dependency 'bootstrap-sass'
   s.add_dependency 'twitter-bootstrap-rails'

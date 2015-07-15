@@ -129,7 +129,7 @@ module Intersail
       private
       # create the array that contain all the unit options for the select
       def fetch_unit_options
-        zum.unit_list.inject([["Nessuno",0]]) {|units,unit| units << [unit.name,unit.id]}
+        zum.unit_list.inject([["-",0]]) {|units,unit| units << [unit.name,unit.id]}
       end
       # set the parent object of the unit if has any parent_id setted
       # works using the local units found from the client
