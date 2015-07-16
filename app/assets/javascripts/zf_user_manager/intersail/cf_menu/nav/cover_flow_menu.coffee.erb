@@ -140,13 +140,13 @@ intersail.nav.ListElement = class ListElement extends intersail.nav.NodeElement
 
     # Auto scrolling
     scrollToHorizontalPosition: ->
-        nodeScrollElement = $("div##{@options.baseContainerId}")[0]
-        toScrollOnContainer = @getBoxContainer().position().left + @getBoxContainer().width() * 2
-        intersail.lib.delay 100, ->
-            nodeScrollElement.scrollLeft = toScrollOnContainer
+#        nodeScrollElement = $("div##{@options.baseContainerId}")[0]
+#        toScrollOnContainer = @getBoxContainer().position().left + @getBoxContainer().width() * 2
+#        intersail.lib.delay 100, ->
+#            nodeScrollElement.scrollLeft = toScrollOnContainer
 
     scrollToVerticalPosition: ->
-        delay = 400
-        @getBoxSubContainer().animate({
-            scrollTop: @getDomObj().offset().top - @getBoxContainer().offset().top - 60
-        }, delay)
+#        delay = 400
+#        @getBoxSubContainer().animate({
+#            scrollTop: @getDomObj().offset().top - @getBoxContainer().offset().top - 60
+#        }, delay)
