@@ -19,6 +19,13 @@ Offre un'interfaccia grafica per la gestione utenti di ZapFlow
   in questo modo saranno caricati correttamente i css dell'engine.
   Si può anche usare un layout customizzato in tal caso bisogna sovrascrivere il layout da utilizzare nel controller
 
+== Ambiente di test
+
+Per eseguire i test manuali nell'ambiente di test è necessario usare l'applicazione dummy presente
+all'interno della cartella test/dummy.
+Per avviare il server di rails quindi andare nella folder test/dummy ed eseguire rails s.
+login: username: admin, password: 123 (verificare in caso non vada la password di admin sul server di login associato ad intersail_auth)
+
 == Sovvrascrivere Classi e controller
 
 Creare una cartella app/decorators ogni file che matcha *_decorator*.rb sarà caricato, in questo modo è possibile
