@@ -6,6 +6,8 @@ require 'jquery-ui-rails'
 require 'underscore-rails'
 require 'bootstrap-sass'
 require 'turbolinks'
+require 'zf_client'
+require 'intersail_auth'
 
 module ZfUserManager
   class Engine < ::Rails::Engine

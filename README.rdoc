@@ -9,6 +9,10 @@ Offre un'interfaccia grafica per la gestione utenti di ZapFlow
 * Settare le root route in routes.rb:  root to: "home#index"
 * Installare e settare le migrations: rake intersail_auth:install:migrations && rake db:migrate
 * Aggiungere le rotte dell'engine   mount ZfUserManager::Engine => '/'
+* Nell'applicazione host è necessario includere anche le seguenti gemme:
+  gem 'zf_client', :git => 'https://github.com/intersailengineering/zf-client.git', :branch => 'staging'
+  gem 'intersail_auth', :git => 'git@github.com:intersailengineering/intersail_auth.git', :branch => 'staging'
+  Per la loro installazione vedere la relativa documentazione associata
 * Creare infineun layout di nome application_zum che contiene 'yield', in esso sarà renderizzato il form di login: il layout deve contenere i seguenti tag js e css:
     <%= stylesheet_link_tag    "zf_user_manager/application", media: "all" %>
     <%= javascript_include_tag "zf_user_manager/application" %>

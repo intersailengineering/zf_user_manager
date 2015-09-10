@@ -20,7 +20,7 @@ GIT
       rails (~> 4.2.1)
 
 PATH
-  remote: ../zf_user_manager
+  remote: .
   specs:
     zf_user_manager (0.0.3)
       bootstrap-sass

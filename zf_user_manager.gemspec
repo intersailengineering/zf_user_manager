@@ -21,9 +21,7 @@ Gem::Specification.new do |s|
 
   # Database connector
   s.add_dependency 'pg'
-  # Authentication engine
   s.add_dependency 'intersail_auth'
-  # Zapflow client
   s.add_dependency 'zf_client'
 
   # Gui
