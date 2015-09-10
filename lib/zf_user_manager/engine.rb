@@ -1,3 +1,12 @@
+require 'sass-rails'
+require 'uglifier'
+require 'coffee-rails'
+require 'jquery-rails'
+require 'jquery-ui-rails'
+require 'underscore-rails'
+require 'bootstrap-sass'
+require 'turbolinks'
+
 module ZfUserManager
   class Engine < ::Rails::Engine
     isolate_namespace ZfUserManager

@@ -5,14 +5,10 @@ source 'https://rubygems.org'
 # development dependencies will be added by default to the :development group.
 gemspec
 
-# Declare any dependencies that are still in development here instead of in
-# your gemspec. These might include edge Rails or gems from your path or
-# Git. Remember to move these dependencies to your gemspec before releasing
-# your gem to rubygems.org.
-# To use a debugger
-# gem 'byebug', group: [:development, :test]
-
+#@jtodoIMP put this as zum depdencency
 # ZapFlow Authentication
 gem 'intersail_auth', :git => 'git@github.com:intersailengineering/intersail_auth.git', :branch => 'staging'
-# ZapFlow User Manager
-gem 'zf_user_manager', path: '../zf_user_manager'
+#@jtodoIMP put this as zum depdencency
+# ZapFlow Client
+gem 'zf_client', :git => 'https://github.com/intersailengineering/zf-client.git', :branch => 'staging'
+

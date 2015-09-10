@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ZUM: Accesso</title>
+    <%= stylesheet_link_tag    "intersail_auth/application", media: "all" %>
+    <%= javascript_include_tag "intersail_auth/application" %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="zum_app_main">
+    <div class="zum_app_header"></div>
+
+    <div class="zum_app_content">
+        <%= yield %>
+    </div>
+
+    <div class="zum_app_footer"></div>
+</div>
+
+</body>
+</html>

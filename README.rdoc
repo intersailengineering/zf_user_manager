@@ -1,41 +1,45 @@
 = ZfUserManager
 
+Offre un'interfaccia grafica per la gestione utenti di ZapFlow
+
 == Setup
+
 * Aggiungere come dipendenza al gemfile: gem 'zf_user_manager', :git => 'git@github.com:intersailengineering/zf_user_manager.git', :branch => 'staging'
 * Eseguire bundle install(Attenzione devi essere aggiunto agli utenti del repository per scaricarlo)
 * Settare le root route in routes.rb:  root to: "home#index"
-* Installare e settare le migrations: rake zf_user_manager:install:migrations && rake db:migrate
+* Installare e settare le migrations: rake intersail_auth:install:migrations && rake db:migrate
 * Aggiungere le rotte dell'engine   mount ZfUserManager::Engine => '/'
 * Nell'applicazione host è necessario includere anche le seguenti gemme:
   gem 'zf_client', :git => 'https://github.com/intersailengineering/zf-client.git', :branch => 'staging'
   gem 'intersail_auth', :git => 'git@github.com:intersailengineering/intersail_auth.git', :branch => 'staging'
   Per la loro installazione vedere la relativa documentazione associata
+* Creare infineun layout di nome application_zum che contiene 'yield', in esso sarà renderizzato il form di login: il layout deve contenere i seguenti tag js e css:
+    <%= stylesheet_link_tag    "zf_user_manager/application", media: "all" %>
+    <%= javascript_include_tag "zf_user_manager/application" %>
+  in questo modo saranno caricati correttamente i css dell'engine.
+  Si può anche usare un layout customizzato in tal caso bisogna sovrascrivere il layout da utilizzare nel controller
 
 == Sovvrascrivere Classi e controller
+
 Creare una cartella app/decorators ogni file che matcha *_decorator*.rb sarà caricato, in questo modo è possibile
 sovvrascrivere metodi di classi e controller, per esempio:
 
-    module IntersailAuth
-      ApplicationController.class_eval do
-        helper_method :menu_name, :submenu_name
+    module Intersail
+      module ZfUserManager
+          ApplicationController.class_eval do
+            helper_method :menu_name, :submenu_name
 
-        def menu_name
-          "layouts/menu/empty"
-        end
+            def menu_name
+              "layouts/menu/empty"
+            end
 
-        def submenu_name
-          "layouts/nav/under_top/empty"
-        end
+            def submenu_name
+              "layouts/nav/under_top/empty"
+            end
+          end
       end
     end
 
 == File di configurazione ed initializers
 
-Per sovvrascrivere la configurazione creare un file intersail_auth.rb nella cartella config/initializers
-Il file deve essere così strutturato:
-
-Intersail::Configuration.configure do |config|
-    config.key = "key"
-end
-
-Dove le possibili chiavi sono nella classa Intersail::Configuration definiti come attr_accessor
+Questo engine non utilizza initializer.

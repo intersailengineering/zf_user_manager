@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ZUM</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    "zf_user_manager/application", media: "all" %>
+  <%= javascript_include_tag "zf_user_manager/application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="zum_app_main">
+  <div class="zum_app_header">
+    <% if user_signed_in? %>
+      <a href="<%= intersail_auth.destroy_user_session_path %>" class="btn btn-primary" data-method="delete" style="float:right; margin-top:20px; margin-right:10px"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
+    <% end %>
+  </div>
+
+  <div class="zum_app_content">
+    <%= yield %>
+  </div>
+
+  <div class="zum_app_footer"></div>
+</div>
+
+</body>
+</html>

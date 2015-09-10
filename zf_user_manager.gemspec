@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = ZfUserManager::VERSION
   s.authors     = %w(jacopo-beschi-intersail asalomoni)
   s.email       = %w(jacopo.beschi@intersail.it andrea.salomoni@intersail.it)
-  s.homepage    = ''
+  s.homepage    = 'http://www.intesail.it'
   s.summary     = 'Summary of ZfUserManager.'
   s.description = 'Description of ZfUserManager.'
   s.license     = 'PROPRIETARY'
@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rails', '>= 4.2.1'
 
-  # Databse connector
+  # Database connector
   s.add_dependency 'pg'
 
   # Gui
@@ -36,8 +36,10 @@ Gem::Specification.new do |s|
   # UnderscoreJs lib
   s.add_dependency 'underscore-rails'
   # Twitter bootstrap with sass
-  # s.add_dependency 'bootstrap-sass'
-  s.add_dependency 'twitter-bootstrap-rails'
+  s.add_dependency 'bootstrap-sass'
+  # For better user experience: be aware of document.ready issue!
+  s.add_dependency 'turbolinks'
+
 
   # Development
   # Rspec

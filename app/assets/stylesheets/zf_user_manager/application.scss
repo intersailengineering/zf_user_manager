@@ -1,7 +1,8 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
 @import "util";
-@import "cf_menu";
-// @jtodoIMP is not requiring jquery-ui css correctly also for javascript jquery-ui
 @import "jquery-ui";
+@import "cf_menu";
 
 //########################################################
 //######### CONFIGURATION ################################
