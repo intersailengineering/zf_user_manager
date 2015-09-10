@@ -1,7 +1,7 @@
 = ZfUserManager
 
 == Setup
-* Aggiungere come dipendenza al gemfile: gem 'zf_user_manager', path: "../zf_user_manager"
+* Aggiungere come dipendenza al gemfile: gem 'zf_user_manager', :git => 'git@github.com:intersailengineering/zf_user_manager.git', :branch => 'staging'
 * Eseguire bundle install(Attenzione devi essere aggiunto agli utenti del repository per scaricarlo)
 * Settare le root route in routes.rb:  root to: "home#index"
 * Installare e settare le migrations: rake zf_user_manager:install:migrations && rake db:migrate
