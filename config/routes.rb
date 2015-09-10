@@ -1,5 +1,7 @@
 ZfUserManager::Engine.routes.draw do
 
+  mount IntersailAuth::Engine => '/'
+
   get '/user_manager', to: redirect('/user_manager/users')
 
   # Users
