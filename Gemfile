@@ -5,10 +5,6 @@ source 'https://rubygems.org'
 # development dependencies will be added by default to the :development group.
 gemspec
 
-#@jtodoIMP put this as zum depdencency
-# ZapFlow Authentication
 gem 'intersail_auth', :git => 'git@github.com:intersailengineering/intersail_auth.git', :branch => 'staging'
-#@jtodoIMP put this as zum depdencency
-# ZapFlow Client
 gem 'zf_client', :git => 'https://github.com/intersailengineering/zf-client.git', :branch => 'staging'
 
