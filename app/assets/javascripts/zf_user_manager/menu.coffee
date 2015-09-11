@@ -17,6 +17,7 @@ fetchUnits = ->
   units
 
 ready = ->
+    return unless window.units
     builder = new intersail.nav.CoverFlowBuilder intersail.nav.ListElement, null, {parentIdField: "parent_id", }
     builder.build(fetchUnits())
     shared = new intersail.lib.shared.Share
