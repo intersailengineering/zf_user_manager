@@ -3,8 +3,7 @@ module Intersail
     module ZclientServices
 
       def zum
-        #@jtodoIMP we need to use the session_id here!!!
-        @zum ||= Intersail::ZfClient::Client::ZClient.new("1")
+        @zum ||= Intersail::ZfClient::Client::ZClient.new(ApplicationController.logged_user.session_id)
       end
 
       def unit_select(list = nil)

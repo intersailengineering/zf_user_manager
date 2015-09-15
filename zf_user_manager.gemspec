@@ -58,4 +58,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'faker'
   # Sqlite
   s.add_development_dependency 'sqlite3'
+  # For debugging
+  s.add_development_dependency 'byebug'
 end
