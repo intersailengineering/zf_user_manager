@@ -1,0 +1,14 @@
+= Features testate con acceptance test
+Stato features:
+
+. Login utente (todo)
+. Lista utenti (todo)
+. Selezione utente (todo)
+. Lista unit gerarchica (todo)
+. Lista unit normale (todo)
+. Selezione utente (todo)
+. Lista ruoli (todo)
+. Selezione ruolo (todo)
+. Lista Acl (todo)
+. Selezione ACL (todo)
+. Attivazione utente (working)

@@ -6,5 +6,6 @@ source 'https://rubygems.org'
 gemspec
 
 # gem 'intersail_auth', :git => 'git@github.com:intersailengineering/intersail_auth.git', :branch => 'staging'
-gem 'intersail_auth', :git => 'git@github.com:intersailengineering/intersail_auth.git', :branch => 'development'
+# gem 'intersail_auth', :git => 'git@github.com:intersailengineering/intersail_auth.git', :branch => 'development'
+gem 'intersail_auth', path: '../intersail_auth'
 gem 'zf_client', :git => 'https://github.com/intersailengineering/zf-client.git', :branch => 'staging'

@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.license     = 'PROPRIETARY'
 
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.rdoc']
-  s.test_files = Dir['test/**/*']
+  s.test_files = Dir["spec/**/*"]
 
   s.add_dependency 'rails', '~> 4.1'
 
@@ -42,8 +42,10 @@ Gem::Specification.new do |s|
   # For better user experience: be aware of document.ready issue!
   s.add_dependency 'turbolinks'
 
+  ###############
+  #  Testing
+  ###############
 
-  # Development
   # Rspec
   s.add_development_dependency 'rspec-rails'
   # Automated tests with guard
@@ -53,9 +55,25 @@ Gem::Specification.new do |s|
   # More Rspec matches
   s.add_development_dependency 'shoulda-matchers'
   # Automated Object building
-  s.add_development_dependency 'factory_girl_rails', '~> 4.0'
+  s.add_development_dependency 'factory_girl_rails'
   # Build fake data
   s.add_development_dependency 'faker'
+  # Acceptance test suite
+  s.add_development_dependency 'capybara'
+  # Web drivers
+  s.add_development_dependency 'selenium'
+  s.add_development_dependency 'selenium-webdriver'
+  # Allow to proxy external browser requests
+  # s.add_development_dependency 'puffing-billy'
+  # Allow to proxy external requests
+  #s.add_development_dependency 'webmock'
+  # Automatically open screenshoot
+  s.add_development_dependency 'launchy'
+
+  ################
+  #  Development
+  ################
+
   # Sqlite
   s.add_development_dependency 'sqlite3'
   # For debugging

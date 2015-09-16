@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'spec_helper'
 
 module Intersail
   describe 'Configuration', type: :module do
