@@ -12,9 +12,9 @@ describe "user activation", type: :feature, js: true do
     click_button 'Accedi'
     save_and_open_screenshot
 
-    #@jtodoIMP extract below as login logic and go over with other test
-    # the test for now will interact really with the external system
-    # check the acceptancetest file and go from there
+    #@jtodoIMP make testing server for zaplofwsapi and use it for acceptance tests
+    # the server allow you to push a given set of data so that you can do your acceptance test without
+    # breaking anything
 
   end
 
