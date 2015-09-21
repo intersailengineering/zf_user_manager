@@ -1,6 +1,6 @@
 GIT
   remote: git@github.com:intersailengineering/intersail_auth.git
-  revision: d0f2fb9e0455fd74d0b5f82dc71e10d261d8b466
+  revision: 2e76e8fc25c9839235a421702e38ad8ff3decee3
   branch: staging
   specs:
     intersail_auth (0.2.1)
@@ -137,7 +137,7 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
-    httparty (0.13.5)
+    httparty (0.13.6)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.7.0)

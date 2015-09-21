@@ -3,7 +3,7 @@ module Intersail
     module ZclientServices
 
       def zum
-        @zum ||= Intersail::ZfClient::Client::ZClient.new(ApplicationController.logged_user.session_id)
+        @zum ||= Intersail::ZfClient::Client::ZClient.new(IntersailAuth.current_user.session_id)
       end
 
       def unit_select(list = nil)
