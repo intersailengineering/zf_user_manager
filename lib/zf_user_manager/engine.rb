@@ -13,6 +13,8 @@ module ZfUserManager
   class Engine < ::Rails::Engine
     isolate_namespace ZfUserManager
 
+    require "#{config.root}/app/helpers/intersail/zf_user_manager/application_helper.rb"
+
     # Load host application decorators to override classes
     config.to_prepare do
       Dir.glob(Rails.root + "app/decorators/**/*_decorator*.rb").each do |file|
