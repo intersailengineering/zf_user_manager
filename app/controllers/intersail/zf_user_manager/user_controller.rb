@@ -1,5 +1,6 @@
 module Intersail
   module ZfUserManager
+    # NOTE: Why are using the full name space because otherwise it will load the host application ApplicationController
     class UserController < Intersail::ZfUserManager::ApplicationController
       include Intersail::ZfUserManager::Concerns::Messageable
       include Intersail::ZfUserManager::UserServices
