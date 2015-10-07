@@ -1,6 +1,6 @@
 module Intersail
   module ZfUserManager
-    class AclController < ApplicationController
+    class AclController < Intersail::ZfUserManager::ApplicationController
       include Intersail::ZfUserManager::Concerns::Messageable
       include Intersail::ZfUserManager::AclServices
 
