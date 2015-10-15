@@ -1,6 +1,6 @@
 module Intersail
   module ZfUserManager
-    class RoleController < ApplicationController
+    class RoleController < Intersail::ZfUserManager::ApplicationController
       include Intersail::ZfUserManager::Concerns::Messageable
       include Intersail::ZfUserManager::RoleServices
 
