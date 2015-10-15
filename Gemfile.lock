@@ -1,9 +1,9 @@
 GIT
   remote: git@github.com:intersailengineering/intersail_auth.git
-  revision: 2e76e8fc25c9839235a421702e38ad8ff3decee3
-  branch: staging
+  revision: 3d838a65bd7147e85e7b049a8809d8bdb6dc7a92
+  branch: production
   specs:
-    intersail_auth (0.2.1)
+    intersail_auth (1.0.0)
       devise
       httparty
       pg
@@ -11,13 +11,13 @@ GIT
 
 GIT
   remote: https://github.com/intersailengineering/zf-client.git
-  revision: 1b4b066a16c022bb4de9bfbe1101788253df2a48
-  branch: staging
+  revision: 0470538b85cfef623f06e663f4a3a4c15a73b03f
+  branch: production
   specs:
     zf_client (0.0.1)
       faker
       httparty
-      rails (~> 4.2.1)
+      rails (~> 4.1)
 
 PATH
   remote: .
@@ -137,7 +137,7 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
-    httparty (0.13.6)
+    httparty (0.13.7)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.7.0)

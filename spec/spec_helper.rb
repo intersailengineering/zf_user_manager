@@ -4,6 +4,7 @@ require 'byebug'
 require 'rspec/rails'
 require 'spec_helper'
 require 'database_cleaner'
+require 'intersail_auth/test_helpers'
 
 # Configure Rails Environment
 ENV["RAILS_ENV"] = "test"
