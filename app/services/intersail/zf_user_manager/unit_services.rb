@@ -14,6 +14,7 @@ module Intersail
       def unit_index_function
         @resource_select = resource_select
         @role_select = role_select
+
         @units = zum.unit_list(unit_search_params(@search_params))
 
         update_unit_parents

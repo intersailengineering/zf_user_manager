@@ -3,7 +3,7 @@
 
 <!-- cf_menu handling, extract this with the one up in two tabs -->
 <%= javascript_tag do %>
-    window.units = '<%= raw @units.map(&:serializable_hash).to_json %>';
+    window.units = '<%= raw @units.to_json(except: :metadata) %>';
     window.unit_selected = '<%= raw @unit ? @unit.id.to_s : 0 %>';
     $(document).trigger("update:data")
 <% end %>
