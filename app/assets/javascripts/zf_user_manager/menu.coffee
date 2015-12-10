@@ -1,5 +1,10 @@
 //= require ./intersail/cf_menu/autoload.js
 
+searchNode = (nodes, id) ->
+  for node in nodes
+    return node if  node.id == id && id != undefined
+  null
+
 fetchUnits = ->
   # fetch and prepare data
   units = JSON.parse(window.units)
@@ -7,13 +12,22 @@ fetchUnits = ->
     id: 999999,
     identifier: "999999"
   }
+  foundRootChild = false
   for unit in units
-    unit.parent_id = root.id unless unit.parent_id
+    unless unit.parent_id
+      unit.parent_id = root.id
+      foundRootChild = true
     unit.identifier = unit.id.toString()
     unit.label = unit.name
     unit.attributes = {}
     unit.options = {headersEnabled: false}
   units.push(root)
+  # if nobody has as parent the root i search for one with parent_id orphan
+  unless foundRootChild
+    for unit in units
+      if (searchNode(units, unit.parent_id) == null && unit.id != root.id)
+        unit.parent_id = root.id
+
   units
 
 ready = ->
@@ -24,6 +38,7 @@ ready = ->
 
     mainNode = shared.listNodes[0].root.children
     # nodes init
+
     mainNode.initializeGui()
     mainNode.attachEvents()
     # search

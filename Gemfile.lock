@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/intersailengineering/zf-client.git
-  revision: 569c720d475c835a926209723923e75a4b633789
+  revision: 5daeced0ebd7eb641badec944e51db0cb2ad08a5
   branch: production
   specs:
     zf_client (0.2.1)
