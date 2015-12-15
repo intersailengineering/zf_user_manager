@@ -54,3 +54,14 @@ function ajax_safe(url, method, data) {
 // INSPECTOR
 // ----------
 var _zum_inspector_selected_tab = null;
+
+$(document).ready(function(){
+    // hides all success alert
+    $( document ).ajaxSuccess(function( event, xhr, settings ) {
+        if ($(".alert-success").length > 0) {
+            setTimeout(function () {
+                close_messages();
+            }, 4000);
+        }
+    });
+});

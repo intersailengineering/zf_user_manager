@@ -54,7 +54,7 @@ module Intersail
           unit = zum.unit_update(unit.id, unit)
           # this doesn't work with the current api
           # unit_urrs_update
-          set_success_message('Unita aggiornato con successo')
+          set_success_message('Unita aggiornata con successo')
           @unit = zum.unit_read(unit.id, {metadata: true})
         rescue Exception => e
           set_error_message('Verifica i campi inseriti nel form sottostante')
