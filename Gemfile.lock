@@ -9,16 +9,6 @@ GIT
       pg
       rails (>= 4.1.0)
 
-GIT
-  remote: https://github.com/intersailengineering/zf-client.git
-  revision: 5daeced0ebd7eb641badec944e51db0cb2ad08a5
-  branch: production
-  specs:
-    zf_client (0.2.1)
-      faker
-      httparty
-      rails (~> 4.1)
-
 PATH
   remote: .
   specs:
@@ -35,6 +25,14 @@ PATH
       uglifier (>= 1.3.0)
       underscore-rails
       zf_client
+
+PATH
+  remote: ../zf_client
+  specs:
+    zf_client (0.2.1)
+      faker
+      httparty
+      rails (~> 4.1)
 
 GEM
   remote: https://rubygems.org/

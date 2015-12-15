@@ -7,6 +7,9 @@
   </thead>
 
   <tbody>
+  <% unless @unit_urrs.any? %>
+    <b>Nessun profilo associato.</b>
+  <% end %>
   <% @unit_urrs.each do |urr| %>
       <%= render "intersail/zf_user_manager/partials/inspector/urr_row", urr: urr %>
   <% end %>

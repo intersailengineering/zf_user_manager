@@ -49,39 +49,48 @@ module Intersail
 
       def unit_update_function
         unit = set_unit_attributes(@unit)
-        unit = zum.unit_update(unit.id, unit)
 
-        @unit = zum.unit_read(unit.id, {metadata: true}) if unit
+        begin
+          unit = zum.unit_update(unit.id, unit)
+          # this doesn't work with the current api
+          # unit_urrs_update
+          set_success_message('Unita aggiornato con successo')
+          @unit = zum.unit_read(unit.id, {metadata: true})
+        rescue Exception => e
+          set_error_message('Verifica i campi inseriti nel form sottostante')
+          @unit = unit
+        end
 
         unit_index_function
         unit_urrs
       end
 
-      def unit_urrs_update
-        return nil if params[:urrs].blank?
-
-        params[:urrs].each do |urr|
-          if urr[:urr_id] == '0'
-            u = Intersail::ZfClient::ZUrr.new(id: nil, unit_id: @unit.id, role_id: urr[:role_id], resource_id: urr[:resource_id])
-            zum.urr_create(u)
-          elsif urr[:_edited] == '1'
-            u = Intersail::ZfClient::ZUrr.new(id: urr[:urr_id], unit_id: @unit.id, role_id: urr[:role_id], resource_id: urr[:resource_id], _destroy: urr[:_destroy].to_i)
-            zum.urr_update(u.id, u)
-          end
-        end
-        params.delete(:urrs)
-      end
+      # def unit_urrs_update
+      #   return nil if params[:urrs].blank?
+      #
+      #   params[:urrs].each do |urr|
+      #     if urr[:urr_id] == '0'
+      #       u = Intersail::ZfClient::ZUrr.new(id: nil, unit_id: @unit.id, role_id: urr[:role_id], resource_id: urr[:resource_id])
+      #       zum.urr_create(u)
+      #     elsif urr[:_edited] == '1'
+      #       u = Intersail::ZfClient::ZUrr.new(id: urr[:urr_id], unit_id: @unit.id, role_id: urr[:role_id], resource_id: urr[:resource_id], _destroy: urr[:_destroy].to_i)
+      #       zum.urr_update(u.id, u)
+      #     end
+      #   end
+      #   params.delete(:urrs)
+      # end
 
       def unit_create_function
         unit = set_unit_attributes
 
         begin
           unit = zum.unit_create(unit)
-          @unit = unit
-          clean_search_params
-        rescue
-          set_error_message('Campi mancanti o non compilati correttamente')
+          set_success_message('Unità creata con successo')
+        rescue Exception => e
+          set_error_message('Verifica i campi inseriti nel form sottostante')
         end
+
+        @unit = unit
 
         unit_index_function
         unit_urrs
@@ -133,7 +142,7 @@ module Intersail
       private
       # create the array that contain all the unit options for the select
       def fetch_unit_options
-        zum.unit_list.inject([["-",0]]) {|units,unit| units << [unit.name,unit.id]}
+        zum.unit_list.inject([]) {|units,unit| units << [unit.name,unit.id]}
       end
       # set the parent object of the unit if has any parent_id setted
       # works using the local units found from the client

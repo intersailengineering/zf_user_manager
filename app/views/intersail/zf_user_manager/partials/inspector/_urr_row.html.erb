@@ -18,8 +18,8 @@
   </td>
 
   <% if @section == :user %>
-      <td class="row_unit_name destroyable"><%= urr.unit.name %></td>
-      <td class="row_role_name destroyable"><%= urr.role.name %></td>
+      <td class="row_unit_name destroyable"><%= urr.unit && urr.unit.name %></td>
+      <td class="row_role_name destroyable"><%= urr.role && urr.role.name %></td>
   <% elsif @section == :unit %>
       <td class="row_resource_name destroyable"><%= @unit_urr_resources[urr.resource_id] %></td>
       <td class="row_role_name destroyable"><%= @unit_urr_roles[urr.role_id] %></td>
@@ -34,21 +34,12 @@
         <a class="btn btn-primary btn-xs urr_edit_button" onclick="edit_urr('<%= new_id %>', <%= urr.unit_id || 'null' %>, <%= urr.role_id || 'null' %>, null);" >
           <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
         </a>
-    <% elsif @section == :unit %>
-        <a class="btn btn-primary btn-xs urr_edit_button" onclick="edit_urr('<%= new_id %>', null, <%= urr.role_id || 'null' %>, <%= urr.resource_id || 'null' %>);" >
-          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-        </a>
-    <% elsif @section == :role %>
-        <a class="btn btn-primary btn-xs urr_edit_button" onclick="edit_urr('<%= new_id %>', <%= urr.unit_id || 'null' %>, null, <%= urr.resource_id || 'null' %>);" >
-          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-        </a>
     <% end %>
-
-    <% if false %>
-        <a class="btn btn-danger btn-xs urr_destroy_button" onclick="destroy_urr('<%= new_id %>');">
-          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-        </a>
-    <% end %>
+    <%# if false %>
+        <!--<a class="btn btn-danger btn-xs urr_destroy_button" onclick="destroy_urr('<%= new_id %>');">-->
+          <!--<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>-->
+        <!--</a>-->
+    <%# end %>
 
   </td>
 

@@ -1,16 +1,76 @@
 <%= render "intersail/zf_user_manager/scripts/select_record" %>
 
+<ul class="nav nav-tabs" role="tablist">
+  <li role="presentation" class="active">
+    <a href="#cf-view" aria-controls="cf-view" role="tab" data-toggle="tab" id="cf-view-tab">Vista Gerarchica</a>
+  </li>
+  <li role="presentation">
+    <a href="#list-view" aria-controls="list-view" role="tab" data-toggle="tab" id="list-view-tab">Vista Planare</a></li>
+</ul>
 
-<!-- cf_menu handling, extract this with the one up in two tabs -->
-<%= javascript_tag do %>
-    window.units = '<%= raw @units.to_json(except: :metadata) %>';
-    window.unit_selected = '<%= raw @unit ? @unit.id.to_s : 0 %>';
-    $(document).trigger("update:data")
-<% end %>
+<!-- Tab panes -->
+<div class="tab-content unit-list-tabs">
+  <!-- cf_menu -->
+  <div role="tabpanel" class="tab-pane active" id="cf-view">
 
-<div id="box-container">
-  <div class="horizzontal-scroll" id="node-scroll">
-    <%# wise javascript will fill this div %>
-    <div class="clearfix"></div>
+    <!-- cf_menu handling, extract this with the one up in two tabs -->
+    <%= javascript_tag do %>
+        window.units = '<%= raw @units.to_json(except: :metadata) %>';
+        window.unit_selected = '<%= raw @unit ? @unit.id.to_s : 0 %>';
+        $(document).trigger("update:data")
+    <% end %>
+
+    <div id="box-container">
+      <div class="horizzontal-scroll" id="node-scroll">
+        <%# wise javascript will fill this div %>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- list_menu -->
+  <div role="tabpanel" class="tab-pane" id="list-view">
+    <div class="zum_scrollable">
+      <table class="table table-striped table-hover">
+        <thead>
+        <th></th>
+        <th>Nome</th>
+        <th>Descrizione</th>
+        <th>Padre</th>
+        </thead>
+
+        <tbody class="user_table_body">
+        <% @units.each do |unit| %>
+            <%# i set the current_tab so when the page gets reloaded keeps in memory the current tab, use sessionStorage so that i set this value from the js menu aswell %>
+            <tr id="<%= unit.id %>" onclick="select_record(<%= unit.id %>);" class="<%= row_selected(unit, @unit) %>">
+              <td class="list_row_icon">
+                <%= image_tag "zf_user_manager/#{@section.to_s}.png", size: '24x24' %>
+              </td>
+              <td><%= unit.name %></td>
+              <td><%= unit.description %></td>
+              <td><%= unit.parent && unit.parent.name %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
+
+<!-- selected tab handling -->
+<%= javascript_tag do %>
+    $(document).ready(function(){
+    // show current tab
+    var currentUnitTab = sessionStorage.getItem('currentUnitTab');
+    $("#" + currentUnitTab).tab('show');
+
+    // click event to change the current tab
+    $("#cf-view-tab").on('click', function(){
+    sessionStorage.setItem('currentUnitTab', 'cf-view-tab');
+    });
+    $("#list-view-tab").on('click', function(){
+        sessionStorage.setItem('currentUnitTab', 'list-view-tab');
+    });
+
+    });
+<% end %>

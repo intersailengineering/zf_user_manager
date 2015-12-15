@@ -41,6 +41,7 @@ ready = ->
 
     mainNode.initializeGui()
     mainNode.attachEvents()
+    # JS search atm is not handled in this project
     # search
 #      cfSearch = new intersail.nav.coverFlowSearch
 #      cfSearch.attachEvents()

@@ -6,12 +6,16 @@
       <%= text_field_tag :full_text_search, get_search_param(:full_text_search), class: 'form-control', placeholder: 'Cerca'  %>
     </div>
     <div class="form-group">
+      <label for="role_select">Abilitato</label>
+      <%= select_tag(:active_select, options_for_select(@active_select, get_search_param(:active_select)), class: 'form-control', include_blank: 'Qualsiasi') %>
+    </div>
+    <div class="form-group">
       <label for="unit_select">Unità</label>
-      <%= select_tag(:unit_select, options_for_select(@unit_select, get_search_param(:unit_select)), class: 'form-control', include_blank: true) %>
+      <%= select_tag(:unit_select, options_for_select(@unit_select, get_search_param(:unit_select)), class: 'form-control', include_blank: 'Qualsiasi') %>
     </div>
     <div class="form-group">
       <label for="role_select">Ruolo</label>
-      <%= select_tag(:role_select, options_for_select(@role_select, get_search_param(:role_select)), class: 'form-control', include_blank: true) %>
+      <%= select_tag(:role_select, options_for_select(@role_select, get_search_param(:role_select)), class: 'form-control', include_blank: 'Qualsiasi') %>
     </div>
 
     <button type="submit" class="btn btn-primary btn-sm zum_inline_submit">Cerca</button>

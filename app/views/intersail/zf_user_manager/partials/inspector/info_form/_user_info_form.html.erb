@@ -1,28 +1,40 @@
 <div class="form-group">
-  <label for="username" class="col-sm-3 control-label">Username</label>
+  <label for="username" class="col-sm-3 control-label <%= required_label_class(@user, :username) %>">Username</label>
   <div class="col-sm-9">
     <%= text_field_tag :username, @user.username, class: 'form-control', placeholder: 'Username'  %>
+    <% if @user.errors.messages.has_key? :username %>
+        <div class="form-field-error"><%= @user.errors.messages[:username].first %></div>
+    <% end %>
   </div>
 </div>
 
 <div class="form-group">
-  <label for="username" class="col-sm-3 control-label">Email</label>
+  <label for="username" class="col-sm-3 control-label <%= required_label_class(@user.resource, :mail) %>">Email</label>
   <div class="col-sm-9">
     <%= text_field_tag :mail, @user.resource.mail, class: 'form-control', placeholder: 'Email'  %>
+    <% if @user.resource.errors.messages.has_key? :mail %>
+        <div class="form-field-error"><%= @user.resource.errors.messages[:mail].first %></div>
+    <% end %>
   </div>
 </div>
 
 <div class="form-group">
-  <label for="username" class="col-sm-3 control-label">Nome</label>
+  <label for="username" class="col-sm-3 control-label <%= required_label_class(@user.resource, :first_name) %>">Nome</label>
   <div class="col-sm-9">
     <%= text_field_tag :first_name, @user.resource.first_name, class: 'form-control', placeholder: 'Nome'  %>
+    <% if @user.resource.errors.messages.has_key? :first_name %>
+        <div class="form-field-error"><%= @user.resource.errors.messages[:first_name].first %></div>
+    <% end %>
   </div>
 </div>
 
 <div class="form-group">
-  <label for="username" class="col-sm-3 control-label">Cognome</label>
+  <label for="username" class="col-sm-3 control-label <%= required_label_class(@user.resource, :last_name) %>">Cognome</label>
   <div class="col-sm-9">
     <%= text_field_tag :last_name, @user.resource.last_name, class: 'form-control', placeholder: 'Cognome'  %>
+    <% if @user.resource.errors.messages.has_key? :last_name %>
+        <div class="form-field-error"><%= @user.resource.errors.messages[:last_name].first %></div>
+    <% end %>
   </div>
 </div>
 

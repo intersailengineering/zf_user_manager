@@ -4,11 +4,13 @@ module Intersail
       include Intersail::ZfUserManager::ZclientServices
       include Intersail::ZfUserManager::SearchServices
 
-      SEARCH_PARAMETERS = [:full_text_search, :unit_select, :role_select]
+      # all the parameters that will be used for @search_params
+      SEARCH_PARAMETERS = [:full_text_search, :active_select, :unit_select, :role_select]
 
       def user_index_function
         @unit_select = unit_select
         @role_select = role_select
+        @active_select = active_select
         @users = zum.user_list(user_search_params(@search_params))
       end
 
@@ -16,6 +18,10 @@ module Intersail
         parameters = {}
         unless params[:full_text_search].blank?
           parameters['full_text_search'] = params[:full_text_search]
+        end
+
+        unless params[:active_select].blank?
+          parameters['active'] = params[:active_select]
         end
 
         unless params[:unit_select].blank?
@@ -36,6 +42,7 @@ module Intersail
       def user_new_function
         @unit_select = unit_select
         @role_select = role_select
+        @active_select = active_select
         @user = new_user
       end
 
@@ -45,8 +52,15 @@ module Intersail
 
       def user_update_function
         user = set_user_attributes(@user)
-        user = zum.user_update(user.id, user)
-        @user = user if user
+
+        begin
+          user = zum.user_update(user.id, user)
+          set_success_message('Utente aggiornato con successo')
+        rescue Exception => e
+          set_error_message('Verifica i campi inseriti nel form sottostante')
+        end
+
+        @user = user
 
         user_index_function
       end
@@ -56,12 +70,12 @@ module Intersail
 
         begin
           user = zum.user_create(user)
-          @user = user
-          clean_search_params
-        rescue
-          @user = user
-          set_error_message('Campi mancanti o non compilati correttamente')
+          set_success_message('Utente creato con successo')
+        rescue Exception => e
+          set_error_message('Verifica i campi inseriti nel form sottostante')
         end
+
+        @user = user
 
         user_index_function
       end
@@ -91,6 +105,10 @@ module Intersail
 
       def set_user_function(id)
         @user = zum.user_read(id)
+      end
+
+      def active_select
+        [["Abilitati", 1]]
       end
 
     end

@@ -80,8 +80,13 @@
 
               <!-- Nav tabs -->
               <ul class="nav nav-tabs inspector_tabs" role="tablist" >
-                <li role="presentation" class="active"><a href="#record_info" aria-controls="record_info" role="tab" data-toggle="tab">Info <%= I18n.t("zf_user_manager.models.#{@section.to_s}.one").titleize %></a></li>
-                <li role="presentation"><a href="#urrs" aria-controls="urrs" role="tab" data-toggle="tab"><%= I18n.t("zf_user_manager.models.urr.other").titleize %></a></li>
+                <% if @section == :user %>
+                    <li role="presentation" class="active <%= info_error?(@user) %>"><a href="#record_info" aria-controls="record_info" role="tab" data-toggle="tab">Info <%= I18n.t("zf_user_manager.models.#{@section.to_s}.one").titleize %></a></li>
+                    <li role="presentation" class="<%= profile_error?(@user) %>"><a href="#urrs" aria-controls="urrs" role="tab" data-toggle="tab"><%= I18n.t("zf_user_manager.models.urr.other").titleize %></a></li>
+                <% else %>
+                    <li role="presentation" class="active"><a href="#record_info" aria-controls="record_info" role="tab" data-toggle="tab">Info <%= I18n.t("zf_user_manager.models.#{@section.to_s}.one").titleize %></a></li>
+                    <li role="presentation" ><a href="#urrs" aria-controls="urrs" role="tab" data-toggle="tab"><%= I18n.t("zf_user_manager.models.urr.other").titleize %></a></li>
+                <% end %>
               </ul>
 
               <!-- Tab panes -->
@@ -93,11 +98,19 @@
                 <div role="tabpanel" class="tab-pane zum_urrs_tab" id="urrs">
                   <div class="zum_viewer_action_row">
                     <div class="zum_viewer_actions">
-                      <%= link_to "#", onclick: 'new_urr();', class: 'btn btn-primary btn-xs zum_new_urr' do %>
-                          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuovo <%= I18n.t("zf_user_manager.models.urr.one").titleize %>
+                      <%# only the user part can change urrs %>
+                      <% if @section == :user %>
+                          <%= link_to "#", onclick: 'new_urr();', class: 'btn btn-primary btn-xs zum_new_urr' do %>
+                              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuovo <%= I18n.t("zf_user_manager.models.urr.one").titleize %>
+                          <% end %>
+                      <% else %>
+                            <b>Lista profili</b>
                       <% end %>
                       <%= clear %>
                     </div>
+                    <% if @user && @user.resource.errors.messages.has_key?(:urrs) %>
+                        <div class="form-field-error"><%= @user.resource.errors.messages[:urrs].first %></div>
+                    <% end %>
                   </div>
 
                   <div class="zum_urrs_table_container">

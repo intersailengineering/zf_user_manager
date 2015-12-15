@@ -1,1 +1,5 @@
+$('.zum_messages_container').html('<%= j(render_messages) %>');
+<% unless is_error? %>
+    $('.zum_viewer_table').html('<%= j(render("intersail/zf_user_manager/partials/viewer/#{@section.to_s}_viewer")) %>');
+<% end %>
 $('.zum_inspector').html('<%= j(render("intersail/zf_user_manager/partials/inspector/inspector")) %>');

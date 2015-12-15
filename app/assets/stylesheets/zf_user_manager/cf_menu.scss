@@ -105,4 +105,15 @@ div.ui-widget-content{
   }
 }
 
+// Layout container settings
+.unit-list-tabs
+{
+  height: 100%;
+  margin-top: -42px;
+  padding-top: 42px;
+  .tab-pane {
+    height: 100%;
+  }
+}
+
 

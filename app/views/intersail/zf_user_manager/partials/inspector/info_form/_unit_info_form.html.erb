@@ -1,14 +1,20 @@
 <div class="form-group">
-  <label for="name" class="col-sm-3 control-label">Nome</label>
+  <label for="name" class="col-sm-3 control-label  <%= required_label_class(@unit, :name) %>">Nome</label>
   <div class="col-sm-9">
     <%= text_field_tag :name, @unit.name, class: 'form-control', placeholder: 'Nome'  %>
+    <% if @unit.errors.messages.has_key? :name %>
+        <div class="form-field-error"><%= @unit.errors.messages[:name].first %></div>
+    <% end %>
   </div>
 </div>
 
 <div class="form-group">
-  <label for="description" class="col-sm-3 control-label">Descrizione</label>
+  <label for="description" class="col-sm-3 control-label  <%= required_label_class(@unit, :description) %>">Descrizione</label>
   <div class="col-sm-9">
     <%= text_area_tag :description, @unit.description, class: 'form-control', placeholder: 'Descrizione'  %>
+    <% if @unit.errors.messages.has_key? :description %>
+        <div class="form-field-error"><%= @unit.errors.messages[:description].first %></div>
+    <% end %>
   </div>
 </div>
 
@@ -20,7 +26,7 @@
 </div>
 
 <div class="form-group">
-  <label for="description" class="col-sm-3 control-label">Padre</label>
+  <label for="description" class="col-sm-3 control-label required">Padre</label>
   <div class="col-sm-9">
     <%= select :unit, :parent_id, fetch_unit_options , {}, class: 'form-control', disabled: @unit.id != 0  %>
   </div>

@@ -1,5 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "bootstrap_overrides";
 @import "jquery-ui";
 @import "util";
 @import "cf_menu";
@@ -241,7 +242,6 @@ a {
   margin-left: 25px;
 }
 
-
 //--------VIEWER-----------------------------------
 
 .zum_viewer_action_row {
@@ -450,8 +450,35 @@ a {
 }
 
 
+//--------FORM-----------------------------------
+
+.required:after {
+  content:" *";
+}
+
+.form-field-error {
+  color: #a94442;
+  font-weight: bold;
+}
 
 
+@keyframes blink {
+  0%, 100% {
+    background-color: #a94442;
+  }
+  50% {
+    background-color: #FFF;
+  }
+}
+
+li[role=presentation].error {
+  background-color: #a94442;
+  animation: blink 2s infinite;
+  border-radius: 4px 4px 0 0 ;
+  a {
+    color: black !important;
+  }
+}
 
 
 

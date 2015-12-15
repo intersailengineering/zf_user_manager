@@ -37,7 +37,7 @@ module Intersail
         user_create_function
 
         respond_to do |format|
-          format.js { render 'intersail/zf_user_manager/shared/create' }
+          format.js { render 'intersail/zf_user_manager/shared/update' }
         end
       end
 

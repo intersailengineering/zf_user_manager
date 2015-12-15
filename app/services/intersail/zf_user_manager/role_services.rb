@@ -41,40 +41,47 @@ module Intersail
 
       def role_update_function
         role = set_role_attributes(@role)
-        role = zum.role_update(role.id, role)
-        role_urrs_update
 
-        @role = role if role
+        begin
+          role = zum.role_update(role.id, role)
+          # this is not working with the current api
+          # role_urrs_update
+          set_success_message('Ruolo creato con successo')
+        rescue Exception => e
+          set_error_message('Verifica i campi inseriti nel form sottostante')
+        end
+
+        @role = role
 
         role_index_function
         role_urrs
       end
 
-      def role_urrs_update
-        return nil if params[:urrs].blank?
-
-        params[:urrs].each do |urr|
-          if urr[:urr_id] == '0'
-            u = Intersail::ZfClient::ZUrr.new(id: nil, unit_id: urr[:unit_id], role_id: @role.id, resource_id: urr[:resource_id])
-            zum.urr_create(u)
-          elsif urr[:_edited] == '1'
-            u = Intersail::ZfClient::ZUrr.new(id: urr[:urr_id], unit_id: urr[:unit_id], role_id: @role.id, resource_id: urr[:resource_id], _destroy: urr[:_destroy].to_i)
-            zum.urr_update(u.id, u)
-          end
-        end
-        params.delete(:urrs)
-      end
+      # def role_urrs_update
+      #   return nil if params[:urrs].blank?
+      #
+      #   params[:urrs].each do |urr|
+      #     if urr[:urr_id] == '0'
+      #       u = Intersail::ZfClient::ZUrr.new(id: nil, unit_id: urr[:unit_id], role_id: @role.id, resource_id: urr[:resource_id])
+      #       zum.urr_create(u)
+      #     elsif urr[:_edited] == '1'
+      #       u = Intersail::ZfClient::ZUrr.new(id: urr[:urr_id], unit_id: urr[:unit_id], role_id: @role.id, resource_id: urr[:resource_id], _destroy: urr[:_destroy].to_i)
+      #       zum.urr_update(u.id, u)
+      #     end
+      #   end
+      #   params.delete(:urrs)
+      # end
 
       def role_create_function
         role = set_role_attributes
 
         begin
           role = zum.role_create(role)
-          @role = role
-          clean_search_params
-        rescue
-          set_error_message('Campi mancanti o non compilati correttamente')
+          set_success_message('Ruolo creato con successo')
+        rescue Exception => e
+          set_error_message('Verifica i campi inseriti nel form sottostante')
         end
+        @role = role
 
         role_index_function
         role_urrs

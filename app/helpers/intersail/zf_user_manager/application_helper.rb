@@ -42,7 +42,6 @@ module Intersail
       end
 
 
-
       #### MESSAGES
 
       def render_messages(messages_options=nil)
@@ -52,7 +51,6 @@ module Intersail
           render 'intersail/zf_user_manager/partials/render_messages', render_messages_options: @render_messages_options if @render_messages_options
         end
       end
-
 
 
       #### LAYOUT
@@ -66,7 +64,6 @@ module Intersail
       end
 
 
-
       #### MISC
 
       def new_id(record)
@@ -77,6 +74,30 @@ module Intersail
         Time.now.hash.abs.to_s
       end
 
+
+      #### FORM
+
+      def is_error?
+        @render_messages_options && @render_messages_options.fetch(:type,false) == Intersail::ZfUserManager::Concerns::Messageable::ERROR
+      end
+
+      def required_label_class(object, name)
+        object.class.validators_on(name).any? { |v| v.kind_of? ActiveModel::Validations::PresenceValidator } ? 'required' : ''
+      end
+
+      def info_error?(object)
+        if object.is_a?(Intersail::ZfClient::ZUser)
+          return (object.resource.errors.messages.except(:urrs).any? || object.errors.messages.fetch(:username, false)) ? 'error' : ''
+          return ''
+        end
+      end
+
+      def profile_error?(object)
+        if object.is_a?(Intersail::ZfClient::ZUser)
+          return object.resource.errors.messages.has_key?(:urrs) ? 'error' : ''
+          return ''
+        end
+      end
     end
   end
 end
