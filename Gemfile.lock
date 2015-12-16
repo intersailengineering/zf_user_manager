@@ -11,10 +11,10 @@ GIT
 
 GIT
   remote: https://github.com/intersailengineering/zf-client.git
-  revision: 1b0dbc8905dc2a5d5094c2a27f4ae1f08dbe481b
-  branch: staging
+  revision: 0eb5cb501313ee05cc11a4b4bd620bf2df5ba00f
+  tag: 0.2.2
   specs:
-    zf_client (0.2.1)
+    zf_client (0.2.2)
       faker
       httparty
       rails (~> 4.1)

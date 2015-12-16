@@ -8,5 +8,5 @@ gemspec
 gem 'intersail_auth', :git => 'git@github.com:intersailengineering/intersail_auth.git', :branch => 'production'
 # gem 'intersail_auth', :git => 'git@github.com:intersailengineering/intersail_auth.git', :branch => 'development'
 # gem 'intersail_auth', path: '../intersail_auth'
- gem 'zf_client', :git => 'https://github.com/intersailengineering/zf-client.git', :branch => 'staging'
+gem 'zf_client', :git => 'https://github.com/intersailengineering/zf-client.git', :tag => '0.2.2'
 #gem 'zf_client', path: '../zf_client'
