@@ -13,6 +13,10 @@ module ZfUserManager
   class Engine < ::Rails::Engine
     isolate_namespace ZfUserManager
 
+    config.before_initialize do
+      config.i18n.load_path += Dir["#{config.root}/config/locales/**/*.yml"]
+    end
+
     # Load host application decorators to override classes
     config.to_prepare do
       Dir.glob(Rails.root + "app/decorators/**/*_decorator*.rb").each do |file|
