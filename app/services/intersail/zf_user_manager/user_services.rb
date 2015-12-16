@@ -89,6 +89,8 @@ module Intersail
         user.resource.last_name = params[:last_name]
         user.resource.mail = params[:mail]
 
+        user.metadata = params[:metadata]
+
         user.resource.urrs = []
         unless params[:urrs].blank?
           params[:urrs].each do |urr|
@@ -104,7 +106,7 @@ module Intersail
       end
 
       def set_user_function(id)
-        @user = zum.user_read(id)
+        @user = zum.user_read(id, {metadata: true})
       end
 
       def active_select

@@ -124,10 +124,9 @@ module Intersail
         unit.name = params[:name]
         unit.description = params[:description]
         unit.parent_id = params.fetch(:unit, {}).fetch(:parent_id,0).to_i
-        if (centro_di_costo = params.fetch("metadata", {}).fetch("centro_di_costo",false) )
-          metadata = {}.merge({"centro_di_costo" => centro_di_costo})
-          unit.metadata = metadata
-        end
+
+        unit.metadata = params[:metadata]
+        
         unit
       end
 

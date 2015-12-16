@@ -98,6 +98,11 @@ module Intersail
           return ''
         end
       end
+
+      def current_model
+        section = instance_variable_get("@section")
+        instance_variable_get("@#{section}")
+      end
     end
   end
 end

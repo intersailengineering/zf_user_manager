@@ -87,6 +87,9 @@
                     <li role="presentation" class="active"><a href="#record_info" aria-controls="record_info" role="tab" data-toggle="tab">Info <%= I18n.t("zf_user_manager.models.#{@section.to_s}.one").titleize %></a></li>
                     <li role="presentation" ><a href="#urrs" aria-controls="urrs" role="tab" data-toggle="tab"><%= I18n.t("zf_user_manager.models.urr.other").titleize %></a></li>
                 <% end %>
+                <% if [:user, :unit].include? @section %>
+                    <li role="presentation"><a href="#metadata" aria-controls="metadata" role="tab" data-toggle="tab">Altri dati</a></li>
+                <% end %>
               </ul>
 
               <!-- Tab panes -->
@@ -119,10 +122,15 @@
                     </div>
                   </div>
                 </div>
+
+                <div role="tabpanel" class="tab-pane zum_info_tab" id="metadata">
+                  <%= render "intersail/zf_user_manager/partials/inspector/metadata/main" %>
+                </div>
               </div>
             </div>
 
             <%= javascript_tag do %>
+                // remember selected inspector tab
                 if (_zum_inspector_selected_tab != null) {
                 $('.inspector_tabs a[href=' + _zum_inspector_selected_tab + ']').tab('show');
                 }

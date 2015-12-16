@@ -1,0 +1,7 @@
+<div class="form-group">
+  <label for="<%= name %>" class="col-sm-3 control-label"><%= name.titleize %></label>
+  <div class="col-sm-9">
+    <%= text_field_tag "metadata[#{name}]", value, class: 'form-control', placeholder: name.titleize  %>
+
+  </div>
+</div>

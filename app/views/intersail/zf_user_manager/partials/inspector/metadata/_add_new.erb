@@ -1,0 +1,38 @@
+<div class="append-field"></div>
+
+<div class="add-new-separator">Aggiungi nuovo campo</div>
+<div class="form-group">
+  <label for="nome" class="col-sm-3 control-label">Nome</label>
+  <div class="col-sm-9">
+    <%= text_field_tag "name", '', class: 'form-control', id: 'meta-name'%>
+  </div>
+</div>
+<div class="form-group">
+  <label for="value" class="col-sm-3 control-label">Valore</label>
+  <div class="col-sm-9">
+    <%= text_field_tag "value", '', class: 'form-control', id: 'meta-value'%>
+  </div>
+</div>
+<div class="form-group">
+  <div class="pull-right add-new">
+    <a href="#" class="btn btn-sm btn-primary" onclick="add_new_meta()"><i class="glyphicon glyphicon-plus"></i>Aggiungi</a>
+  </div>
+</div>
+
+<%= javascript_tag do %>
+    function add_new_meta(){
+        var value = $("#meta-value").val();
+        var name = $("#meta-name").val();
+
+        // append the form input element and sets name and value
+        $('.append-field').append('<%= j(render("intersail/zf_user_manager/partials/inspector/metadata/field", name: "", value: "")) %>');
+        var label = $('.append-field').find("div.form-group > label").last();
+        label.html(name);
+        var input  = $('.append-field').find("div.form-group input.form-control").last();
+        input.val(value);
+        input.attr({
+            name: 'metadata['+ name +']',
+            id: 'metadata_'+ name
+        });
+    };
+<% end %>

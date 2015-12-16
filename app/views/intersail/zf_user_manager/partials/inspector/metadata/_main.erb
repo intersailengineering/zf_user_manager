@@ -1,0 +1,7 @@
+<% if current_model.metadata && current_model.metadata.any? %>
+    <% current_model.metadata.each  do |name,value| %>
+        <%= render 'intersail/zf_user_manager/partials/inspector/metadata/field', name: name, value: value %>
+    <% end %>
+<% end %>
+<%= render 'intersail/zf_user_manager/partials/inspector/metadata/add_new' %>
+
