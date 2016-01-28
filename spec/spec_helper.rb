@@ -43,6 +43,8 @@ RSpec.configure do |config|
   config.include Helpers
   config.include ZfUserManager::Engine.routes.url_helpers
   config.include IntersailAuth::TestHelpers::Cookies
+  # Activate factory girl
+  config.include FactoryGirl::Syntax::Methods
 
   # Database handling
   # migrate test schema if needed

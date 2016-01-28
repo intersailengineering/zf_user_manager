@@ -10,6 +10,7 @@ ZfUserManager::Engine.routes.draw do
   get '/user_manager/users/:id', to: '/intersail/zf_user_manager/user#show'
   post '/user_manager/users', to: '/intersail/zf_user_manager/user#create'
   put '/user_manager/users/:id', to: '/intersail/zf_user_manager/user#update'
+  get '/user_manager/users/:id/reset_password', to: '/intersail/zf_user_manager/user#reset_password'
   #delete '/user_manager/users/:id', to: '/intersail/zf_user_manager/user#destroy'
 
   # Units

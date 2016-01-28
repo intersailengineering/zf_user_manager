@@ -11,10 +11,10 @@ GIT
 
 GIT
   remote: https://github.com/intersailengineering/zf-client.git
-  revision: 0eb5cb501313ee05cc11a4b4bd620bf2df5ba00f
-  tag: 0.2.2
+  revision: f131225d841fac2bf4e9e1674f88c7d4fe1cd311
+  tag: 0.2.3
   specs:
-    zf_client (0.2.2)
+    zf_client (0.2.3)
       faker
       httparty
       rails (~> 4.1)
@@ -22,7 +22,7 @@ GIT
 PATH
   remote: .
   specs:
-    zf_user_manager (0.0.4)
+    zf_user_manager (0.0.5)
       bootstrap-sass
       coffee-rails (~> 4.1.0)
       intersail_auth

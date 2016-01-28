@@ -63,6 +63,7 @@ Gem::Specification.new do |s|
   # Web drivers
   s.add_development_dependency 'selenium'
   s.add_development_dependency 'selenium-webdriver'
+
   # Allow to proxy external browser requests
   # s.add_development_dependency 'puffing-billy'
   # Allow to proxy external requests
