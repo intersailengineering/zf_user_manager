@@ -147,7 +147,7 @@
 </div>
 
 <div class="zum_inspector_footer">
-  <% if @section == :user %>
+  <% if @section == :user && @user.id != 0 %>
       <a href="/user_manager/users/<%= @user.id %>/reset_password" class="btn btn-primary btn-sm" data-remote="true">Rigenera password</a>
   <% end %>
   <button type="button" class="btn btn-primary btn-sm" onclick="disable_save_warning();$('.record_data_form').submit();"><%= form_method == :post ? 'Crea' : 'Salva' %></button>
