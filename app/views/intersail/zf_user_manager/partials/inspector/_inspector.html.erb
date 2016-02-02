@@ -102,7 +102,7 @@
                   <div class="zum_viewer_action_row">
                     <div class="zum_viewer_actions">
                       <%# only the user part can change urrs %>
-                      <% if @section == :user %>
+                      <% if @section == :user && @user.urrs.empty? %>
                           <%= link_to "#", onclick: 'new_urr();', class: 'btn btn-primary btn-xs zum_new_urr' do %>
                               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuovo <%= I18n.t("zf_user_manager.models.urr.one").titleize %>
                           <% end %>
